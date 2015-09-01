@@ -3,14 +3,6 @@
 #include "lexer.h"
 #include "constant_table.h"
 
-namespace boost { namespace spirit { namespace traits {
-    template <typename Iterator, typename T> struct assign_to_attribute_from_iterators<T, Iterator>
-    {
-        static void call(Iterator const& first, Iterator const& last, T& attr) {
-        }
-    };
-}}}
-
 Lexer::Lexer(ConstantTable& table): constants(table)
 {
 	namespace phx = boost::phoenix;

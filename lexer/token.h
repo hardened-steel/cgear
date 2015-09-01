@@ -14,7 +14,7 @@ struct token
 	{
 		const T* pointer;
 	public:
-		attribute() {}
+		attribute(): pointer(nullptr) {}
 		attribute(const T* ptr): pointer(ptr) {}
 		attribute(const attribute& other): pointer(other.pointer) {}
 		attribute& operator = (const attribute& other) {
@@ -63,5 +63,13 @@ struct token
 		}
 	};
 };
+
+namespace boost { namespace spirit { namespace traits {
+    template <typename Iterator, typename T> struct assign_to_attribute_from_iterators<T, Iterator>
+    {
+        static void call(Iterator const& first, Iterator const& last, T& attr) {
+        }
+    };
+}}}
 
 #endif /* LEXER_TOKEN_H_ */

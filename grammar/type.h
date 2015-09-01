@@ -2,6 +2,7 @@
 #define GTYPE_H
 
 #include <memory>
+#include <map>
 #include <boost/spirit/include/qi.hpp>
 #include "../lexer/lexer.h"
 #include "../syntax/tree.h"
@@ -9,7 +10,11 @@
 class ast::type: public ast
 {
 public:
-	class base;
+	class base
+	{
+	public:
+		virtual ~base() {}
+	};
 	class t_bool;
 	class t_int;
 	class t_real;
@@ -20,14 +25,16 @@ public:
 	class t_struct;
 public:
 	type(): impl(nullptr) {}
-	type(const std::shared_ptr<base>& impl): impl(impl) {}
-	type(std::shared_ptr<base>&& impl): impl(std::move(impl)) {}
-	type& operator=(const std::shared_ptr<base>& impl) {
-		this->impl = impl;
+	type(type&& other): impl(std::move(other.impl)) {}
+	type(const type& other): impl(other.impl) {}
+	template<typename T> type(T&& other): impl(std::move(other.impl)) {}
+	template<typename T> type(const T& other): impl(other.impl) {}
+	template<typename T> type& operator=(T&& other) {
+		this->impl = std::move(other.impl);
 		return *this;
 	}
-	type& operator=(std::shared_ptr<base>&& impl) {
-		this->impl = std::move(impl);
+	template<typename T> type& operator=(const T& other) {
+		this->impl = other.impl;
 		return *this;
 	}
 private:

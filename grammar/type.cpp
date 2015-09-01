@@ -2,7 +2,7 @@
 #include "../syntax/operation.h"
 #include "type.h"
 
-class ast::type::base
+class ast::type::t_bool: public ast::type::base
 {
 public:
 

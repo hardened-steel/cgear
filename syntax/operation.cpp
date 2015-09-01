@@ -5,12 +5,9 @@ enum numeration
 {
 	null = 0,
     OPERATION(ForOperation)
-	OPERATION_COUNT
 };
 
-const unsigned int operation::count = OPERATION_COUNT;
-
-#define EnumOperation(Operation, Str) operation operation::Operation = numeration::Operation;
+#define EnumOperation(Operation, Str) ast::operation::code ast::operation::code::Operation = numeration::Operation;
 OPERATION(EnumOperation)
 #undef EnumOperation
 
@@ -18,6 +15,6 @@ OPERATION(EnumOperation)
 const std::string operation_str[] = { OPERATION(EnumOperation) };
 #undef EnumOperation
 
-const std::string& operation::getStr() const {
-    return operation_str[this->code - 1];
+const std::string& ast::operation::code::getStr() const {
+    return operation_str[this->value - 1];
 }
