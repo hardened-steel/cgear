@@ -1,9 +1,17 @@
+// Project: CGear
+//
+//  Created on: 01.08.2015
+//      Author: K.Pinegin
+//	     email: keldgaden@gmail.com
+//
+
 #ifndef POOL_H_
 #define POOL_H_
 
-template<unsigned size, unsigned capacity> class pool {
+template<unsigned size, unsigned capacity> class pool
+{
 	void *pointers[capacity];
-	unsigned top;
+	unsigned int top;
 public:
 	static_assert(size > 0, "size must be greater than zero");
 

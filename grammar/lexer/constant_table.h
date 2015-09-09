@@ -1,3 +1,10 @@
+// Project: CGear
+//
+//  Created on: 01.08.2015
+//      Author: K.Pinegin
+//	     email: keldgaden@gmail.com
+//
+
 #ifndef LEXER_CONSTANT_TABLE_H_
 #define LEXER_CONSTANT_TABLE_H_
 

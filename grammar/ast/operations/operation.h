@@ -1,44 +1,52 @@
+// Project: CGear
+//
+//  Created on: 01.08.2015
+//      Author: K.Pinegin
+//	     email: keldgaden@gmail.com
+//
+
 #ifndef OPERATION_H
 #define OPERATION_H
 
+#include "../pool.h"
+#include "../ast.h"
 #include <string>
 #include <memory>
-#include "tree.h"
 
 #define OPERATION(X) \
-    X(assign, "=")\
-    X(addition_and_assign, "+=")\
-    X(subtraction_and_assign, "-=")\
-    X(multiplication_and_assign, "*=")\
-    X(division_and_assign, "/=")\
-    X(modulo_and_assign, "%=")\
-    \
-    X(ternary, "?")\
-    \
-    X(equal, "==")\
-    X(not_equal, "!=")\
-    \
-    X(less, "<")\
-    X(less_or_equal, "<=")\
-    X(more, ">")\
-    X(more_or_equal, ">=")\
-    \
-    X(addition, "+")\
-    X(subtraction, "-")\
-    \
-    X(multiplication, "*")\
-    X(division, "/")\
-    X(modulo, "%")\
-    \
-    X(unary_plus, "+")\
-    X(unary_minus,"-")\
-    X(prefix_inc, "++")\
-    X(prefix_dec, "--")\
-    X(size_of,"sizeof")\
-    \
-    X(suffix_inc, "++")\
-    X(suffix_dec, "++")\
-    X(function_call, "()")
+	X(assign, "=")\
+	X(addition_and_assign, "+=")\
+	X(subtraction_and_assign, "-=")\
+	X(multiplication_and_assign, "*=")\
+	X(division_and_assign, "/=")\
+	X(modulo_and_assign, "%=")\
+	\
+	X(ternary, "?")\
+	\
+	X(equal, "==")\
+	X(not_equal, "!=")\
+	\
+	X(less, "<")\
+	X(less_or_equal, "<=")\
+	X(more, ">")\
+	X(more_or_equal, ">=")\
+	\
+	X(addition, "+")\
+	X(subtraction, "-")\
+	\
+	X(multiplication, "*")\
+	X(division, "/")\
+	X(modulo, "%")\
+	\
+	X(unary_plus, "+")\
+	X(unary_minus,"-")\
+	X(prefix_inc, "++")\
+	X(prefix_dec, "--")\
+	X(size_of,"sizeof")\
+	\
+	X(suffix_inc, "++")\
+	X(suffix_dec, "++")\
+	X(function_call, "()")
 
 constexpr unsigned int OPERATION_COUNT() {
 #define ForOperation(operation, Str) operation,
@@ -62,7 +70,7 @@ public:
 	class binary;
 	class ternary;
 	class type_cast;
-	class var;
+	class variable;
 	class index;
 	class section;
 	class call;

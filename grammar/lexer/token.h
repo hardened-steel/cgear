@@ -1,3 +1,10 @@
+// Project: CGear
+//
+//  Created on: 01.08.2015
+//      Author: K.Pinegin
+//	     email: keldgaden@gmail.com
+//
+
 #ifndef LEXER_TOKEN_H_
 #define LEXER_TOKEN_H_
 
@@ -31,17 +38,17 @@ struct token
 	using realLiteral = attribute<real_type>;
 	using intLiteral = attribute<int_type>;
 	typedef boost::spirit::lex::lexertl::token
-			<
-			iterator, boost::mpl::vector
-				<
-				identifier,
-				charLiteral,
-				stringLiteral,
-				realLiteral,
-				intLiteral
-				>,
-			boost::mpl::true_
-			> type;
+	<
+	    iterator, boost::mpl::vector
+	    <
+	        identifier,
+	        charLiteral,
+	        stringLiteral,
+	        realLiteral,
+	        intLiteral
+	    >,
+	    boost::mpl::true_
+	> type;
 
 	class omit
 	{

@@ -1,3 +1,10 @@
+// Project: CGear
+//
+//  Created on: 01.08.2015
+//      Author: K.Pinegin
+//	     email: keldgaden@gmail.com
+//
+
 #include <boost/spirit/include/qi.hpp>
 #include "constant_table.h"
 

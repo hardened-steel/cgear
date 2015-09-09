@@ -1,5 +1,13 @@
+// Project: CGear
+//
+//  Created on: 01.08.2015
+//      Author: K.Pinegin
+//	     email: keldgaden@gmail.com
+//
+
 #include <boost/phoenix/phoenix.hpp>
 #include "../syntax/operation.h"
+#include "execinfo.h"
 #include "type.h"
 
 class ast::type::t_bool: public ast::type::base
@@ -8,10 +16,14 @@ public:
 
 };
 
-GType::GType(Lexer& lexer): GType::base_type(type, "type")
-{
-    namespace qi = boost::spirit::qi;
-    namespace phx = boost::phoenix;
+GTypeName::GTypeName(Lexer& lexer): GTypeName::base_type(type, "type") {
+	namespace qi = boost::spirit::qi;
+	namespace phx = boost::phoenix;
+}
+
+GType::GType(Lexer& lexer): GType::base_type(type, "type") {
+	namespace qi = boost::spirit::qi;
+	namespace phx = boost::phoenix;
 /*
     type = ( lexer.kbool   [qi::_val = phx::new_<ast::type::t_bool>()]
            | lexer.kint    [qi::_val = phx::new_<ast::type::base>(ast::type::base::int_ , true)]
