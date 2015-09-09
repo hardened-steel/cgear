@@ -2,7 +2,7 @@
 //
 //  Created on: 09.09.2015
 //      Author: K.Pinegin
-//	     email: keldgaden@gmail.com
+//       email: keldgaden@gmail.com
 //
 
 #ifndef INSTRUCTIONS_IF_H_
