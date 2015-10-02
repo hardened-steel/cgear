@@ -16,11 +16,6 @@ public:
 
 };
 
-GTypeName::GTypeName(Lexer& lexer): GTypeName::base_type(type, "type") {
-	namespace qi = boost::spirit::qi;
-	namespace phx = boost::phoenix;
-}
-
 GType::GType(Lexer& lexer): GType::base_type(type, "type") {
 	namespace qi = boost::spirit::qi;
 	namespace phx = boost::phoenix;
@@ -45,3 +40,9 @@ GType::GType(Lexer& lexer): GType::base_type(type, "type") {
 */
 }
 
+GTypeName::GTypeName(Lexer& lexer): GTypeName::base_type(type, "type") {
+	namespace qi = boost::spirit::qi;
+	namespace phx = boost::phoenix;
+
+	type = lexer.identifier[qi::_val = qi::_1];
+}

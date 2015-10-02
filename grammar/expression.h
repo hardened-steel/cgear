@@ -20,9 +20,9 @@ class GExpression: public boost::spirit::qi::grammar<GIterator, ast::operation()
 	boost::spirit::qi::rule<GIterator, ast::operation(), boost::spirit::locals<token::identifier>, GSkip> call;
 	boost::spirit::qi::rule<GIterator, ast::operation(), GSkip> operation[9];
 
-	GTypeName type;
+	GTypeName& type;
 public:
-	GExpression(Lexer& lexer);
+	GExpression(Lexer& lexer, GTypeName& type);
 	~GExpression();
 };
 

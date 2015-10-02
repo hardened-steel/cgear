@@ -26,6 +26,7 @@ public:
 	class t_void;
 	class array;
 	class pointer;
+	class tuple;
 	class t_class;
 	class t_struct;
 public:
@@ -39,6 +40,14 @@ public:
 		return *this;
 	}
 	template<typename T> type& operator=(const T& other) {
+		this->impl = other.impl;
+		return *this;
+	}
+	type& operator=(type&& other) {
+		this->impl = std::move(other.impl);
+		return *this;
+	}
+	type& operator=(const type& other) {
 		this->impl = other.impl;
 		return *this;
 	}

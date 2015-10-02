@@ -7,25 +7,28 @@
 
 #include <boost/phoenix/phoenix.hpp>
 #include "function.h"
+#include "ast/function/prototype.h"
+#include "ast/function/definition.h"
 
-GFunction::GFunction(Lexer& lexer): GFunction::base_type(function, "function grammar"), instruction(lexer), type(lexer)
+GFunction::GFunction(Lexer& lexer, GInstruction& instruction, GTypeName& typeName): GFunction::base_type(function, "function grammar"),
+	instruction(instruction), typeName(typeName)
 {
 	namespace qi = boost::spirit::qi;
 	namespace phx = boost::phoenix;
 
-	parameter = (type >> lexer.identifier) [qi::_val = phx::construct<st::function::parameter>(qi::_1, qi::_2)];
+	boost::spirit::qi::rule<GIterator, ast::function::prototype::parameter(), GSkip> parameter = (typeName >> lexer.identifier)[qi::_val = phx::construct<ast::function::prototype::parameter>(qi::_1, qi::_2)];
+	boost::spirit::qi::rule<GIterator, std::vector<ast::function::prototype::parameter>(), GSkip> parameters;
+	parameters = ( (lexer.tokens["("] >> lexer.tokens[")"])
+	             | (lexer.tokens["("] >> parameter % lexer.tokens[","] > lexer.tokens[")"]) [qi::_val = qi::_1]
+	             );
 
-	prototype = type[qi::_a = qi::_1] >> (lexer.identifier >> lexer.tokens["("]
-	          > (parameter % lexer.tokens[","])
-	          > lexer.tokens[")"]
-	          ) [qi::_val = phx::construct<st::function::prototype>(qi::_1, qi::_a, qi::_2)];
+	prototype = lexer.kfunction > (lexer.identifier > parameters > lexer.tokens[":"] > typeName)[qi::_val = phx::construct<ast::function::prototype>(qi::_1, qi::_2, qi::_3)];
+	function = prototype[qi::_a = qi::_1] >> ((lexer.tokens[";"][qi::_val = qi::_a]) | (instruction[qi::_val = phx::construct<ast::function::definition>(qi::_a, qi::_1)]));
 
-	function = prototype[qi::_a = qi::_1] >> ((lexer.tokens[";"][qi::_val = qi::_a]) | (instruction[qi::_val = phx::construct<st::function::definition>(qi::_a, qi::_1)]));
-
-	parameter.name("function parameter");
 	prototype.name("function prototype");
 	function.name("function rule");
 
+	/*
 	qi::on_error<qi::fail>
 	    (
 	        prototype
@@ -42,6 +45,7 @@ GFunction::GFunction(Lexer& lexer): GFunction::base_type(function, "function gra
 	            << qi::_4                               // what failed?
 	            << std::endl
 	    );
+	*/
 }
 
 GFunction::~GFunction()

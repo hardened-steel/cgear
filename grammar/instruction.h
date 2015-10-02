@@ -9,10 +9,9 @@
 #define INSTRUCTION_H
 
 #include <boost/spirit/include/qi.hpp>
-
+#include "lexer/lexer.h"
 #include "ast/operators/operator.h"
 #include "expression.h"
-#include "lexer/lexer.h"
 #include "type.h"
 
 class GInstruction: public boost::spirit::qi::grammar<GIterator, ast::instruction(), GSkip>
@@ -30,10 +29,10 @@ class GInstruction: public boost::spirit::qi::grammar<GIterator, ast::instructio
 	boost::spirit::qi::rule<GIterator, ast::instruction(), GSkip> block;
 	boost::spirit::qi::rule<GIterator, ast::instruction(), GSkip> nope;
 
-	GExpression operation;
-	GType type;
+	GExpression& operation;
+	GType& type;
 public:
-	GInstruction(Lexer& lexer);
+	GInstruction(Lexer& lexer, GExpression& operation, GType& type);
 	~GInstruction();
 };
 

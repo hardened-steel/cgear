@@ -24,6 +24,7 @@ Lexer::Lexer(ConstantTable& table): constants(table)
 	this->self += token('?') | token('<') | token('>') | token("<=", "<=") | token(">=", ">=");
 	this->self += token("!=", "\\!=") | token("==", "==");
 	this->self += kbool | kelse | kfor | kif | kint | kreal | kreturn | karray | kvoid | kwhile | ktrue | kfalse | kchar | ksizeof | kconst;
+	this->self += kfunction;
 	this->self += realLiteral        [ lex::_val = phx::bind(&ConstantTable::createReal,       &constants, lex::_start, lex::_end) ]
 	            | intLiteral         [ lex::_val = phx::bind(&ConstantTable::createInteger,    &constants, lex::_start, lex::_end) ]
 	            | identifier         [ lex::_val = phx::bind(&ConstantTable::createIdentifier, &constants, lex::_start, lex::_end) ]

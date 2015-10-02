@@ -5,24 +5,24 @@
 //       email: keldgaden@gmail.com
 //
 
-#ifndef FUNCTION_H
-#define FUNCTION_H
+#ifndef GRAMMAR_FUNCTION_H_
+#define GRAMMAR_FUNCTION_H_
 
 #include <boost/spirit/include/qi.hpp>
+#include "lexer/lexer.h"
+#include "ast/function/function.h"
+#include "instruction.h"
 
-#include "expression.h"
-
-class GFunction: public boost::spirit::qi::grammar<GIterator, boost::spirit::locals<st::function::prototype>, st::function(), GSkip>
+class GFunction: public boost::spirit::qi::grammar<GIterator, boost::spirit::locals<ast::function::prototype>, ast::function(), GSkip>
 {
-	boost::spirit::qi::rule<GIterator, boost::spirit::locals<st::function::prototype>, st::function(), GSkip> function;
-	boost::spirit::qi::rule<GIterator, st::function::parameter(), GSkip> parameter;
-	boost::spirit::qi::rule<GIterator, boost::spirit::locals<st::type>, st::function::prototype(), GSkip> prototype;
+	boost::spirit::qi::rule<GIterator, boost::spirit::locals<ast::function::prototype>, ast::function(), GSkip> function;
+	boost::spirit::qi::rule<GIterator, ast::function::prototype(), GSkip> prototype;
 
-	GInstruction instruction;
-	GType type;
+	GInstruction& instruction;
+	GTypeName& typeName;
 public:
-	GFunction(Lexer& lexer);
+	GFunction(Lexer& lexer, GInstruction& instruction, GTypeName& typeName);
 	~GFunction();
 };
 
-#endif // FUNCTION_H
+#endif // GRAMMAR_FUNCTION_H_

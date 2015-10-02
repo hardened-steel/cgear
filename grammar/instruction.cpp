@@ -36,7 +36,7 @@ private:
 	std::shared_ptr<implementation> impl;
 };
 
-GInstruction::GInstruction(Lexer& lexer): GInstruction::base_type(instruction, "instruction"), operation(lexer), type(lexer)
+GInstruction::GInstruction(Lexer& lexer, GExpression& operation, GType& type): GInstruction::base_type(instruction, "instruction"), operation(operation), type(type)
 {
 	namespace qi = boost::spirit::qi;
 	namespace phx = boost::phoenix;

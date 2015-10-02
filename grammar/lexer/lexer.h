@@ -23,6 +23,8 @@ public:
 	//bool
 	boost::spirit::lex::token_def<boost::spirit::lex::omit> ktrue        {"true"};
 	boost::spirit::lex::token_def<boost::spirit::lex::omit> kfalse       {"false"};
+	//statements
+	boost::spirit::lex::token_def<boost::spirit::lex::omit> kfunction    {"function"};
 	//key words
 	boost::spirit::lex::token_def<boost::spirit::lex::omit> kconst       {"const"};
 	boost::spirit::lex::token_def<boost::spirit::lex::omit> kreturn      {"return"};

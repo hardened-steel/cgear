@@ -13,7 +13,7 @@
 #include "ast/operations/variable.h"
 #include "expression.h"
 
-GExpression::GExpression(Lexer& lexer): GExpression::base_type(expression), type(lexer)
+GExpression::GExpression(Lexer& lexer, GTypeName& type): GExpression::base_type(expression), type(type)
 {
 	namespace qi = boost::spirit::qi;
 	namespace phx = boost::phoenix;
