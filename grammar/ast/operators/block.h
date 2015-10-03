@@ -8,6 +8,7 @@
 #ifndef INSTRUCTIONS_BLOCK_H_
 #define INSTRUCTIONS_BLOCK_H_
 
+#include <vector>
 #include "operator.h"
 
 class ast::instruction::block
@@ -31,7 +32,7 @@ public:
 	block(const std::vector<ast::instruction>& instructions): impl(new implementation(instructions)) {}
 	block(std::vector<ast::instruction>&& instructions): impl(new implementation(std::move(instructions))) {}
 private:
-	static pool<sizeof(implementation), 1024> memory_pool;
+	static pool<sizeof(implementation)> memory_pool;
 	std::shared_ptr<implementation> impl;
 };
 

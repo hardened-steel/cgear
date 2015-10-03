@@ -10,6 +10,7 @@
 
 #include <vector>
 #include "../../lexer/token.h"
+#include "../types/type.h"
 #include "function.h"
 
 class ast::function::prototype
@@ -54,7 +55,7 @@ public:
 	prototype(): impl(nullptr) {}
 	prototype(token::identifier name, std::vector<parameter> parameters, ast::type returnType): impl(new implementation(name, parameters, returnType)) {}
 private:
-	static pool<sizeof(implementation), 1024> memory_pool;
+	static pool<sizeof(implementation)> memory_pool;
 	std::shared_ptr<implementation> impl;
 };
 

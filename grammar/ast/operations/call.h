@@ -5,8 +5,8 @@
 //       email: keldgaden@gmail.com
 //
 
-#ifndef CALL_H_
-#define CALL_H_
+#ifndef CALL_H
+#define CALL_H
 
 #include "../../lexer/token.h"
 #include "operation.h"
@@ -33,8 +33,8 @@ public:
 	call(token::identifier id, const std::vector<ast::operation>& params): impl(new implementation(id, params)) {}
 	call(token::identifier id, std::vector<ast::operation>&& params = {}): impl(new implementation(id, std::move(params))) {}
 private:
-	static pool<sizeof(implementation), 1024> memory_pool;
+	static pool<sizeof(implementation)> memory_pool;
 	std::shared_ptr<implementation> impl;
 };
 
-#endif /* CALL_H_ */
+#endif /* CALL_H */

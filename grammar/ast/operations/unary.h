@@ -5,8 +5,8 @@
 //       email: keldgaden@gmail.com
 //
 
-#ifndef UNARY_H_
-#define UNARY_H_
+#ifndef UNARY_H
+#define UNARY_H
 
 #include "operation.h"
 
@@ -30,8 +30,8 @@ protected:
 public:
 	unary(ast::operation::code code, ast::operation op): impl(new implementation(code, op)) {}
 private:
-	static pool<sizeof(implementation), 1024> memory_pool;
+	static pool<sizeof(implementation)> memory_pool;
 	std::shared_ptr<implementation> impl;
 };
 
-#endif /* UNARY_H_ */
+#endif /* UNARY_H */

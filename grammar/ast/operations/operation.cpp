@@ -25,3 +25,17 @@ const std::string operation_str[] = { OPERATION(EnumOperation) };
 const std::string& ast::operation::code::getStr() const {
     return operation_str[this->value - 1];
 }
+
+#include "binary.h"
+#include "call.h"
+#include "ternary.h"
+#include "unary.h"
+#include "variable.h"
+#include "literal.h"
+
+pool<sizeof(ast::operation::binary::implementation)>   ast::operation::binary::memory_pool;
+pool<sizeof(ast::operation::call::implementation)>     ast::operation::call::memory_pool;
+pool<sizeof(ast::operation::ternary::implementation)>  ast::operation::ternary::memory_pool;
+pool<sizeof(ast::operation::unary::implementation)>    ast::operation::unary::memory_pool;
+pool<sizeof(ast::operation::variable::implementation)> ast::operation::variable::memory_pool;
+pool<sizeof(ast::operation::literal::implementation)>  ast::operation::literal::memory_pool;

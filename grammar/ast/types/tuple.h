@@ -43,7 +43,7 @@ public:
 	tuple(const std::vector<field>& fields): impl(new implementation(fields)) {}
 	tuple(std::vector<field>&& fields): impl(new implementation(std::move(fields))) {}
 private:
-	static pool<sizeof(implementation), 1024> memory_pool;
+	static pool<sizeof(implementation)> memory_pool;
 	std::shared_ptr<implementation> impl;
 };
 

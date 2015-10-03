@@ -11,6 +11,7 @@
 #include <boost/spirit/include/qi.hpp>
 #include "lexer/lexer.h"
 #include "ast/function/function.h"
+#include "ast/function/prototype.h"
 #include "instruction.h"
 
 class GFunction: public boost::spirit::qi::grammar<GIterator, boost::spirit::locals<ast::function::prototype>, ast::function(), GSkip>

@@ -8,7 +8,9 @@
 #ifndef POOL_H_
 #define POOL_H_
 
-template<unsigned size, unsigned capacity> class pool
+#include <cstddef>
+
+template<unsigned size, unsigned capacity = 1024> class pool
 {
 	void *pointers[capacity];
 	unsigned int top;

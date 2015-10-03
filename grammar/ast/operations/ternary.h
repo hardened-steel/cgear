@@ -5,8 +5,8 @@
 //       email: keldgaden@gmail.com
 //
 
-#ifndef TERNARY_H_
-#define TERNARY_H_
+#ifndef TERNARY_H
+#define TERNARY_H
 
 #include "operation.h"
 
@@ -31,8 +31,8 @@ protected:
 public:
 	ternary(ast::operation condition, ast::operation true_action, ast::operation false_action): impl(new implementation(condition, true_action, false_action)) {}
 private:
-	static pool<sizeof(implementation), 1024> memory_pool;
+	static pool<sizeof(implementation)> memory_pool;
 	std::shared_ptr<implementation> impl;
 };
 
-#endif /* TERNARY_H_ */
+#endif /* TERNARY_H */

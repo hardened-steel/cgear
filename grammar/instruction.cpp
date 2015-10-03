@@ -36,6 +36,8 @@ private:
 	std::shared_ptr<implementation> impl;
 };
 
+ast::instruction::nope::implementation ast::instruction::nope::snope;
+
 GInstruction::GInstruction(Lexer& lexer, GExpression& operation, GType& type): GInstruction::base_type(instruction, "instruction"), operation(operation), type(type)
 {
 	namespace qi = boost::spirit::qi;

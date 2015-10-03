@@ -5,8 +5,8 @@
 //       email: keldgaden@gmail.com
 //
 
-#ifndef VARIABLE_H_
-#define VARIABLE_H_
+#ifndef VARIABLE_H
+#define VARIABLE_H
 
 #include "../../lexer/token.h"
 #include "operation.h"
@@ -30,8 +30,8 @@ protected:
 public:
 	variable(token::identifier id): impl(new implementation(id)) {}
 private:
-	static pool<sizeof(implementation), 1024> memory_pool;
+	static pool<sizeof(implementation)> memory_pool;
 	std::shared_ptr<implementation> impl;
 };
 
-#endif /* VARIABLE_H_ */
+#endif /* VARIABLE_H */

@@ -5,8 +5,8 @@
 //       email: keldgaden@gmail.com
 //
 
-#ifndef BINARY_H_
-#define BINARY_H_
+#ifndef BINARY_H
+#define BINARY_H
 
 #include "operation.h"
 
@@ -37,4 +37,4 @@ private:
 	std::shared_ptr<implementation> impl;
 };
 
-#endif /* BINARY_H_ */
+#endif /* BINARY_H */

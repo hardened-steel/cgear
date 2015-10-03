@@ -6,15 +6,33 @@
 //
 
 #include <boost/phoenix/phoenix.hpp>
-#include "../syntax/operation.h"
-#include "execinfo.h"
+#include "ast/types/tuple.h"
 #include "type.h"
 
-class ast::type::t_bool: public ast::type::base
+class type_name: public ast::type::base
 {
+	friend ast::type;
+protected:
+	class implementation: public ast::type::base
+	{
+		token::identifier name;
+	public:
+		implementation(token::identifier name): name(name) {}
+		void* operator new(size_t size) {
+			return memory_pool.allocate(size);
+		}
+		void operator delete(void* pointer) {
+			memory_pool.deallocate(pointer);
+		}
+	};
 public:
-
+	type_name(token::identifier name): impl(new implementation(name)) {}
+private:
+	static pool<sizeof(implementation)> memory_pool;
+	std::shared_ptr<implementation> impl;
 };
+
+pool<sizeof(type_name::implementation)> type_name::memory_pool;
 
 GType::GType(Lexer& lexer): GType::base_type(type, "type") {
 	namespace qi = boost::spirit::qi;
@@ -44,5 +62,5 @@ GTypeName::GTypeName(Lexer& lexer): GTypeName::base_type(type, "type") {
 	namespace qi = boost::spirit::qi;
 	namespace phx = boost::phoenix;
 
-	type = lexer.identifier[qi::_val = qi::_1];
+	type = lexer.identifier[qi::_val = phx::construct<type_name>(qi::_1)];
 }
