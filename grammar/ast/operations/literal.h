@@ -17,8 +17,9 @@ class ast::operation::literal
 protected:
 	class implementation: public ast::operation::base
 	{
-		enum { integer_literal, real_literal, string_literal, symbol_literal };
+		enum { boolean_literal, integer_literal, real_literal, string_literal, symbol_literal };
 		union {
+			bool boolean;
 			token::intLiteral integer;
 			token::realLiteral real;
 			token::stringLiteral string;
@@ -26,6 +27,7 @@ protected:
 		};
 		int type;
 	public:
+		implementation(bool boolean): boolean(boolean), type(boolean_literal) {}
 		implementation(token::intLiteral integer): integer(integer), type(integer_literal) {}
 		implementation(token::realLiteral real): real(real), type(real_literal) {}
 		implementation(token::stringLiteral string): string(string), type(string_literal) {}
@@ -38,6 +40,7 @@ protected:
 		}
 	};
 public:
+	literal(bool                 value): impl(new implementation(value)) {}
 	literal(token::intLiteral    value): impl(new implementation(value)) {}
 	literal(token::realLiteral   value): impl(new implementation(value)) {}
 	literal(token::stringLiteral value): impl(new implementation(value)) {}
@@ -46,7 +49,5 @@ private:
 	static pool<sizeof(implementation)> memory_pool;
 	std::shared_ptr<implementation> impl;
 };
-
-
 
 #endif /* LITERAL_H */

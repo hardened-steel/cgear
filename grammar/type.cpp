@@ -7,9 +7,10 @@
 
 #include <boost/phoenix/phoenix.hpp>
 #include "ast/types/tuple.h"
+#include "ast/types/int.h"
 #include "type.h"
 
-class type_name: public ast::type::base
+class type_name
 {
 	friend ast::type;
 protected:
@@ -37,10 +38,10 @@ pool<sizeof(type_name::implementation)> type_name::memory_pool;
 GType::GType(Lexer& lexer): GType::base_type(type, "type") {
 	namespace qi = boost::spirit::qi;
 	namespace phx = boost::phoenix;
-/*
-    type = ( lexer.kbool   [qi::_val = phx::new_<ast::type::t_bool>()]
-           | lexer.kint    [qi::_val = phx::new_<ast::type::base>(ast::type::base::int_ , true)]
-           | lexer.kreal   [qi::_val = phx::new_<ast::type::base>(ast::type::base::real , true)]
+
+    type = /*( lexer.kbool   [qi::_val = phx::new_<ast::type::t_bool>()]
+           | */lexer.kint    [qi::_val = phx::construct<ast::type::t_int>()]
+           /*| lexer.kreal   [qi::_val = phx::new_<ast::type::base>(ast::type::base::real , true)]
            | lexer.kchar   [qi::_val = phx::new_<ast::type::base>(ast::type::base::char_, true)]
            | lexer.kvoid   [qi::_val = phx::new_<ast::type::base>(ast::type::base::void_, true)]
            | (lexer.karray > lexer.tokens["<"] > type > lexer.tokens[">"]) [qi::_val = phx::new_<ast::type::array>(qi::_1, true)]
@@ -53,14 +54,17 @@ GType::GType(Lexer& lexer): GType::base_type(type, "type") {
            | lexer.kchar   [qi::_val = phx::new_<st::type::base>(ast::type::base::char_, false)]
            | lexer.kvoid   [qi::_val = phx::new_<st::type::base>(ast::type::base::void_, false)]
            | (lexer.karray > lexer.tokens["<"] > type > lexer.tokens[">"]) [qi::_val = phx::new_<ast::type::array>(qi::_1, false)]
-           )
+           )*/
+		   | lexer.identifier[qi::_val = phx::construct<type_name>(qi::_1)]
          ;
-*/
+
 }
 
-GTypeName::GTypeName(Lexer& lexer): GTypeName::base_type(type, "type") {
+GTypeName::GTypeName(Lexer& lexer): GTypeName::base_type(type, "type identifier") {
 	namespace qi = boost::spirit::qi;
 	namespace phx = boost::phoenix;
 
-	type = lexer.identifier[qi::_val = phx::construct<type_name>(qi::_1)];
+	type = lexer.kint      [qi::_val = phx::construct<ast::type::t_int>()]
+		 | lexer.identifier[qi::_val = phx::construct<type_name>(qi::_1)]
+		 ;
 }

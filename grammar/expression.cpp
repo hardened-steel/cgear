@@ -11,6 +11,7 @@
 #include "ast/operations/ternary.h"
 #include "ast/operations/call.h"
 #include "ast/operations/variable.h"
+#include "ast/operations/literal.h"
 #include "expression.h"
 
 GExpression::GExpression(Lexer& lexer, GTypeName& type): GExpression::base_type(expression), type(type)
@@ -69,11 +70,11 @@ GExpression::GExpression(Lexer& lexer, GTypeName& type): GExpression::base_type(
 	             );
 	operation[8] = (lexer.tokens["("] > expression > lexer.tokens[")"]) [qi::_val = qi::_1]
 	             //| (lexer.tokens["{"] > (expression % lexer.tokens[","]) > lexer.tokens["}"]) [qi::_val = phx::construct<ast::operation::array>(qi::_1)]
-	             //| lexer.ktrue         [qi::_val = phx::construct<ast::operation::literal>(true)]
-	             //| lexer.kfalse        [qi::_val = phx::construct<ast::operation::literal>(false)]
-	             //| lexer.intLiteral    [qi::_val = phx::construct<ast::operation::literal>(qi::_1)]
-	             //| lexer.realLiteral   [qi::_val = phx::construct<ast::operation::literal>(qi::_1)]
-	             //| lexer.stringLiteral [qi::_val = phx::construct<ast::operation::literal>(qi::_1)]
+	             | lexer.ktrue         [qi::_val = phx::construct<ast::operation::literal>(true)]
+	             | lexer.kfalse        [qi::_val = phx::construct<ast::operation::literal>(false)]
+	             | lexer.intLiteral    [qi::_val = phx::construct<ast::operation::literal>(qi::_1)]
+	             | lexer.realLiteral   [qi::_val = phx::construct<ast::operation::literal>(qi::_1)]
+	             | lexer.stringLiteral [qi::_val = phx::construct<ast::operation::literal>(qi::_1)]
 	             | call [qi::_val = qi::_1]
 	             | variable  [qi::_val = qi::_1]
 	             ;

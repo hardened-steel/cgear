@@ -12,10 +12,10 @@
 #include "../ast.h"
 #include <memory>
 
-class ast::type: public ast
+class ast::type
 {
 public:
-	class base
+	class base: public ast
 	{
 	public:
 		virtual ~base() {}

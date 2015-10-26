@@ -118,7 +118,7 @@ GInstruction::GInstruction(Lexer& lexer, GExpression& operation, GType& type): G
 
     qi::on_success
             (
-                If
+				if_i
               , std::cout << phx::val("success rule If:\n") << phx::bind(&st::print, qi::_val, 0) << std::endl
             );
 

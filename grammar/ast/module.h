@@ -12,7 +12,12 @@
 
 class ast::module
 {
-
+	std::vector<ast::function> functions;
+public:
+	module() {}
+	module(const std::vector<ast::function>& functions): functions(functions) {}
+	module(std::vector<ast::function>&& functions): functions(std::move(functions)) {}
+	void process();
 };
 
 #endif /* AST_MODULE_H */

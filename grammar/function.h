@@ -21,9 +21,13 @@ class GFunction: public boost::spirit::qi::grammar<GIterator, boost::spirit::loc
 
 	GInstruction& instruction;
 	GTypeName& typeName;
+protected:
+	class GParameters;
 public:
-	GFunction(Lexer& lexer, GInstruction& instruction, GTypeName& typeName);
+	GFunction(Lexer& lexer, GInstruction& instruction, GType& type, GTypeName& typeName);
 	~GFunction();
+private:
+	std::unique_ptr<GParameters> parameters_ptr;
 };
 
 #endif // GRAMMAR_FUNCTION_H_

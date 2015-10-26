@@ -7,7 +7,7 @@
 #include <boost/phoenix/phoenix.hpp>
 #include "grammar/lexer/lexer.h"
 #include "grammar/lexer/constant_table.h"
-#include "grammar/function.h"
+#include "grammar/module.h"
 
 void parse_file(std::istream& in, std::ostream& out) {
 	namespace lex = boost::spirit::lex;
@@ -19,17 +19,11 @@ void parse_file(std::istream& in, std::ostream& out) {
 	try {
 		ConstantTable table;
 		Lexer lexer(table);
+		GModule gmodule(lexer);
 
-		//GFunction function(lexer);
-		//std::vector<st::function> functions;
-		GType type(lexer);
-		GTypeName typeName(lexer);
-		GExpression expression(lexer, typeName);
-		GInstruction instruction(lexer, expression, type);
-		GFunction gfunction(lexer, instruction, typeName);
-		ast::function function;
+		ast::module module;
 
-		bool res = lex::tokenize_and_phrase_parse(lp_begin, lp_end, lexer, gfunction, qi::in_state("WS")[lexer.self]);
+		bool res = lex::tokenize_and_phrase_parse(lp_begin, lp_end, lexer, gmodule, qi::in_state("WS")[lexer.self], module);
 		if(res && lp_begin == lp_end) {
 			std::cout << "successed" << std::endl;
 		} else {
