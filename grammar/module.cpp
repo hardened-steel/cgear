@@ -6,13 +6,37 @@
 //
 
 #include <boost/phoenix/phoenix.hpp>
+#include "type.h"
+#include "function.h"
+#include "instruction.h"
+#include "expression.h"
 #include "module.h"
 
-GModule::GModule(Lexer& lexer): GModule::base_type(module, "module"),
-	type(lexer), typeName(lexer), expression(lexer, typeName), instruction(lexer, expression, type), function(lexer, instruction, type, typeName)
+class GModule::implementation
+{
+public:
+	GType type;
+	GTypeName typeName;
+	GExpression expression;
+	GInstruction instruction;
+	GFunction function;
+public:
+	implementation(Lexer& lexer):
+		type(lexer), typeName(lexer), expression(lexer, typeName), instruction(lexer, expression, type), function(lexer, instruction, typeName)
+	{}
+};
+
+GModule::GModule(Lexer& lexer): GModule::base_type(module, "module"), impl(new GModule::implementation(lexer))
 {
 	namespace qi = boost::spirit::qi;
 	namespace phx = boost::phoenix;
 
-	module = (*function)[qi::_val = qi::_1];
+	GType& type               = impl->type;
+	GFunction& function       = impl->function;
+
+	module = (*(function | type))[qi::_val = qi::_1];
+}
+
+GModule::~GModule() {
+
 }

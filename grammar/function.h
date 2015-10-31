@@ -24,7 +24,7 @@ class GFunction: public boost::spirit::qi::grammar<GIterator, boost::spirit::loc
 protected:
 	class GParameters;
 public:
-	GFunction(Lexer& lexer, GInstruction& instruction, GType& type, GTypeName& typeName);
+	GFunction(Lexer& lexer, GInstruction& instruction, GTypeName& typeName);
 	~GFunction();
 private:
 	std::unique_ptr<GParameters> parameters_ptr;

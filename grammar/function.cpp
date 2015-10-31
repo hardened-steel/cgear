@@ -29,7 +29,7 @@ public:
 	}
 };
 
-GFunction::GFunction(Lexer& lexer, GInstruction& instruction, GType& type, GTypeName& typeName): GFunction::base_type(function, "function grammar"),
+GFunction::GFunction(Lexer& lexer, GInstruction& instruction, GTypeName& typeName): GFunction::base_type(function, "function grammar"),
 	instruction(instruction), typeName(typeName), parameters_ptr(new GParameters(lexer, typeName))
 {
 	namespace qi = boost::spirit::qi;
@@ -37,7 +37,7 @@ GFunction::GFunction(Lexer& lexer, GInstruction& instruction, GType& type, GType
 
 	GParameters& parameters = *parameters_ptr;
 
-	prototype = lexer.kfunction > (lexer.identifier > parameters > lexer.tokens[":"] > type)[qi::_val = phx::construct<ast::function::prototype>(qi::_1, qi::_2, qi::_3)];
+	prototype = lexer.kfunction > (lexer.identifier > parameters > lexer.tokens[":"] > typeName)[qi::_val = phx::construct<ast::function::prototype>(qi::_1, qi::_2, qi::_3)];
 	function = prototype[qi::_a = qi::_1] >> ((lexer.tokens[";"][qi::_val = qi::_a]) | (instruction[qi::_val = phx::construct<ast::function::definition>(qi::_a, qi::_1)]));
 
 	prototype.name("function prototype");

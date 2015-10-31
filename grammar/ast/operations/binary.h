@@ -23,6 +23,7 @@ protected:
 		implementation(ast::operation::code code, ast::operation left, ast::operation right):
 			left(left), right(right), code(code)
 		{}
+		void accept(ast::operation::visitor&) override;
 		void* operator new(size_t size) {
 			return memory_pool.allocate(size);
 		}

@@ -13,7 +13,7 @@
 class ast::instruction::if_i
 {
 	friend ast::instruction;
-protected:
+public:
 	class implementation: public ast::instruction::base
 	{
 	protected:
@@ -23,6 +23,7 @@ protected:
 		implementation(ast::operation condition, ast::instruction true_action):
 			condition(condition), true_action(true_action)
 		{}
+		void accept(ast::instruction::visitor&) override;
 		void* operator new(size_t size) {
 			return memory_pool.allocate(size);
 		}
@@ -50,6 +51,7 @@ protected:
 		implementation(ast::operation condition, ast::instruction true_action, ast::instruction false_action):
 			condition(condition), true_action(true_action), false_action(false_action)
 		{}
+		void accept(ast::instruction::visitor&) override;
 		void* operator new(size_t size) {
 			return memory_pool.allocate(size);
 		}

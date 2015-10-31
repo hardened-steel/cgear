@@ -20,6 +20,7 @@ protected:
 		ast::operation::code code;
 	public:
 		implementation(ast::operation::code code, ast::operation op): op(op), code(code) {}
+		void accept(ast::operation::visitor&) override;
 		void* operator new(size_t size) {
 			return memory_pool.allocate(size);
 		}

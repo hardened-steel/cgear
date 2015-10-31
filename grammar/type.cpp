@@ -6,34 +6,10 @@
 //
 
 #include <boost/phoenix/phoenix.hpp>
+#include "ast/types/name.h"
 #include "ast/types/tuple.h"
 #include "ast/types/int.h"
 #include "type.h"
-
-class type_name
-{
-	friend ast::type;
-protected:
-	class implementation: public ast::type::base
-	{
-		token::identifier name;
-	public:
-		implementation(token::identifier name): name(name) {}
-		void* operator new(size_t size) {
-			return memory_pool.allocate(size);
-		}
-		void operator delete(void* pointer) {
-			memory_pool.deallocate(pointer);
-		}
-	};
-public:
-	type_name(token::identifier name): impl(new implementation(name)) {}
-private:
-	static pool<sizeof(implementation)> memory_pool;
-	std::shared_ptr<implementation> impl;
-};
-
-pool<sizeof(type_name::implementation)> type_name::memory_pool;
 
 GType::GType(Lexer& lexer): GType::base_type(type, "type") {
 	namespace qi = boost::spirit::qi;
@@ -55,7 +31,7 @@ GType::GType(Lexer& lexer): GType::base_type(type, "type") {
            | lexer.kvoid   [qi::_val = phx::new_<st::type::base>(ast::type::base::void_, false)]
            | (lexer.karray > lexer.tokens["<"] > type > lexer.tokens[">"]) [qi::_val = phx::new_<ast::type::array>(qi::_1, false)]
            )*/
-		   | lexer.identifier[qi::_val = phx::construct<type_name>(qi::_1)]
+		   | lexer.identifier[qi::_val = phx::construct<ast::type::name>(qi::_1)]
          ;
 
 }
@@ -65,6 +41,6 @@ GTypeName::GTypeName(Lexer& lexer): GTypeName::base_type(type, "type identifier"
 	namespace phx = boost::phoenix;
 
 	type = lexer.kint      [qi::_val = phx::construct<ast::type::t_int>()]
-		 | lexer.identifier[qi::_val = phx::construct<type_name>(qi::_1)]
+		 | lexer.identifier[qi::_val = phx::construct<ast::type::name>(qi::_1)]
 		 ;
 }

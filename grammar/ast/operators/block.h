@@ -14,13 +14,14 @@
 class ast::instruction::block
 {
 	friend ast::instruction;
-protected:
+public:
 	class implementation: public ast::instruction::base
 	{
 		std::vector<ast::instruction> instructions;
 	public:
 		implementation(const std::vector<ast::instruction>& instructions): instructions(instructions) {}
 		implementation(std::vector<ast::instruction>&& instructions): instructions(std::move(instructions)) {}
+		void accept(ast::instruction::visitor&) override;
 		void* operator new(size_t size) {
 			return memory_pool.allocate(size);
 		}

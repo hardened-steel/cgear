@@ -8,8 +8,8 @@
 #ifndef OPERATION_H
 #define OPERATION_H
 
-#include "../pool.h"
-#include "../ast.h"
+#include "grammar/ast/pool.h"
+#include "grammar/ast/ast.h"
 #include <string>
 #include <memory>
 
@@ -61,9 +61,11 @@ enum {
 class ast::operation: public ast
 {
 public:
+	class visitor;
 	class base
 	{
 	public:
+		virtual void accept(ast::operation::visitor&) = 0;
 		virtual ~base() {}
 	};
 	class unary;
@@ -91,6 +93,7 @@ public:
 		this->impl = other.impl;
 		return *this;
 	}
+	void accept(ast::operation::visitor& v) { impl->accept(v); }
 private:
 	std::shared_ptr<base> impl;
 };

@@ -9,7 +9,6 @@
 #define LITERAL_H
 
 #include "operation.h"
-#include "../../lexer/token.h"
 
 class ast::operation::literal
 {
@@ -32,6 +31,7 @@ protected:
 		implementation(token::realLiteral real): real(real), type(real_literal) {}
 		implementation(token::stringLiteral string): string(string), type(string_literal) {}
 		implementation(token::charLiteral symbol): symbol(symbol), type(symbol_literal) {}
+		void accept(ast::operation::visitor&) override;
 		void* operator new(size_t size) {
 			return memory_pool.allocate(size);
 		}

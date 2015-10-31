@@ -8,7 +8,7 @@
 #ifndef CALL_H
 #define CALL_H
 
-#include "../../lexer/token.h"
+#include "grammar/lexer/token.h"
 #include "operation.h"
 
 class ast::operation::call
@@ -22,6 +22,7 @@ protected:
 	public:
 		implementation(token::identifier id, const std::vector<ast::operation>& params): id(id), params(params) {}
 		implementation(token::identifier id, std::vector<ast::operation>&& params): id(id), params(std::move(params)) {}
+		void accept(ast::operation::visitor&) override;
 		void* operator new(size_t size) {
 			return memory_pool.allocate(size);
 		}

@@ -8,7 +8,7 @@
 #ifndef VARIABLE_H
 #define VARIABLE_H
 
-#include "../../lexer/token.h"
+#include "grammar/lexer/token.h"
 #include "operation.h"
 
 class ast::operation::variable
@@ -20,6 +20,7 @@ protected:
 		token::identifier id;
 	public:
 		implementation(token::identifier id): id(id) {}
+		void accept(ast::operation::visitor&) override;
 		void* operator new(size_t size) {
 			return memory_pool.allocate(size);
 		}

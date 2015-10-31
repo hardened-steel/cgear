@@ -13,13 +13,14 @@
 class ast::instruction::repeat_i
 {
 	friend ast::instruction;
-protected:
+public:
 	class implementation: public ast::instruction::base
 	{
 		ast::operation condition;
 		ast::instruction action;
 	public:
 		implementation(ast::operation condition, ast::instruction action): condition(condition), action(action) {}
+		void accept(ast::instruction::visitor&) override;
 		void* operator new(size_t size) {
 			return memory_pool.allocate(size);
 		}

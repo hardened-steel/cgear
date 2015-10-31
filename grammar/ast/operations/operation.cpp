@@ -39,3 +39,16 @@ pool<sizeof(ast::operation::ternary::implementation)>  ast::operation::ternary::
 pool<sizeof(ast::operation::unary::implementation)>    ast::operation::unary::memory_pool;
 pool<sizeof(ast::operation::variable::implementation)> ast::operation::variable::memory_pool;
 pool<sizeof(ast::operation::literal::implementation)>  ast::operation::literal::memory_pool;
+
+#include "visitor.h"
+
+void ast::operation::unary::implementation::accept(ast::operation::visitor& v) { v.visit(*this); }
+void ast::operation::binary::implementation::accept(ast::operation::visitor& v) { v.visit(*this); }
+void ast::operation::ternary::implementation::accept(ast::operation::visitor& v) { v.visit(*this); }
+//void ast::operation::type_cast::implementation::accept(ast::operation::visitor& v) { v.visit(*this); }
+void ast::operation::variable::implementation::accept(ast::operation::visitor& v) { v.visit(*this); }
+//void ast::operation::index::implementation::accept(ast::operation::visitor& v) { v.visit(*this); }
+//void ast::operation::section::implementation::accept(ast::operation::visitor& v) { v.visit(*this); }
+void ast::operation::call::implementation::accept(ast::operation::visitor& v) { v.visit(*this); }
+//void ast::operation::array::implementation::accept(ast::operation::visitor& v) { v.visit(*this); }
+void ast::operation::literal::implementation::accept(ast::operation::visitor& v) { v.visit(*this); }

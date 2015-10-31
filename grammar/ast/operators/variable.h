@@ -8,14 +8,14 @@
 #ifndef INSTRUCTION_VARIABLE_H_
 #define INSTRUCTION_VARIABLE_H_
 
-#include "../types/type.h"
-#include "../../lexer/token.h"
+#include "grammar/ast/types/type.h"
+#include "grammar/lexer/token.h"
 #include "operator.h"
 
 class ast::instruction::variable
 {
 	friend ast::instruction;
-protected:
+public:
 	class implementation: public ast::instruction::base
 	{
 		ast::type type;
@@ -23,6 +23,7 @@ protected:
 		ast::operation init;
 	public:
 		implementation(ast::type type, token::identifier id, ast::operation init): type(type), id(id), init(init) {}
+		void accept(ast::instruction::visitor&) override;
 		void* operator new(size_t size) {
 			return memory_pool.allocate(size);
 		}

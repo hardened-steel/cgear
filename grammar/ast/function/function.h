@@ -8,16 +8,18 @@
 #ifndef AST_FUNCTION_H_
 #define AST_FUNCTION_H_
 
-#include "../pool.h"
-#include "../ast.h"
+#include "grammar/ast/pool.h"
+#include "grammar/ast/ast.h"
 #include <memory>
 
 class ast::function
 {
 public:
+	class visitor;
 	class base
 	{
 	public:
+		virtual void accept(ast::function::visitor&) = 0;
 		virtual ~base() {}
 	};
 	class definition;
@@ -36,6 +38,7 @@ public:
 		this->impl = other.impl;
 		return *this;
 	}
+	void accept(ast::function::visitor& v) { impl->accept(v); }
 private:
 	std::shared_ptr<base> impl;
 };

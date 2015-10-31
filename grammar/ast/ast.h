@@ -12,10 +12,11 @@ class ast
 {
 public:
 	class module;
+	class visitor;
+
 	class function;
 	class instruction;
 	class operation;
-
 	class type;
 };
 

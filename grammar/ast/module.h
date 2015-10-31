@@ -8,16 +8,19 @@
 #ifndef AST_MODULE_H
 #define AST_MODULE_H
 
+#include <boost/variant.hpp>
 #include "ast.h"
+#include "function/function.h"
+#include "types/type.h"
 
 class ast::module
 {
-	std::vector<ast::function> functions;
+	using statement = boost::variant<ast::function, ast::type>;
+	std::vector<statement> statements;
 public:
 	module() {}
-	module(const std::vector<ast::function>& functions): functions(functions) {}
-	module(std::vector<ast::function>&& functions): functions(std::move(functions)) {}
-	void process();
+	module(const std::vector<statement>& statements): statements(statements) {}
+	module(std::vector<statement>&& statements): statements(std::move(statements)) {}
 };
 
 #endif /* AST_MODULE_H */

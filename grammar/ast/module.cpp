@@ -5,6 +5,4 @@
 //       email: keldgaden@gmail.com
 //
 
-void ast::module::process() {
-
-}
+#include "module.h"

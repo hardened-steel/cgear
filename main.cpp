@@ -25,7 +25,6 @@ void parse_file(std::istream& in, std::ostream& out) {
 
 		bool res = lex::tokenize_and_phrase_parse(lp_begin, lp_end, lexer, gmodule, qi::in_state("WS")[lexer.self], module);
 		if(res && lp_begin == lp_end) {
-			std::cout << "successed" << std::endl;
 		} else {
 			std::string rest(lp_begin, lp_end);
 			std::cout << "Parsed: \"" << std::string(lp_start, lp_begin) << "\"" << std::endl;
@@ -46,8 +45,8 @@ int main(int argc, char* argv[]) {
 		std::ifstream in(argv[i]);
 		std::ofstream out(argv[i] + std::string(".out"));
 		in.unsetf(std::ios::skipws);
-		std::cout << "parse file \"" << argv[i] << "\":" << std::endl;
 		parse_file(in, out);
 	}
 }
+
 

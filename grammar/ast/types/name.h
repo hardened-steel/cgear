@@ -1,23 +1,25 @@
 // Project: CGear
 //
-//  Created on: 17.10.2015
+//  Created on: 31.10.2015
 //      Author: K.Pinegin
 //       email: keldgaden@gmail.com
 //
 
-#ifndef GRAMMAR_AST_TYPES_INT_H_
-#define GRAMMAR_AST_TYPES_INT_H_
+#ifndef GRAMMAR_AST_TYPES_NAME_H_
+#define GRAMMAR_AST_TYPES_NAME_H_
 
 #include "type.h"
 #include "grammar/lexer/token.h"
 
-class ast::type::t_int
+class ast::type::name
 {
 	friend ast::type;
 protected:
 	class implementation: public ast::type::base
 	{
+		token::identifier name;
 	public:
+		implementation(token::identifier name): name(name) {}
 		void accept(ast::type::visitor&) override;
 		void* operator new(size_t size) {
 			return memory_pool.allocate(size);
@@ -27,10 +29,10 @@ protected:
 		}
 	};
 public:
-	t_int(): impl(new implementation()) {}
+	name(token::identifier name): impl(new implementation(name)) {}
 private:
 	static pool<sizeof(implementation)> memory_pool;
 	std::shared_ptr<implementation> impl;
 };
 
-#endif /* GRAMMAR_AST_TYPES_INT_H_ */
+#endif /* GRAMMAR_AST_TYPES_NAME_H_ */

@@ -13,12 +13,13 @@
 class ast::instruction::calc
 {
 	friend ast::instruction;
-protected:
+public:
 	class implementation: public ast::instruction::base
 	{
 		ast::operation op;
 	public:
 		implementation(ast::operation op): op(op) {}
+		void accept(ast::instruction::visitor&) override;
 		void* operator new(size_t size) {
 			return memory_pool.allocate(size);
 		}

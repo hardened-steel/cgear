@@ -10,7 +10,7 @@
 
 #include "function.h"
 #include "prototype.h"
-#include "../operators/operator.h"
+#include "grammar/ast/operators/operator.h"
 
 class ast::function::definition
 {
@@ -22,6 +22,7 @@ protected:
 		ast::instruction body;
 	public:
 		implementation(ast::function::prototype prototype, ast::instruction body): prototype(prototype), body(body) {}
+		void accept(ast::function::visitor&) override;
 		void* operator new(size_t size) {
 			return memory_pool.allocate(size);
 		}

@@ -8,17 +8,19 @@
 #ifndef OPERATOR_H_
 #define OPERATOR_H_
 
-#include "../operations/operation.h"
-#include "../pool.h"
-#include "../ast.h"
+#include "grammar/ast/operations/operation.h"
+#include "grammar/ast/pool.h"
+#include "grammar/ast/ast.h"
 #include <memory>
 
 class ast::instruction
 {
 public:
+	class visitor;
 	class base
 	{
 	public:
+		virtual void accept(ast::instruction::visitor&) = 0;
 		virtual ~base() {}
 	};
 	class variable;
@@ -47,6 +49,7 @@ public:
 		this->impl = other.impl;
 		return *this;
 	}
+	void accept(ast::instruction::visitor& v) { impl->accept(v); }
 private:
 	std::shared_ptr<base> impl;
 };

@@ -8,16 +8,18 @@
 #ifndef TYPE_H_
 #define TYPE_H_
 
-#include "../pool.h"
-#include "../ast.h"
+#include "grammar/ast/pool.h"
+#include "grammar/ast/ast.h"
 #include <memory>
 
 class ast::type
 {
 public:
+	class visitor;
 	class base: public ast
 	{
 	public:
+		virtual void accept(ast::type::visitor&) = 0;
 		virtual ~base() {}
 	};
 	class t_bool;
@@ -29,6 +31,7 @@ public:
 	class tuple;
 	class t_class;
 	class t_struct;
+	class name;
 public:
 	type(): impl(nullptr) {}
 	type(type&& other): impl(std::move(other.impl)) {}
@@ -51,6 +54,7 @@ public:
 		this->impl = other.impl;
 		return *this;
 	}
+	void accept(ast::type::visitor& v) { impl->accept(v); }
 private:
 	std::shared_ptr<base> impl;
 };

@@ -15,28 +15,7 @@
 #include "ast/operators/return.h"
 #include "ast/operators/variable.h"
 #include "ast/operators/while.h"
-
-class ast::instruction::nope
-{
-	friend ast::instruction;
-protected:
-	class implementation: public ast::instruction::base
-	{
-	public:
-		void* operator new(size_t size) {
-			return &snope;
-		}
-		void operator delete(void* pointer) {
-		}
-	};
-public:
-	nope(): impl(new implementation) {}
-private:
-	static implementation snope;
-	std::shared_ptr<implementation> impl;
-};
-
-ast::instruction::nope::implementation ast::instruction::nope::snope;
+#include "ast/operators/nope.h"
 
 GInstruction::GInstruction(Lexer& lexer, GExpression& operation, GType& type): GInstruction::base_type(instruction, "instruction"), operation(operation), type(type)
 {

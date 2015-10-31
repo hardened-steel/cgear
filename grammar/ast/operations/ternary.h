@@ -20,7 +20,10 @@ protected:
 		ast::operation false_action;
 		ast::operation condition;
 	public:
-		implementation(ast::operation condition, ast::operation true_action, ast::operation false_action): true_action(true_action), false_action(false_action), condition(condition) {}
+		implementation(ast::operation condition, ast::operation true_action, ast::operation false_action):
+			true_action(true_action), false_action(false_action), condition(condition)
+		{}
+		void accept(ast::operation::visitor&) override;
 		void* operator new(size_t size) {
 			return memory_pool.allocate(size);
 		}

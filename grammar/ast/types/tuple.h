@@ -9,7 +9,7 @@
 #define AST_TYPES_TUPLE_H_
 
 #include <vector>
-#include "../../lexer/token.h"
+#include "grammar/lexer/token.h"
 #include "type.h"
 
 class ast::type::tuple
@@ -31,6 +31,7 @@ protected:
 	public:
 		implementation(const std::vector<field>& fields): fields(fields) {}
 		implementation(std::vector<field>&& fields): fields(std::move(fields)) {}
+		void accept(ast::type::visitor&) override;
 		void* operator new(size_t size) {
 			return memory_pool.allocate(size);
 		}

@@ -9,8 +9,8 @@
 #define FUNCTION_PROTOTYPE_H_
 
 #include <vector>
-#include "../../lexer/token.h"
-#include "../types/type.h"
+#include "grammar/lexer/token.h"
+#include "grammar/ast/types/type.h"
 #include "function.h"
 
 class ast::function::prototype
@@ -44,6 +44,7 @@ protected:
 		ast::type returnType;
 	public:
 		implementation(token::identifier name, std::vector<parameter> parameters, ast::type returnType): name(name), parameters(parameters), returnType(returnType) {}
+		void accept(ast::function::visitor&) override;
 		void* operator new(size_t size) {
 			return memory_pool.allocate(size);
 		}
