@@ -12,6 +12,7 @@
 #include "ast.h"
 #include "function/function.h"
 #include "types/type.h"
+#include "visitor.h"
 
 class ast::module
 {
@@ -21,6 +22,8 @@ public:
 	module() {}
 	module(const std::vector<statement>& statements): statements(statements) {}
 	module(std::vector<statement>&& statements): statements(std::move(statements)) {}
+
+	void accept(const ast::visitor&) const;
 };
 
 #endif /* AST_MODULE_H */

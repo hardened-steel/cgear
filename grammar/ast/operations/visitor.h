@@ -23,7 +23,6 @@ public:
 	virtual void visit(ast::operation::call::implementation&) = 0;
 	//virtual void visit(ast::operation::array::implementation&) = 0;
 	virtual void visit(ast::operation::literal::implementation&) = 0;
-	virtual ~visitor() = 0;
 };
 
 #endif /* GRAMMAR_AST_OPERATIONS_VISITOR_H_ */

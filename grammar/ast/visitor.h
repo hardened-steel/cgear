@@ -17,7 +17,8 @@ public:
 	class base
 	{
 	public:
-		virtual void visit(ast::function&) = 0;
+		virtual void visit(const ast::function&) = 0;
+		virtual void visit(const ast::type&) = 0;
 	};
 private:
 	ast::visitor::base* impl;

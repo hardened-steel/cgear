@@ -9,6 +9,8 @@
 #include "grammar/lexer/constant_table.h"
 #include "grammar/module.h"
 
+void visit_all(ast::module m);
+
 void parse_file(std::istream& in, std::ostream& out) {
 	namespace lex = boost::spirit::lex;
 	namespace phx = boost::phoenix;
@@ -25,6 +27,7 @@ void parse_file(std::istream& in, std::ostream& out) {
 
 		bool res = lex::tokenize_and_phrase_parse(lp_begin, lp_end, lexer, gmodule, qi::in_state("WS")[lexer.self], module);
 		if(res && lp_begin == lp_end) {
+			visit_all(module);
 		} else {
 			std::string rest(lp_begin, lp_end);
 			std::cout << "Parsed: \"" << std::string(lp_start, lp_begin) << "\"" << std::endl;

@@ -17,6 +17,26 @@
 #include "ast/operators/while.h"
 #include "ast/operators/nope.h"
 
+
+template<class Iterator>
+std::string print(Iterator start, Iterator end) {
+	return std::string(start, end);
+}
+
+class WHandler
+{
+public:
+    void operator()(GIterator first, GIterator last) const {
+    	auto begin = boost::get<boost::iterator_range<token::iterator>>(first->value()).begin();
+    	auto end   = boost::get<boost::iterator_range<token::iterator>>(last->value()).end();
+
+    	std::string str(begin, end);
+    	std::cout << str << std::endl;
+    }
+};
+
+boost::phoenix::function<WHandler> Handler;
+
 GInstruction::GInstruction(Lexer& lexer, GExpression& operation, GType& type): GInstruction::base_type(instruction, "instruction"), operation(operation), type(type)
 {
 	namespace qi = boost::spirit::qi;
@@ -82,36 +102,12 @@ GInstruction::GInstruction(Lexer& lexer, GExpression& operation, GType& type): G
 	                << qi::_4                               // what failed?
 	                << std::endl
 	         );
-/*
-    qi::on_success
-            (
-                variable
-              , std::cout << phx::val("success rule variable:\n") << phx::bind(&st::print, qi::_val, 0) << std::endl
-            );
 
     qi::on_success
             (
-                calc
-              , std::cout << phx::val("success rule calc:\n") << phx::bind(&st::print, qi::_val, 0) << std::endl
+				block,
+				Handler(qi::_1, qi::_3)
             );
-
-    qi::on_success
-            (
-				if_i
-              , std::cout << phx::val("success rule If:\n") << phx::bind(&st::print, qi::_val, 0) << std::endl
-            );
-
-    qi::on_success
-            (
-                block
-              , std::cout << phx::val("success rule block:\n") << phx::bind(&st::print, qi::_val, 0) << std::endl
-            );
-    qi::on_success
-            (
-                instruction
-              , std::cout << phx::val("success rule instruction:\n") << phx::bind(&st::print, qi::_val, 0) << std::endl
-            );
-*/
 }
 
 GInstruction::~GInstruction()

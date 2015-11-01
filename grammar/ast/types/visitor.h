@@ -16,7 +16,6 @@ public:
 	virtual void visit(ast::type::t_int::implementation&) = 0;
 	virtual void visit(ast::type::tuple::implementation&) = 0;
 	virtual void visit(ast::type::name::implementation&) = 0;
-	virtual ~visitor() = 0;
 };
 
 #endif /* GRAMMAR_AST_TYPES_VISITOR_H_ */

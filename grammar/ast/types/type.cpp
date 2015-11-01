@@ -5,8 +5,8 @@
 //       email: keldgaden@gmail.com
 //
 
-#include "name.h"
 #include "type.h"
+#include "name.h"
 #include "int.h"
 #include "tuple.h"
 

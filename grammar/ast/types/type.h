@@ -54,6 +54,7 @@ public:
 		this->impl = other.impl;
 		return *this;
 	}
+	bool operator==(const type& other) const { return true; }
 	void accept(ast::type::visitor& v) { impl->accept(v); }
 private:
 	std::shared_ptr<base> impl;

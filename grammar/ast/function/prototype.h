@@ -36,7 +36,7 @@ public:
 			return *this;
 		}
 	};
-protected:
+public:
 	class implementation: public ast::function::base
 	{
 		token::identifier name;

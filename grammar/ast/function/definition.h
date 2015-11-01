@@ -15,7 +15,7 @@
 class ast::function::definition
 {
 	friend ast::function;
-protected:
+public:
 	class implementation: public ast::function::base
 	{
 		ast::function::prototype prototype;

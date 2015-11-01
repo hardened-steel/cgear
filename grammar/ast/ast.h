@@ -8,6 +8,8 @@
 #ifndef AST_H_
 #define AST_H_
 
+#include "grammar/lexer/token.h"
+
 class ast
 {
 public:
@@ -18,6 +20,11 @@ public:
 	class instruction;
 	class operation;
 	class type;
+	class node
+	{
+	public:
+		token::iterator begin, end;
+	};
 };
 
 #endif /* AST_H_ */

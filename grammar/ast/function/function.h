@@ -16,7 +16,7 @@ class ast::function
 {
 public:
 	class visitor;
-	class base
+	class base: public ast::node
 	{
 	public:
 		virtual void accept(ast::function::visitor&) = 0;

@@ -24,7 +24,6 @@ public:
 	virtual void visit(ast::instruction::return_i::implementation&) = 0;
 	virtual void visit(ast::instruction::block::implementation&) = 0;
 	virtual void visit(ast::instruction::variable::implementation&) = 0;
-	virtual ~visitor() = 0;
 };
 
 #endif /* GRAMMAR_AST_OPERATORS_VISITOR_H_ */
