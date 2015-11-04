@@ -10,32 +10,18 @@
 
 #include "operation.h"
 
-class ast::operation::ternary
+class ast::operation::ternary: public ast::operation
 {
-	friend ast::operation;
-protected:
-	class implementation: public ast::operation::base
-	{
-		ast::operation true_action;
-		ast::operation false_action;
-		ast::operation condition;
-	public:
-		implementation(ast::operation condition, ast::operation true_action, ast::operation false_action):
-			true_action(true_action), false_action(false_action), condition(condition)
-		{}
-		void accept(ast::operation::visitor&) override;
-		void* operator new(size_t size) {
-			return memory_pool.allocate(size);
-		}
-		void operator delete(void* pointer) {
-			memory_pool.deallocate(pointer);
-		}
-	};
+	ast::operation::instance true_action;
+	ast::operation::instance false_action;
+	ast::operation::instance condition;
 public:
-	ternary(ast::operation condition, ast::operation true_action, ast::operation false_action): impl(new implementation(condition, true_action, false_action)) {}
-private:
-	static pool<sizeof(implementation)> memory_pool;
-	std::shared_ptr<implementation> impl;
+	using instance = instance_t<ast::operation::ternary>;
+public:
+	ternary(ast::operation::instance condition, ast::operation::instance true_action, ast::operation::instance false_action)
+	: true_action(true_action), false_action(false_action), condition(condition) {}
+
+	void accept(ast::operation::visitor&) override;
 };
 
 #endif /* TERNARY_H */

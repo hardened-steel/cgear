@@ -12,40 +12,26 @@
 #include "grammar/lexer/token.h"
 #include "type.h"
 
-class ast::type::tuple
+class ast::type::tuple: public ast::type
 {
-	friend ast::type;
 public:
 	class field
 	{
-		ast::type type;
+		ast::type::instance type;
 		token::identifier name;
 	public:
-		field(ast::type type, token::identifier name): type(type), name(name) {}
+		field(ast::type::instance type, token::identifier name): type(type), name(name) {}
 		field(const field& other): type(other.type), name(other.name) {}
 	};
 protected:
-	class implementation: public ast::type::base
-	{
-		std::vector<field> fields;
-	public:
-		implementation(const std::vector<field>& fields): fields(fields) {}
-		implementation(std::vector<field>&& fields): fields(std::move(fields)) {}
-		void accept(ast::type::visitor&) override;
-		void* operator new(size_t size) {
-			return memory_pool.allocate(size);
-		}
-		void operator delete(void* pointer) {
-			memory_pool.deallocate(pointer);
-		}
-	};
+	std::vector<field> fields;
 public:
-	tuple(): impl(nullptr) {}
-	tuple(const std::vector<field>& fields): impl(new implementation(fields)) {}
-	tuple(std::vector<field>&& fields): impl(new implementation(std::move(fields))) {}
-private:
-	static pool<sizeof(implementation)> memory_pool;
-	std::shared_ptr<implementation> impl;
+	using instance = instance_t<ast::type::tuple>;
+public:
+	tuple(const std::vector<field>& fields): fields(fields) {}
+	tuple(std::vector<field>&& fields): fields(std::move(fields)) {}
+
+	void accept(ast::type::visitor&) override;
 };
 
 #endif /* AST_TYPES_TUPLE_H_ */

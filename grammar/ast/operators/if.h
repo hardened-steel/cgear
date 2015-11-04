@@ -10,62 +10,30 @@
 
 #include "operator.h"
 
-class ast::instruction::if_i
+class ast::instruction::if_i: public ast::instruction
 {
-	friend ast::instruction;
+protected:
+	ast::operation::instance condition;
+	ast::instruction::instance true_action;
 public:
-	class implementation: public ast::instruction::base
-	{
-	protected:
-		ast::operation condition;
-		ast::instruction true_action;
-	public:
-		implementation(ast::operation condition, ast::instruction true_action):
-			condition(condition), true_action(true_action)
-		{}
-		void accept(ast::instruction::visitor&) override;
-		void* operator new(size_t size) {
-			return memory_pool.allocate(size);
-		}
-		void operator delete(void* pointer) {
-			memory_pool.deallocate(pointer);
-		}
-	};
+	using instance = instance_t<ast::instruction::if_i>;
 public:
-	if_i(ast::operation condition, ast::instruction true_action): impl(new implementation(condition, true_action)) {}
-private:
-	static pool<sizeof(implementation)> memory_pool;
-	std::shared_ptr<implementation> impl;
+	if_i(ast::operation::instance condition, ast::instruction::instance true_action)
+	: condition(condition), true_action(true_action) {}
+
+	void accept(ast::instruction::visitor&) override;
 };
 
-class ast::instruction::ifelse_i
+class ast::instruction::ifelse_i: public ast::instruction::if_i
 {
-	friend ast::instruction;
-protected:
-	class implementation: public ast::instruction::base
-	{
-		ast::operation condition;
-		ast::instruction true_action;
-		ast::instruction false_action;
-	public:
-		implementation(ast::operation condition, ast::instruction true_action, ast::instruction false_action):
-			condition(condition), true_action(true_action), false_action(false_action)
-		{}
-		void accept(ast::instruction::visitor&) override;
-		void* operator new(size_t size) {
-			return memory_pool.allocate(size);
-		}
-		void operator delete(void* pointer) {
-			memory_pool.deallocate(pointer);
-		}
-	};
+	ast::instruction::instance false_action;
 public:
-	ifelse_i(ast::operation condition, ast::instruction true_action, ast::instruction false_action):
-		impl(new implementation(condition, true_action, false_action))
-	{}
-private:
-	static pool<sizeof(implementation)> memory_pool;
-	std::shared_ptr<implementation> impl;
+	using instance = instance_t<ast::instruction::ifelse_i>;
+public:
+	ifelse_i(ast::operation::instance condition, ast::instruction::instance true_action, ast::instruction::instance false_action)
+	: ast::instruction::if_i(condition, true_action), false_action(false_action) {}
+
+	void accept(ast::instruction::visitor&) override;
 };
 
 #endif /* INSTRUCTIONS_IF_H_ */

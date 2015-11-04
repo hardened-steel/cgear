@@ -8,11 +8,7 @@
 #include "function.h"
 #include "prototype.h"
 #include "definition.h"
-
-pool<sizeof(ast::function::prototype::implementation)>  ast::function::prototype::memory_pool;
-pool<sizeof(ast::function::definition::implementation)> ast::function::definition::memory_pool;
-
 #include "visitor.h"
 
-void ast::function::prototype::implementation::accept(ast::function::visitor& v) { v.visit(*this); }
-void ast::function::definition::implementation::accept(ast::function::visitor& v) { v.visit(*this); }
+void ast::function::prototype::accept(ast::function::visitor& v) { v.visit(*this); }
+void ast::function::definition::accept(ast::function::visitor& v) { v.visit(*this); }

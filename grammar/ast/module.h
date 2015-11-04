@@ -16,7 +16,7 @@
 
 class ast::module
 {
-	using statement = boost::variant<ast::function, ast::type>;
+	using statement = boost::variant<ast::function::instance, ast::type::instance>;
 	std::vector<statement> statements;
 public:
 	module() {}

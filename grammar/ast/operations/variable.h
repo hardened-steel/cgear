@@ -11,28 +11,14 @@
 #include "grammar/lexer/token.h"
 #include "operation.h"
 
-class ast::operation::variable
+class ast::operation::variable: public ast::operation
 {
-	friend ast::operation;
-protected:
-	class implementation: public ast::operation::base
-	{
-		token::identifier id;
-	public:
-		implementation(token::identifier id): id(id) {}
-		void accept(ast::operation::visitor&) override;
-		void* operator new(size_t size) {
-			return memory_pool.allocate(size);
-		}
-		void operator delete(void* pointer) {
-			memory_pool.deallocate(pointer);
-		}
-	};
+	token::identifier id;
 public:
-	variable(token::identifier id): impl(new implementation(id)) {}
-private:
-	static pool<sizeof(implementation)> memory_pool;
-	std::shared_ptr<implementation> impl;
+	using instance = instance_t<ast::operation::variable>;
+public:
+	variable(token::identifier id): id(id) {}
+	void accept(ast::operation::visitor&) override;
 };
 
 #endif /* VARIABLE_H */

@@ -14,16 +14,16 @@
 #include "lexer/lexer.h"
 #include "ast/types/type.h"
 
-class GType: public boost::spirit::qi::grammar<GIterator, ast::type(), GSkip>
+class GType: public boost::spirit::qi::grammar<GIterator, ast::type::instance(), GSkip>
 {
-	boost::spirit::qi::rule<GIterator, ast::type(), GSkip> type;
+	boost::spirit::qi::rule<GIterator, ast::type::instance(), GSkip> type;
 public:
 	GType(Lexer& lexer);
 };
 
-class GTypeName: public boost::spirit::qi::grammar<GIterator, ast::type(), GSkip>
+class GTypeName: public boost::spirit::qi::grammar<GIterator, ast::type::instance(), GSkip>
 {
-	boost::spirit::qi::rule<GIterator, ast::type(), GSkip> type;
+	boost::spirit::qi::rule<GIterator, ast::type::instance(), GSkip> type;
 public:
 	GTypeName(Lexer& lexer);
 };

@@ -26,29 +26,15 @@ const std::string& ast::operation::code::getStr() const {
     return operation_str[this->value - 1];
 }
 
-#include "binary.h"
-#include "call.h"
-#include "ternary.h"
-#include "unary.h"
-#include "variable.h"
-#include "literal.h"
-
-pool<sizeof(ast::operation::binary::implementation)>   ast::operation::binary::memory_pool;
-pool<sizeof(ast::operation::call::implementation)>     ast::operation::call::memory_pool;
-pool<sizeof(ast::operation::ternary::implementation)>  ast::operation::ternary::memory_pool;
-pool<sizeof(ast::operation::unary::implementation)>    ast::operation::unary::memory_pool;
-pool<sizeof(ast::operation::variable::implementation)> ast::operation::variable::memory_pool;
-pool<sizeof(ast::operation::literal::implementation)>  ast::operation::literal::memory_pool;
-
 #include "visitor.h"
 
-void ast::operation::unary::implementation::accept(ast::operation::visitor& v) { v.visit(*this); }
-void ast::operation::binary::implementation::accept(ast::operation::visitor& v) { v.visit(*this); }
-void ast::operation::ternary::implementation::accept(ast::operation::visitor& v) { v.visit(*this); }
-//void ast::operation::type_cast::implementation::accept(ast::operation::visitor& v) { v.visit(*this); }
-void ast::operation::variable::implementation::accept(ast::operation::visitor& v) { v.visit(*this); }
-//void ast::operation::index::implementation::accept(ast::operation::visitor& v) { v.visit(*this); }
-//void ast::operation::section::implementation::accept(ast::operation::visitor& v) { v.visit(*this); }
-void ast::operation::call::implementation::accept(ast::operation::visitor& v) { v.visit(*this); }
-//void ast::operation::array::implementation::accept(ast::operation::visitor& v) { v.visit(*this); }
-void ast::operation::literal::implementation::accept(ast::operation::visitor& v) { v.visit(*this); }
+void ast::operation::unary::accept(ast::operation::visitor& v) { v.visit(*this); }
+void ast::operation::binary::accept(ast::operation::visitor& v) { v.visit(*this); }
+void ast::operation::ternary::accept(ast::operation::visitor& v) { v.visit(*this); }
+//void ast::operation::type_cast::accept(ast::operation::visitor& v) { v.visit(*this); }
+void ast::operation::variable::accept(ast::operation::visitor& v) { v.visit(*this); }
+//void ast::operation::index::accept(ast::operation::visitor& v) { v.visit(*this); }
+//void ast::operation::section::accept(ast::operation::visitor& v) { v.visit(*this); }
+void ast::operation::call::accept(ast::operation::visitor& v) { v.visit(*this); }
+//void ast::operation::array::accept(ast::operation::visitor& v) { v.visit(*this); }
+void ast::operation::literal::accept(ast::operation::visitor& v) { v.visit(*this); }

@@ -12,29 +12,15 @@
 #include "prototype.h"
 #include "grammar/ast/operators/operator.h"
 
-class ast::function::definition
+class ast::function::definition: public ast::function
 {
-	friend ast::function;
+	ast::function::prototype::instance prototype;
+	ast::instruction::instance body;
 public:
-	class implementation: public ast::function::base
-	{
-		ast::function::prototype prototype;
-		ast::instruction body;
-	public:
-		implementation(ast::function::prototype prototype, ast::instruction body): prototype(prototype), body(body) {}
-		void accept(ast::function::visitor&) override;
-		void* operator new(size_t size) {
-			return memory_pool.allocate(size);
-		}
-		void operator delete(void* pointer) {
-			memory_pool.deallocate(pointer);
-		}
-	};
+	using instance = instance_t<ast::function::definition>;
 public:
-	definition(ast::function::prototype prototype, ast::instruction body): impl(new implementation(prototype, body)) {}
-private:
-	static pool<sizeof(implementation)> memory_pool;
-	std::shared_ptr<implementation> impl;
+	definition(ast::function::prototype::instance prototype, ast::instruction::instance body): prototype(prototype), body(body) {}
+	void accept(ast::function::visitor& v) override;
 };
 
 #endif /* FUNCTION_DEFINITION_H_ */

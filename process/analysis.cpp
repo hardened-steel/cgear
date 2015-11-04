@@ -43,13 +43,14 @@
 
 #include <iostream>
 
+/*
 class visitor: public ast::function::visitor, public ast::visitor::base
 {
 public:
-	void visit(ast::function::prototype::implementation&) override {
+	void visit(ast::function::prototype&) override {
 		std::cout << "prototype" << std::endl;
 	}
-	void visit(ast::function::definition::implementation&) override {
+	void visit(ast::function::definition&) override {
 		std::cout << "definition" << std::endl;
 	}
 	void visit(const ast::function& f) override {
@@ -60,8 +61,8 @@ public:
 		std::cout << "type" << std::endl;
 	}
 };
-
+*/
 void visit_all(ast::module m) {
-	visitor v;
-	m.accept(ast::visitor(v));
+	//visitor v;
+	//m.accept(ast::visitor(v));
 }

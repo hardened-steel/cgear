@@ -13,17 +13,15 @@
 #include "grammar/ast/types/type.h"
 #include "function.h"
 
-class ast::function::prototype
+class ast::function::prototype: public ast::function
 {
-	friend ast::function;
 public:
 	class parameter
 	{
-		ast::type type;
+		ast::type::instance type;
 		token::identifier name;
 	public:
-		parameter() {}
-		parameter(ast::type type, token::identifier name): type(type), name(name) {}
+		parameter(ast::type::instance type, token::identifier name): type(type), name(name) {}
 		parameter(const parameter& other): type(other.type), name(other.name) {}
 		parameter& operator = (const parameter& other) {
 			type = other.type;
@@ -36,28 +34,15 @@ public:
 			return *this;
 		}
 	};
-public:
-	class implementation: public ast::function::base
-	{
-		token::identifier name;
-		std::vector<parameter> parameters;
-		ast::type returnType;
-	public:
-		implementation(token::identifier name, std::vector<parameter> parameters, ast::type returnType): name(name), parameters(parameters), returnType(returnType) {}
-		void accept(ast::function::visitor&) override;
-		void* operator new(size_t size) {
-			return memory_pool.allocate(size);
-		}
-		void operator delete(void* pointer) {
-			memory_pool.deallocate(pointer);
-		}
-	};
-public:
-	prototype(): impl(nullptr) {}
-	prototype(token::identifier name, std::vector<parameter> parameters, ast::type returnType): impl(new implementation(name, parameters, returnType)) {}
 private:
-	static pool<sizeof(implementation)> memory_pool;
-	std::shared_ptr<implementation> impl;
+	token::identifier name;
+	std::vector<parameter> parameters;
+	ast::type::instance returnType;
+public:
+	using instance = instance_t<ast::function::prototype>;
+public:
+	prototype(token::identifier name, std::vector<parameter> parameters, ast::type::instance returnType): name(name), parameters(parameters), returnType(returnType) {}
+	void accept(ast::function::visitor& v) override;
 };
 
 #endif /* FUNCTION_PROTOTYPE_H_ */

@@ -11,31 +11,17 @@
 #include "grammar/lexer/token.h"
 #include "operation.h"
 
-class ast::operation::call
+class ast::operation::call: public ast::operation
 {
-	friend ast::operation;
-protected:
-	class implementation: public ast::operation::base
-	{
-		token::identifier id;
-		std::vector<ast::operation> params;
-	public:
-		implementation(token::identifier id, const std::vector<ast::operation>& params): id(id), params(params) {}
-		implementation(token::identifier id, std::vector<ast::operation>&& params): id(id), params(std::move(params)) {}
-		void accept(ast::operation::visitor&) override;
-		void* operator new(size_t size) {
-			return memory_pool.allocate(size);
-		}
-		void operator delete(void* pointer) {
-			memory_pool.deallocate(pointer);
-		}
-	};
+	token::identifier id;
+	std::vector<ast::operation::instance> params;
 public:
-	call(token::identifier id, const std::vector<ast::operation>& params): impl(new implementation(id, params)) {}
-	call(token::identifier id, std::vector<ast::operation>&& params = {}): impl(new implementation(id, std::move(params))) {}
-private:
-	static pool<sizeof(implementation)> memory_pool;
-	std::shared_ptr<implementation> impl;
+	using instance = instance_t<ast::operation::call>;
+public:
+	call(token::identifier id, const std::vector<ast::operation::instance>& params): id(id), params(params) {}
+	call(token::identifier id, std::vector<ast::operation::instance>&& params = {}): id(id), params(std::move(params)) {}
+
+	void accept(ast::operation::visitor&) override;
 };
 
 #endif /* CALL_H */

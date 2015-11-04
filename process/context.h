@@ -16,23 +16,19 @@
 
 class context
 {
-	std::multimap<std::string, ast::type> identifiers;
+	std::multimap<std::string, ast::type::instance> identifiers;
 public:
     context() {}
     ~context() {}
 
     void add_name(const std::string& name, ast::type type) {
-        identifiers.insert(std::pair<std::string, ast::type>(name, type));
+        identifiers.insert(std::pair<std::string, ast::type::instance>(name, type));
     }
 
-    bool find_name(const std::string& name, const ast::type& type) {
+    bool find_name(const std::string& name, const ast::type::instance& type) {
 		auto begin = identifiers.find(name);
 		auto end   = identifiers.end();
 		return end != std::find_if(begin, end, [&](const auto& it) { return it.second == type; });
-    }
-
-    bool find_name(const std::string& name, const ast::type* type) {
-    	return find_name(name, *type);
     }
 
     bool find_name(const std::string& name) {

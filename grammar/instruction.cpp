@@ -45,8 +45,8 @@ GInstruction::GInstruction(Lexer& lexer, GExpression& operation, GType& type): G
 	nope = lexer.tokens[";"][qi::_val = phx::construct<ast::instruction::nope>()];
 
 	variable = type [qi::_a = qi::_1] >> lexer.identifier [ qi::_b = qi::_1] >
-	               ( lexer.tokens[";"] [qi::_val = phx::construct<ast::instruction::variable>(qi::_a, qi::_b, phx::construct<ast::operation>())]
-	               | (lexer.tokens["="] > operation > lexer.tokens[";"]) [qi::_val = phx::construct<ast::instruction::variable>(qi::_a, qi::_b, qi::_1)]
+	               ( lexer.tokens[";"] [qi::_val = phx::construct<ast::instruction::variable::instance>(qi::_a, qi::_b, phx::construct<ast::operation::instance>())]
+	               | (lexer.tokens["="] > operation > lexer.tokens[";"]) [qi::_val = phx::construct<ast::instruction::variable::instance>(qi::_a, qi::_b, qi::_1)]
 	               )
              ;
     /*
@@ -59,7 +59,7 @@ GInstruction::GInstruction(Lexer& lexer, GExpression& operation, GType& type): G
                 > -(expression)
             > lexer.tokens[")"]
            > instruction
-          )[qi::_val = phx::new_<st::instruction::For>(qi::_1, qi::_2, qi::_3, qi::_4)]
+          )[qi::_val = phx::new_<st::instruction::for_i::instance>(qi::_1, qi::_2, qi::_3, qi::_4)]
         ;
     */
 
@@ -69,22 +69,22 @@ GInstruction::GInstruction(Lexer& lexer, GExpression& operation, GType& type): G
 	             > operation
 	             > lexer.tokens[")"]
 	             > instruction
-	          ) [qi::_val = phx::construct<ast::instruction::while_i>(qi::_1, qi::_2)];
+	          ) [qi::_val = phx::construct<ast::instruction::while_i::instance>(qi::_1, qi::_2)];
 
-	return_i = (lexer.kreturn > operation > lexer.tokens[";"])[qi::_val = phx::construct<ast::instruction::return_i>(qi::_1)];
+	return_i = (lexer.kreturn > operation > lexer.tokens[";"])[qi::_val = phx::construct<ast::instruction::return_i::instance>(qi::_1)];
 
-	calc = (operation > lexer.tokens[";"])[qi::_val = phx::construct<ast::instruction::calc>(qi::_1)];
+	calc = (operation > lexer.tokens[";"])[qi::_val = phx::construct<ast::instruction::calc::instance>(qi::_1)];
 
 	if_i = (
 	        lexer.kif
 	        > lexer.tokens["("]
 	        > operation         [qi::_a = qi::_1]
 	        > lexer.tokens[")"]
-	        > instruction       [qi::_b = qi::_1, qi::_val = phx::construct<ast::instruction::if_i>(qi::_a, qi::_b)]
-	        > -(lexer.kelse > instruction [qi::_val = phx::construct<ast::instruction::ifelse_i>(qi::_a, qi::_b, qi::_1)])
+	        > instruction       [qi::_b = qi::_1, qi::_val = phx::construct<ast::instruction::if_i::instance>(qi::_a, qi::_b)]
+	        > -(lexer.kelse > instruction [qi::_val = phx::construct<ast::instruction::ifelse_i::instance>(qi::_a, qi::_b, qi::_1)])
 	       );
 
-	block = (lexer.tokens["{"] > *instruction > lexer.tokens["}"]) [qi::_val = phx::construct<ast::instruction::block>(qi::_1)];
+	block = (lexer.tokens["{"] > *instruction > lexer.tokens["}"]) [qi::_val = phx::construct<ast::instruction::block::instance>(qi::_1)];
 
 	instruction = block | if_i | return_i | while_i | variable | calc;
 

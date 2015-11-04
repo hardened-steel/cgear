@@ -10,29 +10,15 @@
 
 #include "operator.h"
 
-class ast::instruction::while_i
+class ast::instruction::while_i: public ast::instruction
 {
-	friend ast::instruction;
+	ast::operation::instance condition;
+	ast::instruction::instance action;
 public:
-	class implementation: public ast::instruction::base
-	{
-		ast::operation condition;
-		ast::instruction action;
-	public:
-		implementation(ast::operation condition, ast::instruction action): condition(condition), action(action) {}
-		void accept(ast::instruction::visitor&) override;
-		void* operator new(size_t size) {
-			return memory_pool.allocate(size);
-		}
-		void operator delete(void* pointer) {
-			memory_pool.deallocate(pointer);
-		}
-	};
+	using instance = instance_t<ast::instruction::while_i>;
 public:
-	while_i(ast::operation condition, ast::instruction action): impl(new implementation(condition, action)) {}
-private:
-	static pool<sizeof(implementation)> memory_pool;
-	std::shared_ptr<implementation> impl;
+	while_i(ast::operation::instance condition, ast::instruction::instance action): condition(condition), action(action) {}
+	void accept(ast::instruction::visitor&) override;
 };
 
 #endif /* INSTRUCTIONS_WHILE_H_ */

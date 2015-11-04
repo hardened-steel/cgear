@@ -9,13 +9,17 @@
 #define GRAMMAR_AST_TYPES_VISITOR_H_
 
 #include "type.h"
+#include "name.h"
+#include "int.h"
+#include "tuple.h"
 
 class ast::type::visitor
 {
 public:
-	virtual void visit(ast::type::t_int::implementation&) = 0;
-	virtual void visit(ast::type::tuple::implementation&) = 0;
-	virtual void visit(ast::type::name::implementation&) = 0;
+	virtual void visit(ast::type::t_int&) = 0;
+	virtual void visit(ast::type::tuple&) = 0;
+	virtual void visit(ast::type::name&) = 0;
+	virtual ~visitor() {}
 };
 
 #endif /* GRAMMAR_AST_TYPES_VISITOR_H_ */

@@ -11,26 +11,11 @@
 #include "type.h"
 #include "grammar/lexer/token.h"
 
-class ast::type::t_int
+class ast::type::t_int: public ast::type
 {
-	friend ast::type;
-protected:
-	class implementation: public ast::type::base
-	{
-	public:
-		void accept(ast::type::visitor&) override;
-		void* operator new(size_t size) {
-			return memory_pool.allocate(size);
-		}
-		void operator delete(void* pointer) {
-			memory_pool.deallocate(pointer);
-		}
-	};
 public:
-	t_int(): impl(new implementation()) {}
-private:
-	static pool<sizeof(implementation)> memory_pool;
-	std::shared_ptr<implementation> impl;
+	using instance = instance_t<ast::type::t_int>;
+	void accept(ast::type::visitor&) override;
 };
 
 #endif /* GRAMMAR_AST_TYPES_INT_H_ */

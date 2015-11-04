@@ -10,29 +10,15 @@
 
 #include "operation.h"
 
-class ast::operation::unary
+class ast::operation::unary: public ast::operation
 {
-	friend ast::operation;
-protected:
-	class implementation: public ast::operation::base
-	{
-		ast::operation op;
-		ast::operation::code code;
-	public:
-		implementation(ast::operation::code code, ast::operation op): op(op), code(code) {}
-		void accept(ast::operation::visitor&) override;
-		void* operator new(size_t size) {
-			return memory_pool.allocate(size);
-		}
-		void operator delete(void* pointer) {
-			memory_pool.deallocate(pointer);
-		}
-	};
+	ast::operation::instance op;
+	ast::operation::code code;
 public:
-	unary(ast::operation::code code, ast::operation op): impl(new implementation(code, op)) {}
-private:
-	static pool<sizeof(implementation)> memory_pool;
-	std::shared_ptr<implementation> impl;
+	using instance = instance_t<ast::operation::unary>;
+public:
+	unary(ast::operation::code code, ast::operation::instance op): op(op), code(code) {}
+	void accept(ast::operation::visitor&) override;
 };
 
 #endif /* UNARY_H */

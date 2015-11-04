@@ -8,10 +8,10 @@
 #ifndef OPERATION_H
 #define OPERATION_H
 
+#include "grammar/ast/instance.h"
 #include "grammar/ast/pool.h"
 #include "grammar/ast/ast.h"
 #include <string>
-#include <memory>
 
 #define OPERATION(X) \
 	X(assign, "=")\
@@ -58,16 +58,10 @@ enum {
 	return OPERATION_COUNT;
 }
 
-class ast::operation: public ast
+class ast::operation: public ast::node
 {
 public:
 	class visitor;
-	class base
-	{
-	public:
-		virtual void accept(ast::operation::visitor&) = 0;
-		virtual ~base() {}
-	};
 	class unary;
 	class binary;
 	class ternary;
@@ -79,23 +73,10 @@ public:
 	class array;
 	class literal;
 	class code;
+	using instance = instance_t<ast::operation>;
 public:
-	operation(): impl(nullptr) {}
-	operation(operation&& other): impl(std::move(other.impl)) {}
-	operation(const operation& other): impl(other.impl) {}
-	template<typename T> operation(T&& other): impl(std::move(other.impl)) {}
-	template<typename T> operation(const T& other): impl(other.impl) {}
-	template<typename T> operation& operator=(T&& other) {
-		this->impl = std::move(other.impl);
-		return *this;
-	}
-	template<typename T> operation& operator=(const T& other) {
-		this->impl = other.impl;
-		return *this;
-	}
-	void accept(ast::operation::visitor& v) { impl->accept(v); }
-private:
-	std::shared_ptr<base> impl;
+	virtual void accept(ast::operation::visitor& v);
+	virtual ~operation() {}
 };
 
 #define EnumOperation(Operation, Str) static code Operation;

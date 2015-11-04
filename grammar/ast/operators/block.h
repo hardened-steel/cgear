@@ -11,30 +11,16 @@
 #include <vector>
 #include "operator.h"
 
-class ast::instruction::block
+class ast::instruction::block: public ast::instruction
 {
-	friend ast::instruction;
+	std::vector<ast::instruction::instance> instructions;
 public:
-	class implementation: public ast::instruction::base
-	{
-		std::vector<ast::instruction> instructions;
-	public:
-		implementation(const std::vector<ast::instruction>& instructions): instructions(instructions) {}
-		implementation(std::vector<ast::instruction>&& instructions): instructions(std::move(instructions)) {}
-		void accept(ast::instruction::visitor&) override;
-		void* operator new(size_t size) {
-			return memory_pool.allocate(size);
-		}
-		void operator delete(void* pointer) {
-			memory_pool.deallocate(pointer);
-		}
-	};
+	using instance = instance_t<ast::instruction::block>;
 public:
-	block(const std::vector<ast::instruction>& instructions): impl(new implementation(instructions)) {}
-	block(std::vector<ast::instruction>&& instructions): impl(new implementation(std::move(instructions))) {}
-private:
-	static pool<sizeof(implementation)> memory_pool;
-	std::shared_ptr<implementation> impl;
+	block(const std::vector<ast::instruction::instance>& instructions): instructions(instructions) {}
+	block(std::vector<ast::instruction::instance>&& instructions): instructions(std::move(instructions)) {}
+
+	void accept(ast::instruction::visitor&) override;
 };
 
 #endif /* INSTRUCTIONS_BLOCK_H_ */

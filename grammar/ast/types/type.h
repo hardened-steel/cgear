@@ -8,20 +8,15 @@
 #ifndef TYPE_H_
 #define TYPE_H_
 
+#include "grammar/ast/instance.h"
 #include "grammar/ast/pool.h"
 #include "grammar/ast/ast.h"
 #include <memory>
 
-class ast::type
+class ast::type: public ast::node
 {
 public:
 	class visitor;
-	class base: public ast
-	{
-	public:
-		virtual void accept(ast::type::visitor&) = 0;
-		virtual ~base() {}
-	};
 	class t_bool;
 	class t_int;
 	class t_real;
@@ -33,31 +28,10 @@ public:
 	class t_struct;
 	class name;
 public:
-	type(): impl(nullptr) {}
-	type(type&& other): impl(std::move(other.impl)) {}
-	type(const type& other): impl(other.impl) {}
-	template<typename T> type(T&& other): impl(std::move(other.impl)) {}
-	template<typename T> type(const T& other): impl(other.impl) {}
-	template<typename T> type& operator=(T&& other) {
-		this->impl = std::move(other.impl);
-		return *this;
-	}
-	template<typename T> type& operator=(const T& other) {
-		this->impl = other.impl;
-		return *this;
-	}
-	type& operator=(type&& other) {
-		this->impl = std::move(other.impl);
-		return *this;
-	}
-	type& operator=(const type& other) {
-		this->impl = other.impl;
-		return *this;
-	}
-	bool operator==(const type& other) const { return true; }
-	void accept(ast::type::visitor& v) { impl->accept(v); }
-private:
-	std::shared_ptr<base> impl;
+	using instance = instance_t<ast::type>;
+public:
+	virtual void accept(ast::type::visitor& v);
+	virtual ~type() {}
 };
 
 #endif /* TYPE_H_ */

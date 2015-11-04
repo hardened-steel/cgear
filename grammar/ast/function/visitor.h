@@ -13,8 +13,9 @@
 class ast::function::visitor
 {
 public:
-	virtual void visit(ast::function::prototype::implementation&) = 0;
-	virtual void visit(ast::function::definition::implementation&) = 0;
+	virtual void visit(ast::function::prototype&) = 0;
+	virtual void visit(ast::function::definition&) = 0;
+	virtual ~visitor() {}
 };
 
 #endif /* GRAMMAR_AST_FUNCTION_VISITOR_H_ */

@@ -13,12 +13,12 @@
 #include "lexer/lexer.h"
 #include "type.h"
 
-class GExpression: public boost::spirit::qi::grammar<GIterator, ast::operation(), GSkip>
+class GExpression: public boost::spirit::qi::grammar<GIterator, ast::operation::instance(), GSkip>
 {
-	boost::spirit::qi::rule<GIterator, ast::operation(), GSkip> expression;
-	boost::spirit::qi::rule<GIterator, ast::operation(), GSkip> variable;
-	boost::spirit::qi::rule<GIterator, ast::operation(), boost::spirit::locals<token::identifier>, GSkip> call;
-	boost::spirit::qi::rule<GIterator, ast::operation(), GSkip> operation[9];
+	boost::spirit::qi::rule<GIterator, ast::operation::instance(), GSkip> expression;
+	boost::spirit::qi::rule<GIterator, ast::operation::instance(), GSkip> variable;
+	boost::spirit::qi::rule<GIterator, ast::operation::instance(), boost::spirit::locals<token::identifier>, GSkip> call;
+	boost::spirit::qi::rule<GIterator, ast::operation::instance(), GSkip> operation[9];
 
 	GTypeName& type;
 public:

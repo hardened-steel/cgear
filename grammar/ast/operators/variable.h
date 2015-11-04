@@ -12,30 +12,16 @@
 #include "grammar/lexer/token.h"
 #include "operator.h"
 
-class ast::instruction::variable
+class ast::instruction::variable: public ast::instruction
 {
-	friend ast::instruction;
+	ast::type::instance type;
+	token::identifier id;
+	ast::operation::instance init;
 public:
-	class implementation: public ast::instruction::base
-	{
-		ast::type type;
-		token::identifier id;
-		ast::operation init;
-	public:
-		implementation(ast::type type, token::identifier id, ast::operation init): type(type), id(id), init(init) {}
-		void accept(ast::instruction::visitor&) override;
-		void* operator new(size_t size) {
-			return memory_pool.allocate(size);
-		}
-		void operator delete(void* pointer) {
-			memory_pool.deallocate(pointer);
-		}
-	};
+	using instance = instance_t<ast::instruction::variable>;
 public:
-	variable(ast::type type, token::identifier id, ast::operation init): impl(new implementation(type, id, init)) {}
-private:
-	static pool<sizeof(implementation)> memory_pool;
-	std::shared_ptr<implementation> impl;
+	variable(ast::type::instance type, token::identifier id, ast::operation::instance init): type(type), id(id), init(init) {}
+	void accept(ast::instruction::visitor&) override;
 };
 
 #endif /* INSTRUCTION_VARIABLE_H_ */

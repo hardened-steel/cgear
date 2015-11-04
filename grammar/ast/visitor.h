@@ -17,15 +17,14 @@ public:
 	class base
 	{
 	public:
-		virtual void visit(const ast::function&) = 0;
-		virtual void visit(const ast::type&) = 0;
+		virtual void visit(const ast::function::instance&) = 0;
+		virtual void visit(const ast::type::instance&) = 0;
 	};
 private:
 	ast::visitor::base* impl;
 public:
 	visitor(ast::visitor::base& impl): impl(&impl) {}
 
-	void operator()(ast::function&) const;
 	template <typename T>
 	void operator()(T& operand) const {
 		impl->visit(operand);

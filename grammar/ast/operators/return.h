@@ -10,28 +10,14 @@
 
 #include "operator.h"
 
-class ast::instruction::return_i
+class ast::instruction::return_i: public ast::instruction
 {
-	friend ast::instruction;
-protected:
-	class implementation: public ast::instruction::base
-	{
-		ast::operation op;
-	public:
-		implementation(ast::operation op): op(op) {}
-		void accept(ast::instruction::visitor&) override;
-		void* operator new(size_t size) {
-			return memory_pool.allocate(size);
-		}
-		void operator delete(void* pointer) {
-			memory_pool.deallocate(pointer);
-		}
-	};
+	ast::operation::instance op;
 public:
-	return_i(ast::operation op): impl(new implementation(op)) {}
-private:
-	static pool<sizeof(implementation)> memory_pool;
-	std::shared_ptr<implementation> impl;
+	using instance = instance_t<ast::instruction::return_i>;
+public:
+	return_i(ast::operation::instance op): op(op) {}
+	void accept(ast::instruction::visitor&) override;
 };
 
 #endif /* INSTRUCTIONS_RETURN_H_ */

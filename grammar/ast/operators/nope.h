@@ -10,25 +10,11 @@
 
 #include "operator.h"
 
-class ast::instruction::nope
+class ast::instruction::nope: public ast::instruction
 {
-	friend ast::instruction;
-protected:
-	class implementation: public ast::instruction::base
-	{
-	public:
-		void accept(ast::instruction::visitor&) override;
-		void* operator new(size_t size) {
-			return &snope;
-		}
-		void operator delete(void* pointer) {
-		}
-	};
 public:
-	nope(): impl(new implementation) {}
-private:
-	static implementation snope;
-	std::shared_ptr<implementation> impl;
+	using instance = instance_t<ast::instruction::nope>;
+	void accept(ast::instruction::visitor&) override;
 };
 
 

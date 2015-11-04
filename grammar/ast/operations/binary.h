@@ -10,32 +10,16 @@
 
 #include "operation.h"
 
-class ast::operation::binary
+class ast::operation::binary: public ast::operation
 {
-	friend ast::operation;
-protected:
-	class implementation: public ast::operation::base
-	{
-		ast::operation left;
-		ast::operation right;
-		ast::operation::code code;
-	public:
-		implementation(ast::operation::code code, ast::operation left, ast::operation right):
-			left(left), right(right), code(code)
-		{}
-		void accept(ast::operation::visitor&) override;
-		void* operator new(size_t size) {
-			return memory_pool.allocate(size);
-		}
-		void operator delete(void* pointer) {
-			memory_pool.deallocate(pointer);
-		}
-	};
+	ast::operation::instance left;
+	ast::operation::instance right;
+	ast::operation::code code;
 public:
-	binary(ast::operation::code code, ast::operation left, ast::operation right): impl(new implementation(code, left, right)) {}
-private:
-	static pool<sizeof(implementation), 1024> memory_pool;
-	std::shared_ptr<implementation> impl;
+	using instance = instance_t<ast::operation::binary>;
+public:
+	binary(ast::operation::code code, ast::operation::instance left, ast::operation::instance right): left(left), right(right), code(code) {}
+	void accept(ast::operation::visitor&) override;
 };
 
 #endif /* BINARY_H */

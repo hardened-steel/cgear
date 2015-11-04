@@ -8,39 +8,20 @@
 #ifndef AST_FUNCTION_H_
 #define AST_FUNCTION_H_
 
+#include "grammar/ast/instance.h"
 #include "grammar/ast/pool.h"
 #include "grammar/ast/ast.h"
-#include <memory>
 
-class ast::function
+class ast::function: public ast::node
 {
 public:
 	class visitor;
-	class base: public ast::node
-	{
-	public:
-		virtual void accept(ast::function::visitor&) = 0;
-		virtual ~base() {}
-	};
 	class definition;
 	class prototype;
+	using instance = instance_t<ast::function>;
 public:
-	function(): impl(nullptr) {}
-	function(function&& other): impl(std::move(other.impl)) {}
-	function(const function& other): impl(other.impl) {}
-	template<typename T> function(T&& other): impl(std::move(other.impl)) {}
-	template<typename T> function(const T& other): impl(other.impl) {}
-	template<typename T> function& operator=(T&& other) {
-		this->impl = std::move(other.impl);
-		return *this;
-	}
-	template<typename T> function& operator=(const T& other) {
-		this->impl = other.impl;
-		return *this;
-	}
-	void accept(ast::function::visitor& v) { impl->accept(v); }
-private:
-	std::shared_ptr<base> impl;
+	virtual void accept(ast::function::visitor& v);
+	virtual ~function() {}
 };
 
 #endif /* AST_FUNCTION_H_ */

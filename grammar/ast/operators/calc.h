@@ -10,28 +10,14 @@
 
 #include "operator.h"
 
-class ast::instruction::calc
+class ast::instruction::calc: public ast::instruction
 {
-	friend ast::instruction;
+	ast::operation::instance op;
 public:
-	class implementation: public ast::instruction::base
-	{
-		ast::operation op;
-	public:
-		implementation(ast::operation op): op(op) {}
-		void accept(ast::instruction::visitor&) override;
-		void* operator new(size_t size) {
-			return memory_pool.allocate(size);
-		}
-		void operator delete(void* pointer) {
-			memory_pool.deallocate(pointer);
-		}
-	};
+	using instance = instance_t<ast::instruction::calc>;
 public:
-	calc(ast::operation op): impl(new implementation(op)) {}
-private:
-	static pool<sizeof(implementation)> memory_pool;
-	std::shared_ptr<implementation> impl;
+	calc(ast::operation::instance op): op(op) {}
+	void accept(ast::instruction::visitor&) override;
 };
 
 #endif /* INSTRUCTIONS_CALC_H_ */

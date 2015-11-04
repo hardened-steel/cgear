@@ -14,10 +14,10 @@
 #include "ast/function/prototype.h"
 #include "instruction.h"
 
-class GFunction: public boost::spirit::qi::grammar<GIterator, boost::spirit::locals<ast::function::prototype>, ast::function(), GSkip>
+class GFunction: public boost::spirit::qi::grammar<GIterator, boost::spirit::locals<ast::function::prototype::instance>, ast::function::instance(), GSkip>
 {
-	boost::spirit::qi::rule<GIterator, boost::spirit::locals<ast::function::prototype>, ast::function(), GSkip> function;
-	boost::spirit::qi::rule<GIterator, ast::function::prototype(), GSkip> prototype;
+	boost::spirit::qi::rule<GIterator, boost::spirit::locals<ast::function::prototype::instance>, ast::function::instance(), GSkip> function;
+	boost::spirit::qi::rule<GIterator, ast::function::prototype::instance(), GSkip> prototype;
 
 	GInstruction& instruction;
 	GTypeName& typeName;
