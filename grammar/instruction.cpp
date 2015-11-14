@@ -26,12 +26,12 @@ std::string print(Iterator start, Iterator end) {
 class WHandler
 {
 public:
-    void operator()(GIterator first, GIterator last) const {
+    void operator()(ast::instruction::instance& node, GIterator& first, const GIterator& last) const {
     	auto begin = boost::get<boost::iterator_range<token::iterator>>(first->value()).begin();
     	auto end   = boost::get<boost::iterator_range<token::iterator>>(last->value()).end();
 
-    	std::string str(begin, end);
-    	std::cout << str << std::endl;
+    	//node->begin = begin;
+    	//node->end = end;
     }
 };
 
@@ -103,11 +103,7 @@ GInstruction::GInstruction(Lexer& lexer, GExpression& operation, GType& type): G
 	                << std::endl
 	         );
 
-    qi::on_success
-            (
-				block,
-				Handler(qi::_1, qi::_3)
-            );
+    qi::on_success(block, Handler(qi::_val, qi::_1, qi::_3));
 }
 
 GInstruction::~GInstruction()

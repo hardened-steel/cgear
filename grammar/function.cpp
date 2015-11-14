@@ -29,29 +29,32 @@ public:
 	}
 };
 
+class GFunction::GPrototype: public boost::spirit::qi::grammar<GIterator, ast::function::prototype::instance(), GSkip>
+{
+	boost::spirit::qi::rule<GIterator, ast::function::prototype::instance(), GSkip> prototype;
+public:
+	GPrototype(Lexer& lexer, GTypeName& typeName, GParameters& parameters): GPrototype::base_type(prototype, "function prototype") {
+		namespace qi = boost::spirit::qi;
+		namespace phx = boost::phoenix;
+
+		prototype = lexer.kfunction > (lexer.identifier > parameters > lexer.tokens[":"] > typeName)[qi::_val = phx::construct<ast::function::prototype::instance>(qi::_1, qi::_2, qi::_3)];
+	}
+};
+
 GFunction::GFunction(Lexer& lexer, GInstruction& instruction, GTypeName& typeName): GFunction::base_type(function, "function grammar"),
-	instruction(instruction), typeName(typeName), parameters_ptr(new GParameters(lexer, typeName))
+	instruction(instruction), typeName(typeName), parameters_ptr(new GParameters(lexer, typeName)), prototype_ptr(new GPrototype(lexer, typeName, *parameters_ptr))
 {
 	namespace qi = boost::spirit::qi;
 	namespace phx = boost::phoenix;
 
-	GParameters& parameters = *parameters_ptr;
+	GPrototype&   prototype = *prototype_ptr;
 
-	prototype = lexer.kfunction > (lexer.identifier > parameters > lexer.tokens[":"] > typeName)[qi::_val = phx::construct<ast::function::prototype::instance>(qi::_1, qi::_2, qi::_3)];
-	function = prototype[qi::_a = qi::_1] >> ((lexer.tokens[";"][qi::_val = qi::_a]) | (instruction[qi::_val = phx::construct<ast::function::definition::instance>(qi::_a, qi::_1)]));
+	function = (prototype >> lexer.tokens[";"])[qi::_val = qi::_1]
+			 | (prototype >> instruction)[qi::_val = phx::construct<ast::function::definition::instance>(qi::_1, qi::_2)]
+			 ;
 
-	prototype.name("function prototype");
 	function.name("function rule");
 
-
-	qi::on_error<qi::fail>
-	    (
-	        prototype
-	      , std::cout
-	            << phx::val("Error! Expecting ")
-	            << qi::_4                               // what failed?
-	             << std::endl
-	    );
 	qi::on_error<qi::fail>
 	    (
 	        function

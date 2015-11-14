@@ -18,7 +18,7 @@ public:
 	using instance = instance_t<ast::operation::variable>;
 public:
 	variable(token::identifier id): id(id) {}
-	void accept(ast::operation::visitor&) override;
+	void accept(ast::operation::visitor&) const override;
 };
 
 #endif /* VARIABLE_H */

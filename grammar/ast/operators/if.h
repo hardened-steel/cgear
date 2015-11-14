@@ -21,7 +21,7 @@ public:
 	if_i(ast::operation::instance condition, ast::instruction::instance true_action)
 	: condition(condition), true_action(true_action) {}
 
-	void accept(ast::instruction::visitor&) override;
+	void accept(ast::instruction::visitor&) const override;
 };
 
 class ast::instruction::ifelse_i: public ast::instruction::if_i
@@ -33,7 +33,7 @@ public:
 	ifelse_i(ast::operation::instance condition, ast::instruction::instance true_action, ast::instruction::instance false_action)
 	: ast::instruction::if_i(condition, true_action), false_action(false_action) {}
 
-	void accept(ast::instruction::visitor&) override;
+	void accept(ast::instruction::visitor&) const override;
 };
 
 #endif /* INSTRUCTIONS_IF_H_ */

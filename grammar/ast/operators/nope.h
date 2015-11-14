@@ -14,7 +14,7 @@ class ast::instruction::nope: public ast::instruction
 {
 public:
 	using instance = instance_t<ast::instruction::nope>;
-	void accept(ast::instruction::visitor&) override;
+	void accept(ast::instruction::visitor&) const override;
 };
 
 

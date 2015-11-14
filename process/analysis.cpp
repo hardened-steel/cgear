@@ -43,26 +43,27 @@
 
 #include <iostream>
 
-/*
 class visitor: public ast::function::visitor, public ast::visitor::base
 {
 public:
-	void visit(ast::function::prototype&) override {
+	void visit(const ast::function::prototype&) override {
 		std::cout << "prototype" << std::endl;
 	}
-	void visit(ast::function::definition&) override {
+	void visit(const ast::function::definition&) override {
 		std::cout << "definition" << std::endl;
 	}
-	void visit(const ast::function& f) override {
+	void visit(const ast::function::instance& f) override {
 		std::cout << "function" << std::endl;
-		f.accept(*this);
+		ast::function::visitor& visitor = *this;
+		f->accept(visitor);
 	}
-	void visit(const ast::type&) override {
+	void visit(const ast::type::instance&) override {
 		std::cout << "type" << std::endl;
 	}
 };
-*/
+
 void visit_all(ast::module m) {
-	//visitor v;
-	//m.accept(ast::visitor(v));
+	visitor v;
+	ast::visitor base_visitor{v};
+	m.accept(base_visitor);
 }

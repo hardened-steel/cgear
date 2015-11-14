@@ -10,5 +10,6 @@
 #include "definition.h"
 #include "visitor.h"
 
-void ast::function::prototype::accept(ast::function::visitor& v) { v.visit(*this); }
-void ast::function::definition::accept(ast::function::visitor& v) { v.visit(*this); }
+void ast::function::prototype::accept(ast::function::visitor& v) const { v.visit(*this); }
+void ast::function::definition::accept(ast::function::visitor& v) const { v.visit(*this); }
+void ast::function::accept(ast::function::visitor& v) const { throw 1; }

@@ -20,7 +20,7 @@ public:
 	using instance = instance_t<ast::function::definition>;
 public:
 	definition(ast::function::prototype::instance prototype, ast::instruction::instance body): prototype(prototype), body(body) {}
-	void accept(ast::function::visitor& v) override;
+	void accept(ast::function::visitor& v) const override;
 };
 
 #endif /* FUNCTION_DEFINITION_H_ */

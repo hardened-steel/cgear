@@ -20,7 +20,7 @@ public:
 	block(const std::vector<ast::instruction::instance>& instructions): instructions(instructions) {}
 	block(std::vector<ast::instruction::instance>&& instructions): instructions(std::move(instructions)) {}
 
-	void accept(ast::instruction::visitor&) override;
+	void accept(ast::instruction::visitor&) const override;
 };
 
 #endif /* INSTRUCTIONS_BLOCK_H_ */

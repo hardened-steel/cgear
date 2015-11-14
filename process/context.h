@@ -26,9 +26,10 @@ public:
     }
 
     bool find_name(const std::string& name, const ast::type::instance& type) {
-		auto begin = identifiers.find(name);
-		auto end   = identifiers.end();
-		return end != std::find_if(begin, end, [&](const auto& it) { return it.second == type; });
+		//auto begin = identifiers.find(name);
+		//auto end   = identifiers.end();
+		//return end != std::find_if(begin, end, [&](const auto& it) { return it.second == type; });
+    	return true;
     }
 
     bool find_name(const std::string& name) {

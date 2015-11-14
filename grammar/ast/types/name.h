@@ -18,7 +18,7 @@ public:
 	using instance = instance_t<ast::type::name>;
 public:
 	name(token::identifier type_name): type_name(type_name) {}
-	void accept(ast::type::visitor&) override;
+	void accept(ast::type::visitor&) const override;
 };
 
 #endif /* GRAMMAR_AST_TYPES_NAME_H_ */

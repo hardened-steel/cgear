@@ -20,7 +20,7 @@ public:
 	class prototype;
 	using instance = instance_t<ast::function>;
 public:
-	virtual void accept(ast::function::visitor& v);
+	virtual void accept(ast::function::visitor& v) const;
 	virtual ~function() {}
 };
 

@@ -15,7 +15,7 @@ class ast::type::t_int: public ast::type
 {
 public:
 	using instance = instance_t<ast::type::t_int>;
-	void accept(ast::type::visitor&) override;
+	void accept(ast::type::visitor&) const override;
 };
 
 #endif /* GRAMMAR_AST_TYPES_INT_H_ */

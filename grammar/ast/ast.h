@@ -9,6 +9,7 @@
 #define AST_H_
 
 #include "grammar/lexer/token.h"
+#include "instance.h"
 
 class ast
 {
@@ -22,6 +23,8 @@ public:
 	class type;
 	class node
 	{
+	public:
+		using instance = instance_t<node>;
 	public:
 		token::iterator begin, end;
 	};

@@ -21,7 +21,7 @@ public:
 	ternary(ast::operation::instance condition, ast::operation::instance true_action, ast::operation::instance false_action)
 	: true_action(true_action), false_action(false_action), condition(condition) {}
 
-	void accept(ast::operation::visitor&) override;
+	void accept(ast::operation::visitor&) const override;
 };
 
 #endif /* TERNARY_H */

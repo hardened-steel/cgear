@@ -11,23 +11,23 @@
 #include <boost/spirit/include/qi.hpp>
 #include "lexer/lexer.h"
 #include "ast/function/function.h"
-#include "ast/function/prototype.h"
 #include "instruction.h"
 
-class GFunction: public boost::spirit::qi::grammar<GIterator, boost::spirit::locals<ast::function::prototype::instance>, ast::function::instance(), GSkip>
+class GFunction: public boost::spirit::qi::grammar<GIterator, ast::function::instance(), GSkip>
 {
-	boost::spirit::qi::rule<GIterator, boost::spirit::locals<ast::function::prototype::instance>, ast::function::instance(), GSkip> function;
-	boost::spirit::qi::rule<GIterator, ast::function::prototype::instance(), GSkip> prototype;
+	boost::spirit::qi::rule<GIterator, ast::function::instance(), GSkip> function;
 
 	GInstruction& instruction;
 	GTypeName& typeName;
 protected:
 	class GParameters;
+	class GPrototype;
 public:
 	GFunction(Lexer& lexer, GInstruction& instruction, GTypeName& typeName);
 	~GFunction();
 private:
 	std::unique_ptr<GParameters> parameters_ptr;
+	std::unique_ptr<GPrototype>  prototype_ptr;
 };
 
 #endif // GRAMMAR_FUNCTION_H_

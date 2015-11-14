@@ -21,7 +21,7 @@ public:
 	using instance = instance_t<ast::instruction::variable>;
 public:
 	variable(ast::type::instance type, token::identifier id, ast::operation::instance init): type(type), id(id), init(init) {}
-	void accept(ast::instruction::visitor&) override;
+	void accept(ast::instruction::visitor&) const override;
 };
 
 #endif /* INSTRUCTION_VARIABLE_H_ */

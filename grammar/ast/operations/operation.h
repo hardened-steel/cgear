@@ -75,7 +75,7 @@ public:
 	class code;
 	using instance = instance_t<ast::operation>;
 public:
-	virtual void accept(ast::operation::visitor& v);
+	virtual void accept(ast::operation::visitor& v) const;
 	virtual ~operation() {}
 };
 

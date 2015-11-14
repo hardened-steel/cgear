@@ -32,7 +32,7 @@ public:
 public:
 	using instance = instance_t<ast::instruction>;
 public:
-	virtual void accept(ast::instruction::visitor& v);
+	virtual void accept(ast::instruction::visitor& v) const;
 	virtual ~instruction() {}
 };
 

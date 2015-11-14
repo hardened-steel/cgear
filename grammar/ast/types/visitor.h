@@ -16,9 +16,9 @@
 class ast::type::visitor
 {
 public:
-	virtual void visit(ast::type::t_int&) = 0;
-	virtual void visit(ast::type::tuple&) = 0;
-	virtual void visit(ast::type::name&) = 0;
+	virtual void visit(const ast::type::t_int&) = 0;
+	virtual void visit(const ast::type::tuple&) = 0;
+	virtual void visit(const ast::type::name&) = 0;
 	virtual ~visitor() {}
 };
 

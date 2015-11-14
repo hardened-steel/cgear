@@ -21,6 +21,7 @@ public:
 		ast::type::instance type;
 		token::identifier name;
 	public:
+		parameter() {}
 		parameter(ast::type::instance type, token::identifier name): type(type), name(name) {}
 		parameter(const parameter& other): type(other.type), name(other.name) {}
 		parameter& operator = (const parameter& other) {
@@ -41,8 +42,9 @@ private:
 public:
 	using instance = instance_t<ast::function::prototype>;
 public:
+	prototype() {}
 	prototype(token::identifier name, std::vector<parameter> parameters, ast::type::instance returnType): name(name), parameters(parameters), returnType(returnType) {}
-	void accept(ast::function::visitor& v) override;
+	void accept(ast::function::visitor& v) const override;
 };
 
 #endif /* FUNCTION_PROTOTYPE_H_ */

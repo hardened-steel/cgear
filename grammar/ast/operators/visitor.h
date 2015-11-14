@@ -20,17 +20,17 @@
 class ast::instruction::visitor
 {
 public:
-	virtual void visit(ast::instruction::calc&) = 0;
-	virtual void visit(ast::instruction::if_i&) = 0;
-	virtual void visit(ast::instruction::ifelse_i&) = 0;
-	virtual void visit(ast::instruction::while_i&) = 0;
-	//virtual void visit(ast::instruction::for_i&) = 0;
-	virtual void visit(ast::instruction::repeat_i&) = 0;
-	//virtual void visit(ast::instruction::try_catch_i&) = 0;
-	//virtual void visit(ast::instruction::switch_i&) = 0;
-	virtual void visit(ast::instruction::return_i&) = 0;
-	virtual void visit(ast::instruction::block&) = 0;
-	virtual void visit(ast::instruction::variable&) = 0;
+	virtual void visit(const ast::instruction::calc&) = 0;
+	virtual void visit(const ast::instruction::if_i&) = 0;
+	virtual void visit(const ast::instruction::ifelse_i&) = 0;
+	virtual void visit(const ast::instruction::while_i&) = 0;
+	//virtual void visit(const ast::instruction::for_i&) = 0;
+	virtual void visit(const ast::instruction::repeat_i&) = 0;
+	//virtual void visit(const ast::instruction::try_catch_i&) = 0;
+	//virtual void visit(const ast::instruction::switch_i&) = 0;
+	virtual void visit(const ast::instruction::return_i&) = 0;
+	virtual void visit(const ast::instruction::block&) = 0;
+	virtual void visit(const ast::instruction::variable&) = 0;
 	virtual ~visitor() {}
 };
 

@@ -30,7 +30,7 @@ public:
 	literal(token::stringLiteral string): string(string), type(string_literal) {}
 	literal(token::charLiteral symbol): symbol(symbol), type(symbol_literal) {}
 
-	void accept(ast::operation::visitor&) override;
+	void accept(ast::operation::visitor&) const override;
 };
 
 #endif /* LITERAL_H */

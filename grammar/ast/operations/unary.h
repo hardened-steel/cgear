@@ -18,7 +18,7 @@ public:
 	using instance = instance_t<ast::operation::unary>;
 public:
 	unary(ast::operation::code code, ast::operation::instance op): op(op), code(code) {}
-	void accept(ast::operation::visitor&) override;
+	void accept(ast::operation::visitor&) const override;
 };
 
 #endif /* UNARY_H */

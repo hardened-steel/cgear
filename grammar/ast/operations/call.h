@@ -21,7 +21,7 @@ public:
 	call(token::identifier id, const std::vector<ast::operation::instance>& params): id(id), params(params) {}
 	call(token::identifier id, std::vector<ast::operation::instance>&& params = {}): id(id), params(std::move(params)) {}
 
-	void accept(ast::operation::visitor&) override;
+	void accept(ast::operation::visitor&) const override;
 };
 
 #endif /* CALL_H */

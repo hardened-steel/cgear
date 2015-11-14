@@ -17,7 +17,7 @@ public:
 	using instance = instance_t<ast::instruction::calc>;
 public:
 	calc(ast::operation::instance op): op(op) {}
-	void accept(ast::instruction::visitor&) override;
+	void accept(ast::instruction::visitor&) const override;
 };
 
 #endif /* INSTRUCTIONS_CALC_H_ */

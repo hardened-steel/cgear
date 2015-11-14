@@ -30,7 +30,7 @@ public:
 public:
 	using instance = instance_t<ast::type>;
 public:
-	virtual void accept(ast::type::visitor& v);
+	virtual void accept(ast::type::visitor& v) const;
 	virtual ~type() {}
 };
 

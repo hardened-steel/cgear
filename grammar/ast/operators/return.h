@@ -17,7 +17,7 @@ public:
 	using instance = instance_t<ast::instruction::return_i>;
 public:
 	return_i(ast::operation::instance op): op(op) {}
-	void accept(ast::instruction::visitor&) override;
+	void accept(ast::instruction::visitor&) const override;
 };
 
 #endif /* INSTRUCTIONS_RETURN_H_ */

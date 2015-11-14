@@ -13,8 +13,8 @@
 class ast::function::visitor
 {
 public:
-	virtual void visit(ast::function::prototype&) = 0;
-	virtual void visit(ast::function::definition&) = 0;
+	virtual void visit(const ast::function::prototype&) = 0;
+	virtual void visit(const ast::function::definition&) = 0;
 	virtual ~visitor() {}
 };
 

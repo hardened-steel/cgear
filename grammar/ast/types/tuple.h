@@ -31,7 +31,7 @@ public:
 	tuple(const std::vector<field>& fields): fields(fields) {}
 	tuple(std::vector<field>&& fields): fields(std::move(fields)) {}
 
-	void accept(ast::type::visitor&) override;
+	void accept(ast::type::visitor&) const override;
 };
 
 #endif /* AST_TYPES_TUPLE_H_ */
