@@ -12,7 +12,7 @@
 
 class ast::instruction::if_i: public ast::instruction
 {
-protected:
+public:
 	ast::operation::instance condition;
 	ast::instruction::instance true_action;
 public:
@@ -26,6 +26,7 @@ public:
 
 class ast::instruction::ifelse_i: public ast::instruction::if_i
 {
+public:
 	ast::instruction::instance false_action;
 public:
 	using instance = instance_t<ast::instruction::ifelse_i>;

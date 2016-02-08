@@ -13,6 +13,7 @@
 
 class ast::operation::call: public ast::operation
 {
+public:
 	token::identifier id;
 	std::vector<ast::operation::instance> params;
 public:

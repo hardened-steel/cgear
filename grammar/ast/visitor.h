@@ -9,25 +9,18 @@
 #define GRAMMAR_AST_VISITOR_H_
 
 #include <boost/variant.hpp>
-#include "ast.h"
+#include "module.h"
 
-class ast::visitor: public boost::static_visitor<void>
+class ast::module::visitor: public boost::static_visitor<void>
 {
 public:
-	class base
-	{
-	public:
-		virtual void visit(const ast::function::instance&) = 0;
-		virtual void visit(const ast::type::instance&) = 0;
-	};
-private:
-	ast::visitor::base* impl;
+	virtual void visit(const ast::function::instance&) = 0;
+	virtual void visit(const ast::type::instance&) = 0;
 public:
-	visitor(ast::visitor::base& impl): impl(&impl) {}
+	virtual ~visitor() {}
 
-	template <typename T>
-	void operator()(T& operand) const {
-		impl->visit(operand);
+	template <typename T> void operator()(const T& operand) {
+		visit(operand);
 	}
 };
 

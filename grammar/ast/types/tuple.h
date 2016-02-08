@@ -17,15 +17,15 @@ class ast::type::tuple: public ast::type
 public:
 	class field
 	{
+	public:
 		ast::type::instance type;
 		token::identifier name;
 	public:
 		field(ast::type::instance type, token::identifier name): type(type), name(name) {}
 		field(const field& other): type(other.type), name(other.name) {}
 	};
-protected:
-	std::vector<field> fields;
 public:
+	std::vector<field> fields;
 	using instance = instance_t<ast::type::tuple>;
 public:
 	tuple(const std::vector<field>& fields): fields(fields) {}

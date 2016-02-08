@@ -12,6 +12,7 @@
 
 class ast::operation::binary: public ast::operation
 {
+public:
 	ast::operation::instance left;
 	ast::operation::instance right;
 	ast::operation::code code;

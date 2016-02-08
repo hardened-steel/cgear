@@ -13,6 +13,7 @@
 
 class ast::type::name: public ast::type
 {
+public:
 	token::identifier type_name;
 public:
 	using instance = instance_t<ast::type::name>;

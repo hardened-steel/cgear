@@ -12,6 +12,7 @@
 
 class ast::operation::ternary: public ast::operation
 {
+public:
 	ast::operation::instance true_action;
 	ast::operation::instance false_action;
 	ast::operation::instance condition;

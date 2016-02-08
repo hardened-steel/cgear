@@ -12,6 +12,7 @@
 
 class ast::instruction::while_i: public ast::instruction
 {
+public:
 	ast::operation::instance condition;
 	ast::instruction::instance action;
 public:

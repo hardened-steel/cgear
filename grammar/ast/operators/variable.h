@@ -14,6 +14,7 @@
 
 class ast::instruction::variable: public ast::instruction
 {
+public:
 	ast::type::instance type;
 	token::identifier id;
 	ast::operation::instance init;

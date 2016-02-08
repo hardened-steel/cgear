@@ -13,6 +13,7 @@
 
 class ast::instruction::block: public ast::instruction
 {
+public:
 	std::vector<ast::instruction::instance> instructions;
 public:
 	using instance = instance_t<ast::instruction::block>;

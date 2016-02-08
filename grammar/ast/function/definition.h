@@ -14,6 +14,7 @@
 
 class ast::function::definition: public ast::function
 {
+public:
 	ast::function::prototype::instance prototype;
 	ast::instruction::instance body;
 public:

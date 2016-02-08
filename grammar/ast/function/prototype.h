@@ -18,6 +18,7 @@ class ast::function::prototype: public ast::function
 public:
 	class parameter
 	{
+	public:
 		ast::type::instance type;
 		token::identifier name;
 	public:
@@ -35,7 +36,7 @@ public:
 			return *this;
 		}
 	};
-private:
+public:
 	token::identifier name;
 	std::vector<parameter> parameters;
 	ast::type::instance returnType;

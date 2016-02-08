@@ -6,8 +6,9 @@
 //
 
 #include "module.h"
+#include "visitor.h"
 
-void ast::module::accept(ast::visitor& v) const {
+void ast::module::accept(ast::module::visitor& v) const {
 	for(auto& statement: statements) {
 		boost::apply_visitor(v, statement);
 	}

@@ -12,6 +12,7 @@
 
 class ast::operation::literal: public ast::operation
 {
+public:
 	enum { boolean_literal, integer_literal, real_literal, string_literal, symbol_literal };
 	union {
 		bool boolean;

@@ -13,6 +13,7 @@
 
 class ast::operation::variable: public ast::operation
 {
+public:
 	token::identifier id;
 public:
 	using instance = instance_t<ast::operation::variable>;

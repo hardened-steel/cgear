@@ -12,6 +12,7 @@
 
 class ast::operation::unary: public ast::operation
 {
+public:
 	ast::operation::instance op;
 	ast::operation::code code;
 public:

@@ -12,6 +12,7 @@
 
 class ast::instruction::calc: public ast::instruction
 {
+public:
 	ast::operation::instance op;
 public:
 	using instance = instance_t<ast::instruction::calc>;

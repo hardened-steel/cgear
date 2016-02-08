@@ -12,6 +12,7 @@
 
 class ast::instruction::return_i: public ast::instruction
 {
+public:
 	ast::operation::instance op;
 public:
 	using instance = instance_t<ast::instruction::return_i>;

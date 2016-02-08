@@ -8,7 +8,6 @@
 #ifndef CONTEXT_H
 #define CONTEXT_H
 
-#include <list>
 #include <map>
 #include <string>
 #include <algorithm>
