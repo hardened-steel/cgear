@@ -15,14 +15,14 @@
 class GModule::implementation
 {
 public:
-	GType type;
 	GTypeName typeName;
+	GType type;
 	GExpression expression;
 	GInstruction instruction;
 	GFunction function;
 public:
 	implementation(Lexer& lexer):
-		type(lexer), typeName(lexer), expression(lexer, typeName), instruction(lexer, expression, type), function(lexer, instruction, typeName)
+		typeName(lexer), type(lexer, typeName), expression(lexer, typeName), instruction(lexer, expression, type), function(lexer, instruction, typeName)
 	{}
 };
 

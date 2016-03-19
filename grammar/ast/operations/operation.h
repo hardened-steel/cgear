@@ -13,40 +13,24 @@
 #include "grammar/ast/ast.h"
 #include <string>
 
-#define OPERATION(X) \
-	X(assign, "=")\
-	X(addition_and_assign, "+=")\
-	X(subtraction_and_assign, "-=")\
+#define OPERATION(X)                  \
+	X(assign, "=")                    \
+	X(addition_and_assign, "+=")      \
+	X(subtraction_and_assign, "-=")   \
 	X(multiplication_and_assign, "*=")\
-	X(division_and_assign, "/=")\
-	X(modulo_and_assign, "%=")\
-	\
-	X(ternary, "?")\
-	\
-	X(equal, "==")\
-	X(not_equal, "!=")\
-	\
-	X(less, "<")\
-	X(less_or_equal, "<=")\
-	X(more, ">")\
-	X(more_or_equal, ">=")\
-	\
-	X(addition, "+")\
-	X(subtraction, "-")\
-	\
-	X(multiplication, "*")\
-	X(division, "/")\
-	X(modulo, "%")\
-	\
-	X(unary_plus, "+")\
-	X(unary_minus,"-")\
-	X(prefix_inc, "++")\
-	X(prefix_dec, "--")\
-	X(size_of,"sizeof")\
-	\
-	X(suffix_inc, "++")\
-	X(suffix_dec, "++")\
-	X(function_call, "()")
+	X(division_and_assign, "/=")      \
+	X(modulo_and_assign, "%=")        \
+	                                  \
+	X(equal, "==")                    \
+	X(not_equal, "!=")                \
+	                                  \
+	X(addition, "+")                  \
+	X(subtraction, "-")               \
+	                                  \
+	X(multiplication, "*")            \
+	X(division, "/")                  \
+	X(modulo, "%")                    \
+	X(function_call, "()")            \
 
 constexpr unsigned int OPERATION_COUNT() {
 #define ForOperation(operation, Str) operation,
@@ -62,15 +46,9 @@ class ast::operation: public ast::node
 {
 public:
 	class visitor;
-	class unary;
 	class binary;
-	class ternary;
-	class type_cast;
 	class variable;
-	class index;
-	class section;
 	class call;
-	class array;
 	class literal;
 	class code;
 	using instance = instance_t<ast::operation>;

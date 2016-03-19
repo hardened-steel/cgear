@@ -28,9 +28,9 @@ const std::string& ast::operation::code::getStr() const {
 
 #include "visitor.h"
 
-void ast::operation::unary::accept(ast::operation::visitor& v) const { v.visit(*this); }
+//void ast::operation::unary::accept(ast::operation::visitor& v) const { v.visit(*this); }
 void ast::operation::binary::accept(ast::operation::visitor& v) const { v.visit(*this); }
-void ast::operation::ternary::accept(ast::operation::visitor& v) const { v.visit(*this); }
+//void ast::operation::ternary::accept(ast::operation::visitor& v) const { v.visit(*this); }
 //void ast::operation::type_cast::accept(ast::operation::visitor& v) const { v.visit(*this); }
 void ast::operation::variable::accept(ast::operation::visitor& v) const { v.visit(*this); }
 //void ast::operation::index::accept(ast::operation::visitor& v) const { v.visit(*this); }

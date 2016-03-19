@@ -28,7 +28,7 @@ struct token
 			pointer = other.pointer;
 			return *this;
 		}
-		operator const T&() const { return *pointer; }
+		const T& get() const { return *pointer; }
 	};
 	using real_type = long double;
 	using int_type = unsigned long long int;

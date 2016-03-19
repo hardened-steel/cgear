@@ -11,7 +11,7 @@
 #include "block.h"
 #include "calc.h"
 #include "if.h"
-#include "repeat.h"
+//#include "repeat.h"
 #include "return.h"
 #include "variable.h"
 #include "while.h"
@@ -25,7 +25,7 @@ public:
 	virtual void visit(const ast::instruction::ifelse_i&) = 0;
 	virtual void visit(const ast::instruction::while_i&) = 0;
 	//virtual void visit(const ast::instruction::for_i&) = 0;
-	virtual void visit(const ast::instruction::repeat_i&) = 0;
+	//virtual void visit(const ast::instruction::repeat_i&) = 0;
 	//virtual void visit(const ast::instruction::try_catch_i&) = 0;
 	//virtual void visit(const ast::instruction::switch_i&) = 0;
 	virtual void visit(const ast::instruction::return_i&) = 0;

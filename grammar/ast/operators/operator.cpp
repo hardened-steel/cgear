@@ -11,7 +11,7 @@ void ast::instruction::block::accept(ast::instruction::visitor& v) const { v.vis
 void ast::instruction::calc::accept(ast::instruction::visitor& v) const { v.visit(*this); }
 void ast::instruction::if_i::accept(ast::instruction::visitor& v) const { v.visit(*this); }
 void ast::instruction::ifelse_i::accept(ast::instruction::visitor& v) const { v.visit(*this); }
-void ast::instruction::repeat_i::accept(ast::instruction::visitor& v) const { v.visit(*this); }
+//void ast::instruction::repeat_i::accept(ast::instruction::visitor& v) const { v.visit(*this); }
 void ast::instruction::return_i::accept(ast::instruction::visitor& v) const { v.visit(*this); }
 void ast::instruction::variable::accept(ast::instruction::visitor& v) const { v.visit(*this); }
 void ast::instruction::while_i::accept(ast::instruction::visitor& v) const { v.visit(*this); }

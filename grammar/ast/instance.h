@@ -40,6 +40,8 @@ private:
 			return std::make_shared<B>(std::move(other));
 		}
 	};
+	struct null_instance {};
+	instance_t(null_instance): impl(nullptr) {}
 public:
 	template<typename...TArgs> instance_t(TArgs&&... args): impl(std::make_shared<T>(std::forward<TArgs>(args)...)) {
 		static_assert(std::is_constructible<T, TArgs...>::value, "type T must have appropriate constructor");
@@ -74,9 +76,26 @@ public:
 		impl = caster<T, D, std::is_constructible<T, instance_t<D>&&>::value>::getDeriviredPtr(std::move(other));
 		return *this;
 	}
+	bool operator==(const instance_t& other) const {
+		if(impl == other.impl) return true;
+		return (*impl) == (*other.impl);
+	}
+	bool operator!=(const instance_t& other) const {
+		if(impl == other.impl) return false;
+		return (*impl) != (*other.impl);
+	}
 	const T* operator->() const { return impl.get(); }
 	T* operator->() { return impl.get(); }
 	~instance_t() {}
+	template<class D> instance_t<D> cast_to() const {
+
+	}
 };
+
+template<class D, class B> instance_t<D> instance_static_cast(instance_t<B> base) {
+	instance_t<D> instance(instance_t<D>::null_instance);
+	instance.impl = std::static_pointer_cast<D>(base.impl);
+	return instance;
+}
 
 #endif /* GRAMMAR_AST_INSTANCE_H_ */

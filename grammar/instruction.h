@@ -28,9 +28,6 @@ class GInstruction: public boost::spirit::qi::grammar<GIterator, ast::instructio
 	boost::spirit::qi::rule<GIterator, ast::instruction::instance(), GSkip> return_i;
 	boost::spirit::qi::rule<GIterator, ast::instruction::instance(), GSkip> block;
 	boost::spirit::qi::rule<GIterator, ast::instruction::instance(), GSkip> nope;
-
-	GExpression& operation;
-	GType& type;
 public:
 	GInstruction(Lexer& lexer, GExpression& operation, GType& type);
 	~GInstruction();

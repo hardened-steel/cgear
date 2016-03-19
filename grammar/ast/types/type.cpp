@@ -8,6 +8,6 @@
 #include "visitor.h"
 
 void ast::type::t_int::accept(ast::type::visitor& v) const { v.visit(*this); }
-void ast::type::tuple::accept(ast::type::visitor& v) const { v.visit(*this); }
-void ast::type::name::accept(ast::type::visitor& v) const { v.visit(*this); }
+//void ast::type::tuple::accept(ast::type::visitor& v) const { v.visit(*this); }
+//void ast::type::name::accept(ast::type::visitor& v) const { v.visit(*this); }
 void ast::type::accept(ast::type::visitor& v) const { }

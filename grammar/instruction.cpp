@@ -37,7 +37,7 @@ public:
 
 boost::phoenix::function<WHandler> Handler;
 
-GInstruction::GInstruction(Lexer& lexer, GExpression& operation, GType& type): GInstruction::base_type(instruction, "instruction"), operation(operation), type(type)
+GInstruction::GInstruction(Lexer& lexer, GExpression& operation, GType& type): GInstruction::base_type(instruction, "instruction")
 {
 	namespace qi = boost::spirit::qi;
 	namespace phx = boost::phoenix;

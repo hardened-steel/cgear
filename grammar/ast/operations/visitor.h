@@ -10,17 +10,17 @@
 
 #include "binary.h"
 #include "call.h"
-#include "ternary.h"
-#include "unary.h"
+//#include "ternary.h"
+//#include "unary.h"
 #include "variable.h"
 #include "literal.h"
 
 class ast::operation::visitor
 {
 public:
-	virtual void visit(const ast::operation::unary&) = 0;
+	//virtual void visit(const ast::operation::unary&) = 0;
 	virtual void visit(const ast::operation::binary&) = 0;
-	virtual void visit(const ast::operation::ternary&) = 0;
+	//virtual void visit(const ast::operation::ternary&) = 0;
 	//virtual void visit(const ast::operation::type_cast&) = 0;
 	virtual void visit(const ast::operation::variable&) = 0;
 	//virtual void visit(const ast::operation::index&) = 0;
