@@ -8,17 +8,19 @@
 #ifndef INSTRUCTIONS_CALC_H_
 #define INSTRUCTIONS_CALC_H_
 
+#include <utility/instance.hpp>
 #include "operator.h"
 
 class ast::instruction::calc: public ast::instruction
 {
-public:
 	ast::operation::instance op;
 public:
-	using instance = instance_t<ast::instruction::calc>;
+	using instance = utility::instance<ast::instruction::calc, utility::copyable>;
 public:
+	calc(const calc&) = default;
+	calc(calc&&) = default;
 	calc(ast::operation::instance op): op(op) {}
-	void accept(ast::instruction::visitor&) const override;
+	void codegen(generator::context& context) const override;
 };
 
 #endif /* INSTRUCTIONS_CALC_H_ */

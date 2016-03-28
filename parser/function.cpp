@@ -6,9 +6,9 @@
 //
 
 #include <boost/phoenix/phoenix.hpp>
+#include <ast/function/prototype.h>
+#include <ast/function/definition.h>
 #include "function.h"
-#include "ast/function/prototype.h"
-#include "ast/function/definition.h"
 
 class GFunction::GParameters: public boost::spirit::qi::grammar<GIterator, std::vector<ast::function::prototype::parameter>(), GSkip>
 {
@@ -21,7 +21,7 @@ public:
 
 		parameter  = (typeName >> lexer.identifier)[qi::_val = phx::construct<ast::function::prototype::parameter>(qi::_1, qi::_2)];
 		parameters = ( (lexer.tokens["("] >> lexer.tokens[")"]) [qi::_val = phx::construct<std::vector<ast::function::prototype::parameter>>()]
-		             | (lexer.tokens["("] >> (parameter % lexer.tokens[","]) > lexer.tokens[")"]) [qi::_val = qi::_1]
+		             | ((lexer.tokens["("] >> (parameter % lexer.tokens[","])) > lexer.tokens[")"]) [qi::_val = qi::_1]
 		             );
 
 		parameter.name("parameter");
@@ -42,12 +42,12 @@ public:
 };
 
 GFunction::GFunction(Lexer& lexer, GInstruction& instruction, GTypeName& typeName): GFunction::base_type(function, "function grammar"),
-	instruction(instruction), typeName(typeName), parameters_ptr(new GParameters(lexer, typeName)), prototype_ptr(new GPrototype(lexer, typeName, *parameters_ptr))
+	parameters_ptr(new GParameters(lexer, typeName)), prototype_ptr(new GPrototype(lexer, typeName, *parameters_ptr))
 {
 	namespace qi = boost::spirit::qi;
 	namespace phx = boost::phoenix;
 
-	GPrototype&   prototype = *prototype_ptr;
+	GPrototype& prototype = *prototype_ptr;
 
 	function = (prototype >> lexer.tokens[";"])[qi::_val = qi::_1]
 			 | (prototype >> instruction)[qi::_val = phx::construct<ast::function::definition::instance>(qi::_1, qi::_2)]
@@ -66,7 +66,4 @@ GFunction::GFunction(Lexer& lexer, GInstruction& instruction, GTypeName& typeNam
 
 }
 
-GFunction::~GFunction()
-{
-	//destructor
-}
+GFunction::~GFunction() {}

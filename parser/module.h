@@ -8,9 +8,9 @@
 #ifndef GRAMMAR_MODULE_H
 #define GRAMMAR_MODULE_H
 
-#include <boost/spirit/include/qi.hpp>
 #include <memory>
-#include "ast/module.h"
+#include <boost/spirit/include/qi.hpp>
+#include <ast/module.h>
 
 class GModule: public boost::spirit::qi::grammar<GIterator, ast::module(), GSkip>
 {

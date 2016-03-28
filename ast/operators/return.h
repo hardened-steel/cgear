@@ -8,17 +8,18 @@
 #ifndef INSTRUCTIONS_RETURN_H_
 #define INSTRUCTIONS_RETURN_H_
 
+#include <utility/instance.hpp>
 #include "operator.h"
 
 class ast::instruction::return_i: public ast::instruction
 {
-public:
 	ast::operation::instance op;
 public:
-	using instance = instance_t<ast::instruction::return_i>;
+	using instance = utility::instance<ast::instruction::return_i, utility::copyable>;
 public:
+	return_i(const return_i&) = default;
+	return_i(return_i&&) = default;
 	return_i(ast::operation::instance op): op(op) {}
-	void accept(ast::instruction::visitor&) const override;
 };
 
 #endif /* INSTRUCTIONS_RETURN_H_ */

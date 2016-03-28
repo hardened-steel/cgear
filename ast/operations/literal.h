@@ -8,30 +8,40 @@
 #ifndef LITERAL_H
 #define LITERAL_H
 
+#include <utility/instance.hpp>
 #include "operation.h"
 
 class ast::operation::literal: public ast::operation
 {
-public:
-	enum { boolean_literal, integer_literal, real_literal, string_literal, symbol_literal };
-	union {
+	enum { boolean, integer, real, string } type;
+	union value_t {
 		bool boolean;
 		token::intLiteral integer;
 		token::realLiteral real;
 		token::stringLiteral string;
-		token::charLiteral symbol;
-	};
-	int type;
-public:
-	using instance = instance_t<ast::operation::literal>;
-public:
-	literal(bool boolean): boolean(boolean), type(boolean_literal) {}
-	literal(token::intLiteral integer): integer(integer), type(integer_literal) {}
-	literal(token::realLiteral real): real(real), type(real_literal) {}
-	literal(token::stringLiteral string): string(string), type(string_literal) {}
-	literal(token::charLiteral symbol): symbol(symbol), type(symbol_literal) {}
 
-	void accept(ast::operation::visitor&) const override;
+		value_t(): boolean(false) {}
+		value_t(bool value): boolean(value) {}
+		value_t(token::intLiteral&&    value): integer(std::move(value)) {}
+		value_t(token::realLiteral&&   value):    real(std::move(value)) {}
+		value_t(token::stringLiteral&& value):  string(std::move(value)) {}
+	} value;
+public:
+	using instance = utility::instance<ast::operation::literal, utility::copyable>;
+public:
+	literal(const literal& other): type(other.type) {
+		switch(type) {
+		case boolean: value.boolean = other.value.boolean; break;
+		case integer: value.integer = other.value.integer; break;
+		case real:    value.real    = other.value.real;    break;
+		case string:  value.string  = other.value.string;  break;
+		}
+	}
+
+	literal(bool value):                 type(boolean), value(std::move(value)) {}
+	literal(token::intLiteral value):    type(integer), value(std::move(value)) {}
+	literal(token::realLiteral value):   type(real),    value(std::move(value)) {}
+	literal(token::stringLiteral value): type(string),  value(std::move(value)) {}
 };
 
 #endif /* LITERAL_H */

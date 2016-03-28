@@ -6,9 +6,7 @@
 //
 
 #include <boost/phoenix/phoenix.hpp>
-//#include "ast/types/name.h"
-//#include "ast/types/tuple.h"
-#include "ast/types/int.h"
+#include <ast/types/int.h>
 #include "type.h"
 
 GType::GType(Lexer& lexer, GTypeName& typeName): GType::base_type(type, "type") {
@@ -25,7 +23,7 @@ GTypeName::GTypeName(Lexer& lexer): GTypeName::base_type(type, "type identifier"
 	namespace qi = boost::spirit::qi;
 	namespace phx = boost::phoenix;
 
-	type = lexer.kint[qi::_val = phx::construct<ast::type::t_int::instance>()]
+	type = lexer.kint[qi::_val = phx::construct<ast::type::integer::instance>()]
 		 //| lexer.identifier[qi::_val = phx::construct<ast::type::name::instance>(qi::_1)]
 		 ;
 }

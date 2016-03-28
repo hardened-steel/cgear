@@ -8,13 +8,14 @@
 #ifndef GRAMMAR_AST_OPERATORS_NOPE_H_
 #define GRAMMAR_AST_OPERATORS_NOPE_H_
 
+#include <utility/instance.hpp>
 #include "operator.h"
 
 class ast::instruction::nope: public ast::instruction
 {
 public:
-	using instance = instance_t<ast::instruction::nope>;
-	void accept(ast::instruction::visitor&) const override;
+	using instance = utility::instance<ast::instruction::nope, utility::copyable>;
+	void codegen(generator::context& context) const override {}
 };
 
 

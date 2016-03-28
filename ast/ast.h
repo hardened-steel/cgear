@@ -8,8 +8,8 @@
 #ifndef AST_H_
 #define AST_H_
 
-#include "grammar/lexer/token.h"
-#include "instance.h"
+#include <utility/instance.hpp>
+#include <lexer/token.h>
 
 class ast
 {
@@ -17,6 +17,7 @@ public:
 	class module;
 	class visitor;
 
+	class statement;
 	class function;
 	class instruction;
 	class operation;
@@ -24,7 +25,7 @@ public:
 	class node
 	{
 	public:
-		using instance = instance_t<node>;
+		using instance = utility::instance<node, utility::copyable>;
 	public:
 		token::iterator begin, end;
 	};

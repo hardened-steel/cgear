@@ -8,21 +8,23 @@
 #ifndef INSTRUCTION_VARIABLE_H_
 #define INSTRUCTION_VARIABLE_H_
 
-#include "grammar/ast/types/type.h"
-#include "grammar/lexer/token.h"
+#include <utility/instance.hpp>
+#include <ast/types/type.h>
+#include <lexer/token.h>
 #include "operator.h"
 
 class ast::instruction::variable: public ast::instruction
 {
-public:
 	ast::type::instance type;
 	token::identifier id;
 	ast::operation::instance init;
 public:
-	using instance = instance_t<ast::instruction::variable>;
+	using instance = utility::instance<ast::instruction::variable, utility::copyable>;
 public:
+	variable(const variable&) = default;
+	variable(variable&&) = default;
 	variable(ast::type::instance type, token::identifier id, ast::operation::instance init): type(type), id(id), init(init) {}
-	void accept(ast::instruction::visitor&) const override;
+	void codegen(generator::context& context) const override;
 };
 
 #endif /* INSTRUCTION_VARIABLE_H_ */

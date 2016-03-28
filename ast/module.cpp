@@ -5,11 +5,21 @@
 //       email: keldgaden@gmail.com
 //
 
+#include <boost/variant.hpp>
 #include "module.h"
-#include "visitor.h"
 
-void ast::module::accept(ast::module::visitor& v) const {
-	for(auto& statement: statements) {
-		boost::apply_visitor(v, statement);
+void ast::module::codegen() {
+	class visitor : public boost::static_visitor<void>
+	{
+		mutable generator::context context;
+	public:
+	    void operator()(ast::function::instance& function) const {
+	    	function->codegen(context);
+	    }
+	    void operator()(ast::type::instance& type) const {
+	    }
+	};
+	for(auto& i: statements) {
+		boost::apply_visitor(visitor(), i);
 	}
 }

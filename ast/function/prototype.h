@@ -9,8 +9,9 @@
 #define FUNCTION_PROTOTYPE_H_
 
 #include <vector>
-#include "grammar/lexer/token.h"
-#include "grammar/ast/types/type.h"
+#include <utility/instance.hpp>
+#include <lexer/token.h>
+#include <ast/types/type.h>
 #include "function.h"
 
 class ast::function::prototype: public ast::function
@@ -18,6 +19,7 @@ class ast::function::prototype: public ast::function
 public:
 	class parameter
 	{
+		friend prototype;
 	public:
 		ast::type::instance type;
 		token::identifier name;
@@ -36,16 +38,18 @@ public:
 			return *this;
 		}
 	};
-public:
+	using instance = utility::instance<ast::function::prototype, utility::copyable>;
+private:
 	token::identifier name;
 	std::vector<parameter> parameters;
 	ast::type::instance returnType;
 public:
-	using instance = instance_t<ast::function::prototype>;
-public:
 	prototype() {}
-	prototype(token::identifier name, std::vector<parameter> parameters, ast::type::instance returnType): name(name), parameters(parameters), returnType(returnType) {}
-	void accept(ast::function::visitor& v) const override;
+	prototype(const prototype&)  = default;
+	prototype(prototype&& other) = default;
+	prototype(token::identifier name, std::vector<parameter> parameters, ast::type::instance returnType)
+	: name(std::move(name)), parameters(std::move(parameters)), returnType(std::move(returnType)) {}
+	void codegen(generator::context& context) const override;
 };
 
 #endif /* FUNCTION_PROTOTYPE_H_ */

@@ -11,8 +11,8 @@
 #include <memory>
 #include <map>
 #include <boost/spirit/include/qi.hpp>
-#include "lexer/lexer.h"
-#include "ast/types/type.h"
+#include <lexer/lexer.h>
+#include <ast/types/type.h>
 
 class GTypeName: public boost::spirit::qi::grammar<GIterator, ast::type::instance(), GSkip>
 {

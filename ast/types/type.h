@@ -5,33 +5,30 @@
 //       email: keldgaden@gmail.com
 //
 
-#ifndef TYPE_H_
-#define TYPE_H_
+#ifndef AST_TYPE_H_
+#define AST_TYPE_H_
 
-#include "grammar/ast/instance.h"
-#include "grammar/ast/pool.h"
-#include "grammar/ast/ast.h"
 #include <memory>
+#include <utility/instance.hpp>
+#include <ast/ast.h>
 
 class ast::type: public ast::node
 {
 public:
 	class visitor;
-	class t_bool;
-	class t_int;
-	class t_real;
-	class t_void;
+	class boolean;
+	class integer;
+	class real;
+	class void_t;
 	class array;
 	class pointer;
 	class tuple;
-	class t_class;
-	class t_struct;
+	class user;
 	class name;
 public:
-	using instance = instance_t<ast::type>;
+	using instance = utility::instance<ast::type, utility::copyable>;
 public:
-	virtual void accept(ast::type::visitor& v) const;
 	virtual ~type() {}
 };
 
-#endif /* TYPE_H_ */
+#endif /* AST_TYPE_H_ */

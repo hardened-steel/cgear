@@ -5,7 +5,7 @@
 //       email: keldgaden@gmail.com
 //
 
-#include "operation.h"
+#include "code.h"
 
 #define ForOperation(operation, Str) operation,
 enum numeration
@@ -22,20 +22,22 @@ OPERATION(EnumOperation)
 const std::string operation_str[] = { OPERATION(EnumOperation) };
 #undef EnumOperation
 
-const std::string& ast::operation::code::getStr() const {
+const std::string& ast::operation::code::to_string() const {
     return operation_str[this->value - 1];
 }
 
-#include "visitor.h"
+#include "variable.h"
+#include "binary.h"
+#include "call.h"
 
-//void ast::operation::unary::accept(ast::operation::visitor& v) const { v.visit(*this); }
-void ast::operation::binary::accept(ast::operation::visitor& v) const { v.visit(*this); }
-//void ast::operation::ternary::accept(ast::operation::visitor& v) const { v.visit(*this); }
-//void ast::operation::type_cast::accept(ast::operation::visitor& v) const { v.visit(*this); }
-void ast::operation::variable::accept(ast::operation::visitor& v) const { v.visit(*this); }
-//void ast::operation::index::accept(ast::operation::visitor& v) const { v.visit(*this); }
-//void ast::operation::section::accept(ast::operation::visitor& v) const { v.visit(*this); }
-void ast::operation::call::accept(ast::operation::visitor& v) const { v.visit(*this); }
-//void ast::operation::array::accept(ast::operation::visitor& v) const { v.visit(*this); }
-void ast::operation::literal::accept(ast::operation::visitor& v) const { v.visit(*this); }
-void ast::operation::accept(ast::operation::visitor& v) const { }
+generator::value& ast::operation::variable::codegen(generator::context& context) const {
+
+}
+
+generator::value& ast::operation::binary::codegen(generator::context& context) const {
+
+}
+
+generator::value& ast::operation::call::codegen(generator::context& context) const {
+
+}

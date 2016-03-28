@@ -8,38 +8,12 @@
 #ifndef OPERATION_H
 #define OPERATION_H
 
-#include "grammar/ast/instance.h"
-#include "grammar/ast/pool.h"
-#include "grammar/ast/ast.h"
-#include <string>
+#include <utility/instance.hpp>
+#include <ast/ast.h>
 
-#define OPERATION(X)                  \
-	X(assign, "=")                    \
-	X(addition_and_assign, "+=")      \
-	X(subtraction_and_assign, "-=")   \
-	X(multiplication_and_assign, "*=")\
-	X(division_and_assign, "/=")      \
-	X(modulo_and_assign, "%=")        \
-	                                  \
-	X(equal, "==")                    \
-	X(not_equal, "!=")                \
-	                                  \
-	X(addition, "+")                  \
-	X(subtraction, "-")               \
-	                                  \
-	X(multiplication, "*")            \
-	X(division, "/")                  \
-	X(modulo, "%")                    \
-	X(function_call, "()")            \
-
-constexpr unsigned int OPERATION_COUNT() {
-#define ForOperation(operation, Str) operation,
-enum {
-	OPERATION(ForOperation)
-	OPERATION_COUNT
-};
-#undef ForOperation
-	return OPERATION_COUNT;
+namespace generator {
+	class context;
+	class value;
 }
 
 class ast::operation: public ast::node
@@ -51,36 +25,10 @@ public:
 	class call;
 	class literal;
 	class code;
-	using instance = instance_t<ast::operation>;
+	using instance = utility::instance<ast::operation, utility::copyable>;
 public:
-	virtual void accept(ast::operation::visitor& v) const;
+	virtual generator::value& codegen(generator::context& context) const { throw "error"; }
 	virtual ~operation() {}
 };
-
-#define EnumOperation(Operation, Str) static code Operation;
-class ast::operation::code
-{
-    int value;
-    
-    code(int c): value(c) {}
-
-    const std::string& getStr() const;
-public:
-    OPERATION(EnumOperation)
-
-	static constexpr const unsigned int count = OPERATION_COUNT();
-    
-    code(const code& other): value(other.value) {}
-    code& operator = (const code& other) {
-    	value = other.value;
-        return *this;
-    }
-    bool operator == (const code& other) const { return this->value == other.value; }
-    bool operator <  (const code& other) const { return this->value  < other.value; }
-    operator const std::string&() const {
-        return getStr();
-    }
-};
-#undef EnumOperation
 
 #endif // OPERATION_H

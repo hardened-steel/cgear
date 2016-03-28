@@ -8,7 +8,8 @@
 #ifndef VARIABLE_H
 #define VARIABLE_H
 
-#include "grammar/lexer/token.h"
+#include <utility/instance.hpp>
+#include <lexer/token.h>
 #include "operation.h"
 
 class ast::operation::variable: public ast::operation
@@ -16,10 +17,12 @@ class ast::operation::variable: public ast::operation
 public:
 	token::identifier id;
 public:
-	using instance = instance_t<ast::operation::variable>;
+	using instance = utility::instance<ast::operation::variable, utility::copyable>;
 public:
-	variable(token::identifier id): id(id) {}
-	void accept(ast::operation::visitor&) const override;
+	variable(const variable&) = default;
+	variable(variable&&) = default;
+	variable(token::identifier id): id(std::move(id)) {}
+	generator::value& codegen(generator::context& context) const override;
 };
 
 #endif /* VARIABLE_H */

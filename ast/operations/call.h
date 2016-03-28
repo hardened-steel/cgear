@@ -8,21 +8,21 @@
 #ifndef CALL_H
 #define CALL_H
 
-#include "grammar/lexer/token.h"
+#include <lexer/token.h>
 #include "operation.h"
 
 class ast::operation::call: public ast::operation
 {
-public:
 	token::identifier id;
 	std::vector<ast::operation::instance> params;
 public:
-	using instance = instance_t<ast::operation::call>;
+	using instance = utility::instance<ast::operation::call, utility::copyable>;
 public:
-	call(token::identifier id, const std::vector<ast::operation::instance>& params): id(id), params(params) {}
-	call(token::identifier id, std::vector<ast::operation::instance>&& params = {}): id(id), params(std::move(params)) {}
-
-	void accept(ast::operation::visitor&) const override;
+	call(const call&) = default;
+	call(call&&) = default;
+	call(token::identifier id, const std::vector<ast::operation::instance>& params): id(std::move(id)), params(params) {}
+	call(token::identifier id, std::vector<ast::operation::instance>&& params = {}): id(std::move(id)), params(std::move(params)) {}
+	generator::value& codegen(generator::context& context) const override;
 };
 
 #endif /* CALL_H */

@@ -8,10 +8,11 @@
 #ifndef AST_MODULE_H
 #define AST_MODULE_H
 
+#include <utility/instance.hpp>
 #include <boost/variant.hpp>
-#include "ast.h"
 #include "function/function.h"
 #include "types/type.h"
+#include "ast.h"
 
 class ast::module
 {
@@ -24,8 +25,7 @@ public:
 	module() {}
 	module(const std::vector<statement>& statements): statements(statements) {}
 	module(std::vector<statement>&& statements): statements(std::move(statements)) {}
-
-	void accept(ast::module::visitor&) const;
+	void codegen();
 };
 
 #endif /* AST_MODULE_H */

@@ -8,9 +8,9 @@
 #ifndef OPERATOR_H_
 #define OPERATOR_H_
 
-#include "grammar/ast/operations/operation.h"
-#include "grammar/ast/pool.h"
-#include "grammar/ast/ast.h"
+#include <utility/instance.hpp>
+#include <generator/context.h>
+#include <ast/ast.h>
 #include <memory>
 
 class ast::instruction: public ast::node
@@ -30,9 +30,9 @@ public:
 	class block;
 	class nope;
 public:
-	using instance = instance_t<ast::instruction>;
+	using instance = utility::instance<ast::instruction, utility::copyable>;
 public:
-	virtual void accept(ast::instruction::visitor& v) const;
+	virtual void codegen(generator::context& context) const {}
 	virtual ~instruction() {}
 };
 

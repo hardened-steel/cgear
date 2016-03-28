@@ -9,16 +9,13 @@
 #define GRAMMAR_FUNCTION_H_
 
 #include <boost/spirit/include/qi.hpp>
-#include "lexer/lexer.h"
-#include "ast/function/function.h"
+#include <ast/function/function.h>
+#include <lexer/lexer.h>
 #include "instruction.h"
 
 class GFunction: public boost::spirit::qi::grammar<GIterator, ast::function::instance(), GSkip>
 {
 	boost::spirit::qi::rule<GIterator, ast::function::instance(), GSkip> function;
-
-	GInstruction& instruction;
-	GTypeName& typeName;
 protected:
 	class GParameters;
 	class GPrototype;

@@ -9,8 +9,8 @@
 #define INSTRUCTION_H
 
 #include <boost/spirit/include/qi.hpp>
-#include "lexer/lexer.h"
-#include "ast/operators/operator.h"
+#include <ast/operators/operator.h>
+#include <lexer/lexer.h>
 #include "expression.h"
 #include "type.h"
 

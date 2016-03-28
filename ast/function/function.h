@@ -8,9 +8,9 @@
 #ifndef AST_FUNCTION_H_
 #define AST_FUNCTION_H_
 
-#include "grammar/ast/instance.h"
-#include "grammar/ast/pool.h"
-#include "grammar/ast/ast.h"
+#include <utility/instance.hpp>
+#include <generator/context.h>
+#include <ast/ast.h>
 
 class ast::function: public ast::node
 {
@@ -18,9 +18,9 @@ public:
 	class visitor;
 	class definition;
 	class prototype;
-	using instance = instance_t<ast::function>;
+	using instance = utility::instance<ast::function, utility::copyable>;
 public:
-	virtual void accept(ast::function::visitor& v) const;
+	virtual void codegen(generator::context& context) const {}
 	virtual ~function() {}
 };
 

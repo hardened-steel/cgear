@@ -1,4 +1,4 @@
-#include "grammar/ast/instance.h"
+#include <utility/instance.hpp>
 
 #include <vector>
 #include <unordered_map>

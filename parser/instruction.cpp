@@ -7,21 +7,12 @@
 
 #include <vector>
 #include <boost/phoenix/phoenix.hpp>
+#include <ast/operators/block.h>
+#include <ast/operators/calc.h>
+#include <ast/operators/return.h>
+#include <ast/operators/variable.h>
+#include <ast/operators/nope.h>
 #include "instruction.h"
-#include "ast/operators/block.h"
-#include "ast/operators/calc.h"
-#include "ast/operators/if.h"
-#include "ast/operators/repeat.h"
-#include "ast/operators/return.h"
-#include "ast/operators/variable.h"
-#include "ast/operators/while.h"
-#include "ast/operators/nope.h"
-
-
-template<class Iterator>
-std::string print(Iterator start, Iterator end) {
-	return std::string(start, end);
-}
 
 class WHandler
 {
@@ -30,8 +21,8 @@ public:
     	auto begin = boost::get<boost::iterator_range<token::iterator>>(first->value()).begin();
     	auto end   = boost::get<boost::iterator_range<token::iterator>>(last->value()).end();
 
-    	//node->begin = begin;
-    	//node->end = end;
+    	node->begin = begin;
+    	node->end = end;
     }
 };
 
@@ -44,7 +35,7 @@ GInstruction::GInstruction(Lexer& lexer, GExpression& operation, GType& type): G
 
 	nope = lexer.tokens[";"][qi::_val = phx::construct<ast::instruction::nope>()];
 
-	variable = type [qi::_a = qi::_1] >> lexer.identifier [ qi::_b = qi::_1] >
+	variable = (type[qi::_a = qi::_1] >> lexer.identifier [ qi::_b = qi::_1]) >
 	               ( lexer.tokens[";"] [qi::_val = phx::construct<ast::instruction::variable::instance>(qi::_a, qi::_b, phx::construct<ast::operation::instance>())]
 	               | (lexer.tokens["="] > operation > lexer.tokens[";"]) [qi::_val = phx::construct<ast::instruction::variable::instance>(qi::_a, qi::_b, qi::_1)]
 	               )
@@ -63,26 +54,26 @@ GInstruction::GInstruction(Lexer& lexer, GExpression& operation, GType& type): G
         ;
     */
 
-	while_i = (
+	/*while_i = (
 	             lexer.kwhile
 	             > lexer.tokens["("]
 	             > operation
 	             > lexer.tokens[")"]
 	             > instruction
-	          ) [qi::_val = phx::construct<ast::instruction::while_i::instance>(qi::_1, qi::_2)];
+	          ) [qi::_val = phx::construct<ast::instruction::while_i::instance>(qi::_1, qi::_2)];*/
 
 	return_i = (lexer.kreturn > operation > lexer.tokens[";"])[qi::_val = phx::construct<ast::instruction::return_i::instance>(qi::_1)];
 
 	calc = (operation > lexer.tokens[";"])[qi::_val = phx::construct<ast::instruction::calc::instance>(qi::_1)];
 
-	if_i = (
+	/*if_i = (
 	        lexer.kif
 	        > lexer.tokens["("]
 	        > operation         [qi::_a = qi::_1]
 	        > lexer.tokens[")"]
 	        > instruction       [qi::_b = qi::_1, qi::_val = phx::construct<ast::instruction::if_i::instance>(qi::_a, qi::_b)]
 	        > -(lexer.kelse > instruction [qi::_val = phx::construct<ast::instruction::ifelse_i::instance>(qi::_a, qi::_b, qi::_1)])
-	       );
+	       );*/
 
 	block = (lexer.tokens["{"] > *instruction > lexer.tokens["}"]) [qi::_val = phx::construct<ast::instruction::block::instance>(qi::_1)];
 
@@ -90,7 +81,7 @@ GInstruction::GInstruction(Lexer& lexer, GExpression& operation, GType& type): G
 
 	variable.name("variable declaration");
 	calc.name("calucate expression");
-	if_i.name("if operator");
+	//if_i.name("if operator");
 	block.name("block of instructions");
 	instruction.name("instruction");
 

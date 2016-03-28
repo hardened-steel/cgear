@@ -9,19 +9,20 @@
 #define INSTRUCTIONS_BLOCK_H_
 
 #include <vector>
+#include <utility/instance.hpp>
 #include "operator.h"
 
 class ast::instruction::block: public ast::instruction
 {
-public:
 	std::vector<ast::instruction::instance> instructions;
 public:
-	using instance = instance_t<ast::instruction::block>;
+	using instance = utility::instance<ast::instruction::block, utility::copyable>;
 public:
+	block(const block&) = default;
+	block(block&&) = default;
 	block(const std::vector<ast::instruction::instance>& instructions): instructions(instructions) {}
 	block(std::vector<ast::instruction::instance>&& instructions): instructions(std::move(instructions)) {}
-
-	void accept(ast::instruction::visitor&) const override;
+	void codegen(generator::context& context) const override;
 };
 
 #endif /* INSTRUCTIONS_BLOCK_H_ */

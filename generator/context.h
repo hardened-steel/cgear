@@ -11,33 +11,60 @@
 #include <map>
 #include <string>
 #include <algorithm>
-#include "grammar/ast/types/type.h"
+#include <ast/operations/code.h>
+#include <generator/overload.h>
+#include "info.h"
+#include "value.h"
+#include "overload.h"
+
+namespace generator {
 
 class context
 {
-	std::multimap<std::string, ast::type::instance> identifiers;
 public:
-    context() {}
-    ~context() {}
+	using operation = typename overload<value&>::function;
+	class global;
+	class local;
+protected:
+	std::map<std::string, type::info> types;
+	std::map<std::string, value::instance> identifiers;
+public:
+    virtual ~context() {}
 
-    void add_name(const std::string& name, ast::type type) {
-        identifiers.insert(std::pair<std::string, ast::type::instance>(name, type));
-    }
+    virtual void add(const std::string& name, value::instance value);
+    virtual void add(const std::string& name, type::info type);
 
-    bool find_name(const std::string& name, const ast::type::instance& type) {
-		//auto begin = identifiers.find(name);
-		//auto end   = identifiers.end();
-		//return end != std::find_if(begin, end, [&](const auto& it) { return it.second == type; });
-    	return true;
-    }
+    virtual type::info& gettype(const std::string& name);
+    virtual value& getvalue(const std::string& name);
 
-    bool find_name(const std::string& name) {
-        return false;
-		auto begin = identifiers.find(name);
-		auto end   = identifiers.end();
-		return begin != end;
-    }
+	virtual void add(const ast::operation::code& code, operation&& functor) = 0;
+	virtual overload<value&>& getoperation(const ast::operation::code& code) = 0;
 };
+
+class context::local: public context
+{
+	context& parent;
+public:
+	local(context& parent): parent(parent) {}
+    ~local() {}
+
+    type::info& gettype(const std::string& name) override;
+    value& getvalue(const std::string& name)     override;
+
+	void add(const ast::operation::code& code, operation&& functor)  override { parent.add(code, std::move(functor)); }
+	overload<value&>& getoperation(const ast::operation::code& code) override { return parent.getoperation(code);     }
+};
+
+class context::global: public context
+{
+protected:
+	std::map<ast::operation::code, overload<value&>> operations;
+public:
+	void add(const ast::operation::code& code, operation&& functor) override;
+	overload<value&>& getoperation(const ast::operation::code& code) override;
+};
+
+} /* namespace generator */
 
 #endif // CONTEXT_H
 

@@ -5,11 +5,16 @@
 //       email: keldgaden@gmail.com
 //
 
+#include <llvm/IR/IRBuilder.h>
+
 #include "function.h"
 #include "prototype.h"
 #include "definition.h"
-#include "visitor.h"
 
-void ast::function::prototype::accept(ast::function::visitor& v) const { v.visit(*this); }
-void ast::function::definition::accept(ast::function::visitor& v) const { v.visit(*this); }
-void ast::function::accept(ast::function::visitor& v) const { throw 1; }
+void ast::function::prototype::codegen(generator::context& context) const {
+
+}
+
+void ast::function::definition::codegen(generator::context& context) const {
+
+}

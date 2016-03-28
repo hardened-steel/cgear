@@ -9,8 +9,8 @@
 #define EXPRESSION_H
 
 #include <boost/spirit/include/qi.hpp>
-#include "ast/operations/operation.h"
-#include "lexer/lexer.h"
+#include <ast/operations/operation.h>
+#include <lexer/lexer.h>
 #include "type.h"
 
 class GExpression: public boost::spirit::qi::grammar<GIterator, ast::operation::instance(), GSkip>

@@ -5,11 +5,9 @@
 
 #include <boost/spirit/include/qi.hpp>
 #include <boost/phoenix/phoenix.hpp>
-#include "grammar/lexer/lexer.h"
-#include "grammar/lexer/constant_table.h"
-#include "grammar/module.h"
-
-void visit_all(ast::module m);
+#include <lexer/lexer.h>
+#include <lexer/constant_table.h>
+#include <parser/module.h>
 
 void parse_file(std::istream& in, std::ostream& out) {
 	namespace lex = boost::spirit::lex;
@@ -27,7 +25,7 @@ void parse_file(std::istream& in, std::ostream& out) {
 
 		bool res = lex::tokenize_and_phrase_parse(lp_begin, lp_end, lexer, gmodule, qi::in_state("WS")[lexer.self], module);
 		if(res && lp_begin == lp_end) {
-			visit_all(module);
+			module.codegen();
 		} else {
 			std::string rest(lp_begin, lp_end);
 			std::cout << "Parsed: \"" << std::string(lp_start, lp_begin) << "\"" << std::endl;
@@ -47,8 +45,10 @@ int main(int argc, char* argv[]) {
 	for(int i = 1; i < argc; ++i) {
 		std::ifstream in(argv[i]);
 		std::ofstream out(argv[i] + std::string(".out"));
-		in.unsetf(std::ios::skipws);
-		parse_file(in, out);
+		if(in && out) {
+			in.unsetf(std::ios::skipws);
+			parse_file(in, out);
+		}
 	}
 }
 
