@@ -12,10 +12,10 @@
 #include <string>
 #include <algorithm>
 #include <ast/operations/code.h>
-#include <generator/overload.h>
-#include "info.h"
-#include "value.h"
-#include "overload.h"
+#include "../model/info.h"
+#include "../process/overload.h"
+#include "../process/overload.h"
+#include "../process/value.h"
 
 namespace generator {
 

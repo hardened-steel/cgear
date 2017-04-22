@@ -8,12 +8,15 @@
 #ifndef AST_STATEMENT_H_
 #define AST_STATEMENT_H_
 
-#include <utility/instance.hpp>
 #include <ast/operations/operation.h>
+#include <ast/types/type.h>
 #include <ast/ast.h>
 
 class ast::statement: public ast::node
 {
+
+public:
+	using ptr = std::unique_ptr<ast::statement>;
 };
 
 #endif /* AST_STATEMENT_H_ */

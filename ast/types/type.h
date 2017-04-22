@@ -9,26 +9,26 @@
 #define AST_TYPE_H_
 
 #include <memory>
-#include <utility/instance.hpp>
 #include <ast/ast.h>
 
 class ast::type: public ast::node
 {
 public:
 	class visitor;
-	class boolean;
 	class integer;
-	class real;
-	class void_t;
-	class array;
-	class pointer;
-	class tuple;
-	class user;
 	class name;
 public:
-	using instance = utility::instance<ast::type, utility::copyable>;
+	using ptr = std::unique_ptr<ast::type>;
 public:
+	virtual void accept(visitor&) = 0;
 	virtual ~type() {}
+};
+
+class ast::type::visitor {
+public:
+	virtual void visit(ast::type::name&)    {}
+	virtual void visit(ast::type::integer&) {}
+	virtual ~visitor() {}
 };
 
 #endif /* AST_TYPE_H_ */

@@ -8,8 +8,8 @@
 #ifndef NULL_H_
 #define NULL_H_
 
-#include "value.h"
-#include "type.h"
+#include "../model/type.h"
+#include "../process/value.h"
 
 namespace generator {
 

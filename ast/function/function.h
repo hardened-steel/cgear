@@ -9,8 +9,8 @@
 #define AST_FUNCTION_H_
 
 #include <utility/instance.hpp>
-#include <generator/context.h>
 #include <ast/ast.h>
+#include "../../model/context.h"
 
 class ast::function: public ast::node
 {

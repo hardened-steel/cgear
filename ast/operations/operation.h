@@ -8,13 +8,8 @@
 #ifndef OPERATION_H
 #define OPERATION_H
 
-#include <utility/instance.hpp>
 #include <ast/ast.h>
-
-namespace generator {
-	class context;
-	class value;
-}
+#include <memory>
 
 class ast::operation: public ast::node
 {
@@ -22,13 +17,22 @@ public:
 	class visitor;
 	class binary;
 	class variable;
-	class call;
 	class literal;
+
 	class code;
-	using instance = utility::instance<ast::operation, utility::copyable>;
+	using ptr = std::unique_ptr<ast::operation>;
 public:
-	virtual generator::value& codegen(generator::context& context) const { throw "error"; }
+	virtual void accept(visitor&) = 0;
 	virtual ~operation() {}
+};
+
+class ast::operation::visitor
+{
+public:
+	virtual void visit(ast::operation::binary&)   {}
+	virtual void visit(ast::operation::variable&) {}
+	virtual void visit(ast::operation::literal&)  {}
+	virtual ~visitor() {}
 };
 
 #endif // OPERATION_H

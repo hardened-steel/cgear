@@ -11,28 +11,26 @@
 #include <memory>
 #include <utility/instance.hpp>
 
-namespace generator {
+namespace model {
 
 class type;
 class value
 {
 public:
-	using instance = utility::instance<value>;
+	using instance = utility::instance<value, utility::copyable>;
 	class data {
 	public:
-		using instance = utility::instance<data>;
+		using instance = utility::instance<data, utility::copyable>;
 		virtual ~data() {}
 	};
-	class null;
 	class tuple;
-	class var;
 private:
 	const type& type_;
 	data::instance data_;
 public:
-	value(const type& type, data::instance&& data): type_(type), data_(std::move(data)) {}
-	data& getdata() { return data_.get(); }
-	data const& getdata() const { return data_.get(); }
+	value(const type& type, data::instance data): type_(type), data_(std::move(data)) {}
+	      data::instance& getdata()       { return data_; }
+	const data::instance& getdata() const { return data_; }
 	const type& gettype() const { return type_; }
 	virtual ~value() {}
 };

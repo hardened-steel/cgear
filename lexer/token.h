@@ -71,6 +71,32 @@ struct token
 	};
 };
 
+#define KWords(X)\
+	X(true)      \
+	X(false)     \
+	X(function)  \
+	X(let)       \
+	X(var)       \
+	X(ref)       \
+	X(return)    \
+	X(while)     \
+	X(if)        \
+	X(else)      \
+	X(int)       \
+	X(s8)        \
+	X(u8)        \
+	X(s16)       \
+	X(u16)       \
+	X(s32)       \
+	X(u32)       \
+	X(s64)       \
+	X(u64)       \
+	X(r32)       \
+	X(r64)       \
+	X(real)      \
+	X(void)      \
+	X(bool)      \
+
 namespace boost { namespace spirit { namespace traits {
     template <typename Iterator, typename T> struct assign_to_attribute_from_iterators<T, Iterator>
     {

@@ -5,7 +5,7 @@
 //       email: keldgaden@gmail.com
 //
 
-#include "context.h"
+#include "../model/context.h"
 
 namespace generator {
 

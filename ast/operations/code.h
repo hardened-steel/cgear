@@ -28,7 +28,6 @@
 	X(multiplication, "*")            \
 	X(division, "/")                  \
 	X(modulo, "%")                    \
-	X(function_call, "()")            \
 
 constexpr unsigned int OPERATION_COUNT() {
 #define ForOperation(operation, Str) operation,

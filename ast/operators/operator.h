@@ -8,10 +8,9 @@
 #ifndef OPERATOR_H_
 #define OPERATOR_H_
 
-#include <utility/instance.hpp>
-#include <generator/context.h>
 #include <ast/ast.h>
 #include <memory>
+#include "../../process/context.h"
 
 class ast::instruction: public ast::node
 {
@@ -20,20 +19,28 @@ public:
 	class variable;
 	class calc;
 	class if_i;
-	class ifelse_i;
-	class while_i;
-	class for_i;
-	class repeat_i;
-	class try_catch_i;
-	class switch_i;
-	class return_i;
 	class block;
 	class nope;
 public:
-	using instance = utility::instance<ast::instruction, utility::copyable>;
+	using ptr = std::unique_ptr<ast::instruction>;
 public:
-	virtual void codegen(generator::context& context) const {}
+	virtual void accept(visitor&) = 0;
 	virtual ~instruction() {}
+};
+
+class ast::instruction::visitor
+{
+public:
+	virtual void visit(ast::instruction::if_i&)     {}
+	virtual void visit(ast::instruction::block&)    {}
+	virtual void visit(ast::instruction::calc&)     {}
+	virtual void visit(ast::instruction::variable&) {}
+	virtual ~visitor() {}
+};
+
+class ast::instruction::nope: public ast::instruction
+{
+	void accept(visitor&) override {}
 };
 
 #endif /* OPERATOR_H_ */

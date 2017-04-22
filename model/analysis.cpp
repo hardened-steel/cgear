@@ -5,8 +5,6 @@
 //       email: keldgaden@gmail.com
 //
 
-#include "context.h"
-
 #include "ast/function/function.h"
 #include "ast/function/prototype.h"
 #include "ast/function/definition.h"
@@ -48,7 +46,8 @@
 #include <llvm/Support/TargetSelect.h>
 #include <llvm/Support/TargetRegistry.h>
 
-#include "type.h"
+#include "../process/context.h"
+#include "../process/type.h"
 
 /*
 class ast::visitor: public ast::module::visitor

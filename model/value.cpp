@@ -5,9 +5,10 @@
 //       email: keldgaden@gmail.com
 //
 
-#include "type.h"
-#include "value.h"
-#include "null.h"
+#include "../model/value.h"
+
+#include "../model/null.h"
+#include "../process/type.h"
 
 namespace generator {
 

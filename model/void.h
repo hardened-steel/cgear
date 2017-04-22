@@ -8,8 +8,9 @@
 #ifndef VOID_H_
 #define VOID_H_
 
-#include "type.h"
 #include <instance.hpp>
+
+#include "../model/type.h"
 
 namespace generator {
 

@@ -18,10 +18,7 @@ Lexer::Lexer(ConstantTable& table): constants(table)
 
 	this->self += token('(') | token(')') | token('{') | token('}') | token('[') | token(']') | token(':') | token(';') | token(',');
 	this->self += token('=') | token("+=", "\\+=") | token("-=", "\\-=") | token("*=", "\\*=") | token("/=", "\\/=");
-	//this->self += token("++", "\\+\\+") | token("--", "\\-\\-");
 	this->self += token('+') | token('-') | token('*') | token('/') | token('%');
-	//this->self += token('|') | token('&');
-	//this->self += token('?') | token('<') | token('>') | token("<=", "<=") | token(">=", ">=");
 	this->self += token("!=", "\\!=") | token("==", "==");
 #define KAdd(X) this->self += k##X;
 	KWords(KAdd)

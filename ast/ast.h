@@ -8,7 +8,7 @@
 #ifndef AST_H_
 #define AST_H_
 
-#include <utility/instance.hpp>
+#include <memory>
 #include <lexer/token.h>
 
 class ast
@@ -25,7 +25,7 @@ public:
 	class node
 	{
 	public:
-		using instance = utility::instance<node, utility::copyable>;
+		using ptr = std::unique_ptr<node>;
 	public:
 		token::iterator begin, end;
 	};

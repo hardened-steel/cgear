@@ -4,10 +4,10 @@
 //      Author: motorhead
 //
 
-#ifndef GENERATOR_FUNCTION_H_
-#define GENERATOR_FUNCTION_H_
+#ifndef MODEL_FUNCTION_H_
+#define MODEL_FUNCTION_H_
 
-#include "overload.h"
+#include "../model/overload.h"
 
 namespace generator {
 
@@ -18,4 +18,4 @@ class function
 
 } /* namespace generator */
 
-#endif /* GENERATOR_FUNCTION_H_ */
+#endif /* MODEL_FUNCTION_H_ */

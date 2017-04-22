@@ -5,15 +5,16 @@
 //       email: keldgaden@gmail.com
 //
 
-#ifndef GENERATOR_TUPLE_H_
-#define GENERATOR_TUPLE_H_
+#ifndef MODEL_TUPLE_H_
+#define MODEL_TUPLE_H_
 
 #include <vector>
 #include <utility/instance.hpp>
+
 #include "type.h"
 #include "value.h"
 
-namespace generator {
+namespace model {
 
 class type::tuple: public type
 {
@@ -34,7 +35,7 @@ class value::tuple: public value::data
 {
 	std::vector<value::instance> values;
 public:
-	tuple(std::vector<value::instance> values): values(std::move(values)) {}
+	tuple(std::vector<value::instance>&& values): values(std::move(values)) {}
 	value& operator[](size_t index) {
 		return values.at(index);
 	}
@@ -43,6 +44,6 @@ public:
 	}
 };
 
-} /* namespace generator */
+} /* namespace model */
 
-#endif /* GENERATOR_TUPLE_H_ */
+#endif /* MODEL_TUPLE_H_ */
