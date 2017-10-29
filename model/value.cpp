@@ -5,11 +5,9 @@
 //       email: keldgaden@gmail.com
 //
 
-#include "../model/value.h"
+#include "value.h"
 
-#include "../model/null.h"
-#include "../process/type.h"
 
-namespace generator {
+namespace model {
 
 } /* namespace generator */

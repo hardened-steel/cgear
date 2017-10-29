@@ -9,6 +9,7 @@
 #define INSTRUCTIONS_CALC_H_
 
 #include <utility/instance.hpp>
+#include <ast/operations/operation.h>
 #include "operator.h"
 
 class ast::instruction::calc: public ast::instruction
@@ -20,7 +21,6 @@ public:
 	calc(const calc&) = default;
 	calc(calc&&) = default;
 	calc(ast::operation::instance op): op(op) {}
-	void codegen(generator::context& context) const override;
 };
 
 #endif /* INSTRUCTIONS_CALC_H_ */

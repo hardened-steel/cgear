@@ -1,0 +1,68 @@
+{
+	"build_systems":
+	[
+		{
+			"file_regex": "(.+[^:]):(\\d+):(\\d+): (?:fatal )?((?:error|warning): .+)$",
+			"name": "cgear (Linux)",
+			"shell_cmd": "make -j8",
+			"syntax": "Packages/CMakeBuilder/Syntax/Make.sublime-syntax",
+			"variants":
+			[
+				{
+					"name": "clean",
+					"shell_cmd": "make -j8 clean"
+				},
+				{
+					"name": "rebuild_cache",
+					"shell_cmd": "make -j8 rebuild_cache"
+				},
+				{
+					"name": "test",
+					"shell_cmd": "make -j8 test"
+				},
+				{
+					"name": "CGear",
+					"shell_cmd": "make -j8 CGear"
+				},
+				{
+					"name": "cgear-ast",
+					"shell_cmd": "make -j8 cgear-ast"
+				},
+				{
+					"name": "cgear-lexer",
+					"shell_cmd": "make -j8 cgear-lexer"
+				},
+				{
+					"name": "cgear-parser",
+					"shell_cmd": "make -j8 cgear-parser"
+				},
+				{
+					"name": "cgear-model",
+					"shell_cmd": "make -j8 cgear-model"
+				},
+				{
+					"name": "CGear-model-test",
+					"shell_cmd": "make -j8 CGear-model-test"
+				}
+			],
+			"working_dir": "${project_path}/build"
+		}
+	],
+	"settings":
+	{
+		"cmake":
+		{
+			"build_folder": "${project_path}/build",
+			"command_line_overrides":
+			{
+				"BOOST_ROOT": "~/.local/"
+			}
+		}
+	},
+	"folders":
+	[
+		{
+			"path": "."
+		}
+	]
+}

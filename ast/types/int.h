@@ -8,17 +8,14 @@
 #ifndef GRAMMAR_AST_TYPES_INT_H_
 #define GRAMMAR_AST_TYPES_INT_H_
 
+#include <utility/instance.hpp>
 #include <lexer/token.h>
-#include <memory>
 #include "type.h"
 
 class ast::type::integer: public ast::type
 {
 public:
-	using ptr = std::unique_ptr<ast::type::integer>;
-	void accept(visitor& v) override {
-		v.visit(*this);
-	}
+	using instance = utility::instance<ast::type::integer, utility::copyable>;
 };
 
 #endif /* GRAMMAR_AST_TYPES_INT_H_ */

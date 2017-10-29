@@ -8,9 +8,8 @@
 #ifndef OPERATOR_H_
 #define OPERATOR_H_
 
+#include <utility/instance.hpp>
 #include <ast/ast.h>
-#include <memory>
-#include "../../process/context.h"
 
 class ast::instruction: public ast::node
 {
@@ -22,25 +21,14 @@ public:
 	class block;
 	class nope;
 public:
-	using ptr = std::unique_ptr<ast::instruction>;
+	using instance = utility::instance<ast::instruction, utility::copyable>;
 public:
-	virtual void accept(visitor&) = 0;
 	virtual ~instruction() {}
 };
 
-class ast::instruction::visitor
-{
-public:
-	virtual void visit(ast::instruction::if_i&)     {}
-	virtual void visit(ast::instruction::block&)    {}
-	virtual void visit(ast::instruction::calc&)     {}
-	virtual void visit(ast::instruction::variable&) {}
-	virtual ~visitor() {}
-};
 
 class ast::instruction::nope: public ast::instruction
 {
-	void accept(visitor&) override {}
 };
 
 #endif /* OPERATOR_H_ */

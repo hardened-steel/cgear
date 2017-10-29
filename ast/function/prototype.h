@@ -24,7 +24,7 @@ public:
 		ast::type::instance type;
 		token::identifier name;
 	public:
-		parameter() {}
+		parameter() = default;
 		parameter(ast::type::instance type, token::identifier name): type(type), name(name) {}
 		parameter(const parameter& other): type(other.type), name(other.name) {}
 		parameter& operator = (const parameter& other) {
@@ -44,12 +44,11 @@ private:
 	std::vector<parameter> parameters;
 	ast::type::instance returnType;
 public:
-	prototype() {}
+	prototype() = default;
 	prototype(const prototype&)  = default;
 	prototype(prototype&& other) = default;
 	prototype(token::identifier name, std::vector<parameter> parameters, ast::type::instance returnType)
 	: name(std::move(name)), parameters(std::move(parameters)), returnType(std::move(returnType)) {}
-	void codegen(generator::context& context) const override;
 };
 
 #endif /* FUNCTION_PROTOTYPE_H_ */

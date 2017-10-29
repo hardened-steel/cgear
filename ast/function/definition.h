@@ -24,7 +24,6 @@ public:
 	definition(definition&& other) = default;
 	definition(ast::function::prototype::instance prototype, ast::instruction::instance body)
 	: prototype(std::move(prototype)), body(std::move(body)) {}
-	void codegen(generator::context& context) const override;
 };
 
 #endif /* FUNCTION_DEFINITION_H_ */

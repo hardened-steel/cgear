@@ -6,6 +6,7 @@
 //
 
 #include <boost/phoenix/phoenix.hpp>
+#include "statement.h"
 #include "type.h"
 #include "function.h"
 #include "instruction.h"
@@ -20,9 +21,12 @@ public:
 	GExpression expression;
 	GInstruction instruction;
 	GFunction function;
+	GStatement statement;
 public:
-	implementation(Lexer& lexer):
-		typeName(lexer), type(lexer, typeName), expression(lexer, typeName), instruction(lexer, expression, type), function(lexer, instruction, typeName)
+	implementation(Lexer& lexer)
+	: typeName(lexer), type(lexer, typeName), expression(lexer, typeName)
+	, instruction(lexer, expression, type), function(lexer, instruction, typeName)
+	, statement(lexer, function, expression, type)
 	{}
 };
 
@@ -31,10 +35,7 @@ GModule::GModule(Lexer& lexer): GModule::base_type(module, "module"), impl(new G
 	namespace qi = boost::spirit::qi;
 	namespace phx = boost::phoenix;
 
-	GType& type               = impl->type;
-	GFunction& function       = impl->function;
-
-	module = (*(function | type))[qi::_val = qi::_1];
+	module = (*(impl->statement))[qi::_val = qi::_1];
 }
 
 GModule::~GModule() {

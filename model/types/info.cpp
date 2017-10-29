@@ -18,7 +18,7 @@ value::instance type::info::call(const std::string& operation, value& object, va
 	throw "no method name";
 }
 
-bool type::info::operator==(const type::info::info& other) const {
+bool type::info::operator==(const type::info& other) const {
 	return name == other.name;
 }
 

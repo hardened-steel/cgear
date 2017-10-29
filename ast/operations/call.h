@@ -22,7 +22,6 @@ public:
 	call(call&&) = default;
 	call(token::identifier id, const std::vector<ast::operation::instance>& params): id(std::move(id)), params(params) {}
 	call(token::identifier id, std::vector<ast::operation::instance>&& params = {}): id(std::move(id)), params(std::move(params)) {}
-	generator::value& codegen(generator::context& context) const override;
 };
 
 #endif /* CALL_H */

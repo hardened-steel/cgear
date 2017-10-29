@@ -1,0 +1,546 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"operato",
+				"operators\t(type_traits)"
+			],
+			[
+				"CMAKE_DIR",
+				"CMAKE_SOURCE_DIR"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"contents": "╒══════════════════════════════════════╤═══════════════════════════════════════════════════════╤════════════════════════════════════════════╕\n│ CHECK                                │ VALUE                                                 │ SUGGESTION/FIX                             │\n╞══════════════════════════════════════╪═══════════════════════════════════════════════════════╪════════════════════════════════════════════╡\n│ cmake version                        │ 3.7.2                                                 │                                            │\n├──────────────────────────────────────┼───────────────────────────────────────────────────────┼────────────────────────────────────────────┤\n│ server mode                          │ True                                                  │                                            │\n├──────────────────────────────────────┼───────────────────────────────────────────────────────┼────────────────────────────────────────────┤\n│ project file                         │ /home/motorhead/workspace/CGear/cgear.sublime-project │                                            │\n├──────────────────────────────────────┼───────────────────────────────────────────────────────┼────────────────────────────────────────────┤\n│ cmake dictionary present in settings │ False                                                 │ Create a cmake dictionary in your settings │\n╘══════════════════════════════════════╧═══════════════════════════════════════════════════════╧════════════════════════════════════════════╛",
+			"settings":
+			{
+				"buffer_size": 1561,
+				"line_ending": "Unix",
+				"name": "CMakeBuilder Diagnosis",
+				"read_only": true,
+				"scratch": true
+			}
+		},
+		{
+			"file": "cgear.sublime-project",
+			"settings":
+			{
+				"buffer_size": 1210,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "cgear (Linux)",
+	"build_system_choices":
+	[
+		[
+			[
+				[
+					"Packages/Makefile/Make.sublime-build",
+					""
+				],
+				[
+					"Packages/Makefile/Make.sublime-build",
+					"Clean"
+				]
+			],
+			[
+				"Packages/Makefile/Make.sublime-build",
+				""
+			]
+		],
+		[
+			[
+				[
+					"cgear (Linux)",
+					""
+				],
+				[
+					"cgear (Linux)",
+					"clean"
+				],
+				[
+					"cgear (Linux)",
+					"rebuild_cache"
+				],
+				[
+					"cgear (Linux)",
+					"test"
+				],
+				[
+					"cgear (Linux)",
+					"CGear"
+				],
+				[
+					"cgear (Linux)",
+					"cgear-ast"
+				],
+				[
+					"cgear (Linux)",
+					"cgear-lexer"
+				],
+				[
+					"cgear (Linux)",
+					"cgear-parser"
+				],
+				[
+					"cgear (Linux)",
+					"cgear-model"
+				],
+				[
+					"cgear (Linux)",
+					"CGear-model-test"
+				]
+			],
+			[
+				"cgear (Linux)",
+				""
+			]
+		]
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 372.0,
+		"last_filter": "Package Control: ",
+		"selected_items":
+		[
+			[
+				"Package Control: ",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 521.0
+	},
+	"console":
+	{
+		"height": 126.0,
+		"history":
+		[
+			"CPATH=\"$HOME/.local/include\"",
+			"CMakeBuilder: Configure",
+			"Configure",
+			"CMakeBuilder: Configure",
+			"CMakeBuilder: configure",
+			"import urllib.request,os,hashlib; h = 'df21e130d211cfc94d9b0905775a7c0f' + '1e3d39e33b79698005270310898eea76'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by) "
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/home/motorhead/workspace/CGear",
+		"/home/motorhead/workspace/CGear/backends",
+		"/home/motorhead/workspace/CGear/backends/constexpr",
+		"/home/motorhead/workspace/CGear/test"
+	],
+	"file_history":
+	[
+		"/home/motorhead/workspace/CGear/test/model.cpp",
+		"/home/motorhead/workspace/CGear/backends/CMakeLists.txt",
+		"/home/motorhead/workspace/CGear/CMakeLists.txt",
+		"/home/motorhead/workspace/CGear/model/all.h",
+		"/home/motorhead/workspace/CGear/backends/constexpr/integer.h",
+		"/home/motorhead/workspace/CGear/model/tuple.h",
+		"/home/motorhead/workspace/CGear/backends/constexpr/integer.cpp",
+		"/home/motorhead/workspace/CGear/backend/CMakeLists.txt",
+		"/home/motorhead/workspace/CGear/model/overload.h",
+		"/home/motorhead/workspace/CGear/model/type.h",
+		"/home/motorhead/workspace/CGear/model/value.h",
+		"/home/motorhead/workspace/CGear/model/types/var.h",
+		"/home/motorhead/workspace/CGear/model/types/ref.h",
+		"/home/motorhead/workspace/CGear/model/types/raw.h",
+		"/home/motorhead/workspace/CGear/model/types/let.h",
+		"/home/motorhead/workspace/CGear/model/types/info.h",
+		"/home/motorhead/workspace/CGear/model/tuple.cpp",
+		"/home/motorhead/workspace/CGear/ast/CMakeLists.txt",
+		"/home/motorhead/workspace/CGear/lexer/CMakeLists.txt",
+		"/home/motorhead/workspace/CGear/model/CMakeLists.txt",
+		"/home/motorhead/workspace/CGear/parser/CMakeLists.txt",
+		"/home/motorhead/workspace/CGear/test/CMakeLists.txt",
+		"/home/motorhead/workspace/CGear/ast/operations/code.h",
+		"/home/motorhead/workspace/CGear/ast/operations/operation.cpp",
+		"/home/motorhead/workspace/CGear/test/main.cpp",
+		"/home/motorhead/workspace/CGear/ast/module.h",
+		"/usr/share/cmake-3.7/Modules/FindBoost.cmake",
+		"/home/motorhead/Загрузки/cmake-3.8.1-Linux-x86_64.sh",
+		"/home/motorhead/.local/include/c++/v1/type_traits",
+		"/home/motorhead/workspace/CGear/cgear.sublime-project",
+		"/home/motorhead/.local/include/boost/spirit/home/support/detail/lexer/generator.hpp",
+		"/home/motorhead/workspace/CGear/ast/ast.h",
+		"/home/motorhead/workspace/CGear/ast/operators/if.h",
+		"/home/motorhead/workspace/CGear/model/old/analysis.cpp",
+		"/home/motorhead/.config/sublime-text-3/Packages/User/SublimeLinter.sublime-settings",
+		"/home/motorhead/.config/sublime-text-3/Packages/SublimeLinter/SublimeLinter.sublime-settings",
+		"/home/motorhead/.config/sublime-text-3/Packages/C++11/messages/install.txt",
+		"/home/motorhead/.config/sublime-text-3/Packages/C++11/C++11.sublime-settings"
+	],
+	"find":
+	{
+		"height": 34.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 1,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1561,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1561,
+								1561
+							]
+						],
+						"settings":
+						{
+							"bracket_highlighter.busy": false,
+							"bracket_highlighter.locations":
+							{
+								"close":
+								{
+								},
+								"icon":
+								{
+								},
+								"open":
+								{
+								},
+								"unmatched":
+								{
+								}
+							},
+							"bracket_highlighter.regions":
+							[
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content"
+							],
+							"draw_centered": true,
+							"gutter": false,
+							"line_numbers": false,
+							"rulers":
+							[
+							],
+							"syntax": "Packages/CMakeBuilder/Syntax/Diagnosis.sublime-syntax",
+							"word_wrap": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "cgear.sublime-project",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1210,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"bracket_highlighter.busy": false,
+							"bracket_highlighter.locations":
+							{
+								"close":
+								{
+									"1":
+									[
+										1208,
+										1209
+									]
+								},
+								"icon":
+								{
+									"1":
+									[
+										"Packages/BracketHighlighter/icons/curly_bracket.png",
+										"brackethighlighter.default"
+									]
+								},
+								"open":
+								{
+									"1":
+									[
+										0,
+										1
+									]
+								},
+								"unmatched":
+								{
+								}
+							},
+							"bracket_highlighter.regions":
+							[
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content"
+							],
+							"syntax": "Packages/JavaScript/JSON.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 0.0
+	},
+	"input":
+	{
+		"height": 31.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 299.0
+	},
+	"output.files_to_be_deleted":
+	{
+		"height": 100.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "cgear (Linux)",
+	"project": "cgear.sublime-project",
+	"replace":
+	{
+		"height": 0.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 237.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

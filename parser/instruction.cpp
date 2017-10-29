@@ -9,9 +9,6 @@
 #include <boost/phoenix/phoenix.hpp>
 #include <ast/operators/block.h>
 #include <ast/operators/calc.h>
-#include <ast/operators/return.h>
-#include <ast/operators/variable.h>
-#include <ast/operators/nope.h>
 #include "instruction.h"
 
 class WHandler
@@ -28,18 +25,21 @@ public:
 
 boost::phoenix::function<WHandler> Handler;
 
-GInstruction::GInstruction(Lexer& lexer, GExpression& operation, GType& type): GInstruction::base_type(instruction, "instruction")
+GInstruction::GInstruction(Lexer& lexer, GExpression& operation, GType& type)
+: GInstruction::base_type(instruction, "instruction")
 {
 	namespace qi = boost::spirit::qi;
 	namespace phx = boost::phoenix;
 
 	nope = lexer.tokens[";"][qi::_val = phx::construct<ast::instruction::nope>()];
 
+	/*
 	variable = (type[qi::_a = qi::_1] >> lexer.identifier [ qi::_b = qi::_1]) >
 	               ( lexer.tokens[";"] [qi::_val = phx::construct<ast::instruction::variable::instance>(qi::_a, qi::_b, phx::construct<ast::operation::instance>())]
 	               | (lexer.tokens["="] > operation > lexer.tokens[";"]) [qi::_val = phx::construct<ast::instruction::variable::instance>(qi::_a, qi::_b, qi::_1)]
 	               )
              ;
+    */
     /*
     for_i = (
            lexer.kfor
@@ -62,7 +62,7 @@ GInstruction::GInstruction(Lexer& lexer, GExpression& operation, GType& type): G
 	             > instruction
 	          ) [qi::_val = phx::construct<ast::instruction::while_i::instance>(qi::_1, qi::_2)];*/
 
-	return_i = (lexer.kreturn > operation > lexer.tokens[";"])[qi::_val = phx::construct<ast::instruction::return_i::instance>(qi::_1)];
+	//return_i = (lexer.kreturn > operation > lexer.tokens[";"])[qi::_val = phx::construct<ast::instruction::return_i::instance>(qi::_1)];
 
 	calc = (operation > lexer.tokens[";"])[qi::_val = phx::construct<ast::instruction::calc::instance>(qi::_1)];
 
@@ -77,9 +77,9 @@ GInstruction::GInstruction(Lexer& lexer, GExpression& operation, GType& type): G
 
 	block = (lexer.tokens["{"] > *instruction > lexer.tokens["}"]) [qi::_val = phx::construct<ast::instruction::block::instance>(qi::_1)];
 
-	instruction = block | if_i | return_i | while_i | variable | calc;
+	instruction = block | calc;
 
-	variable.name("variable declaration");
+	//variable.name("variable declaration");
 	calc.name("calucate expression");
 	//if_i.name("if operator");
 	block.name("block of instructions");

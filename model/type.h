@@ -5,13 +5,11 @@
 //       email: keldgaden@gmail.com
 //
 
-#ifndef TYPE_H_
-#define TYPE_H_
+#pragma once
 
 #include <utility/instance.hpp>
 #include <map>
 #include <functional>
-#include "overload.h"
 #include "value.h"
 
 namespace model {
@@ -55,4 +53,3 @@ public:
 
 } /* namespace model */
 
-#endif /* TYPE_H_ */

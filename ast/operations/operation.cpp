@@ -30,6 +30,7 @@ const std::string& ast::operation::code::to_string() const {
 #include "binary.h"
 #include "call.h"
 
+/*
 generator::value& ast::operation::variable::codegen(generator::context& context) const {
 
 }
@@ -41,3 +42,4 @@ generator::value& ast::operation::binary::codegen(generator::context& context) c
 generator::value& ast::operation::call::codegen(generator::context& context) const {
 
 }
+*/

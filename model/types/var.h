@@ -5,8 +5,7 @@
 //       email: keldgaden@gmail.com
 //
 
-#ifndef MODEL_TYPES_VAR_H_
-#define MODEL_TYPES_VAR_H_
+#pragma once
 
 #include <model/type.h>
 #include "info.h"
@@ -33,5 +32,3 @@ public:
 };
 
 } /* namespace model */
-
-#endif /* MODEL_TYPES_VAR_H_ */

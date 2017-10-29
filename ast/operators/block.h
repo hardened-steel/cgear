@@ -22,7 +22,6 @@ public:
 	block(block&&) = default;
 	block(const std::vector<ast::instruction::instance>& instructions): instructions(instructions) {}
 	block(std::vector<ast::instruction::instance>&& instructions): instructions(std::move(instructions)) {}
-	void codegen(generator::context& context) const override;
 };
 
 #endif /* INSTRUCTIONS_BLOCK_H_ */

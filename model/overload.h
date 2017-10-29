@@ -5,8 +5,7 @@
 //       email: keldgaden@gmail.com
 //
 
-#ifndef OVERLOAD_H_
-#define OVERLOAD_H_
+#pragma once
 
 #include <algorithm>
 #include <utility>
@@ -56,5 +55,3 @@ private:
 };
 
 } /* namespace model */
-
-#endif /* OVERLOAD_H_ */

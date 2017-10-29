@@ -10,21 +10,15 @@
 
 #include <utility/instance.hpp>
 #include <boost/variant.hpp>
-#include "function/function.h"
-#include "types/type.h"
-#include "ast.h"
+#include "statement/statement.h"
 
 class ast::module
 {
-public:
-	using statement = boost::variant<ast::function::instance, ast::type::instance>;
-	std::vector<statement> statements;
-public:
-	class visitor;
+	std::vector<ast::statement::instance> statements;
 public:
 	module() {}
-	module(const std::vector<statement>& statements): statements(statements) {}
-	module(std::vector<statement>&& statements): statements(std::move(statements)) {}
+	module(const std::vector<ast::statement::instance>& statements): statements(statements) {}
+	module(std::vector<ast::statement::instance>&& statements): statements(std::move(statements)) {}
 	void codegen();
 };
 

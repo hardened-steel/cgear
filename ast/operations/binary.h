@@ -24,7 +24,6 @@ public:
 	binary(binary&&) = default;
 	binary(ast::operation::code code, ast::operation::instance left, ast::operation::instance right)
 	: left(std::move(left)), right(std::move(right)), code(std::move(code)) {}
-	generator::value& codegen(generator::context& context) const override;
 };
 
 #endif /* BINARY_H */

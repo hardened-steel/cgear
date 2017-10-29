@@ -6,9 +6,9 @@
 //
 
 #include "block.h"
-#include "variable.h"
 #include "calc.h"
 
+/*
 void ast::instruction::block::codegen(generator::context& context) const {
 
 }
@@ -20,3 +20,4 @@ void ast::instruction::variable::codegen(generator::context& context) const {
 void ast::instruction::calc::codegen(generator::context& context) const {
 
 }
+*/

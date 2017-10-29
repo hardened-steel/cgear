@@ -8,7 +8,7 @@
 #ifndef AST_TYPE_H_
 #define AST_TYPE_H_
 
-#include <memory>
+#include <utility/instance.hpp>
 #include <ast/ast.h>
 
 class ast::type: public ast::node
@@ -18,9 +18,8 @@ public:
 	class integer;
 	class name;
 public:
-	using ptr = std::unique_ptr<ast::type>;
+	using instance = utility::instance<ast::type, utility::copyable>;
 public:
-	virtual void accept(visitor&) = 0;
 	virtual ~type() {}
 };
 

@@ -5,9 +5,7 @@
 //       email: keldgaden@gmail.com
 //
 
-#ifndef MODEL_TYPES_LET_H_
-#define MODEL_TYPES_LET_H_
-
+#pragma once
 
 #include <model/type.h>
 #include "info.h"
@@ -16,6 +14,8 @@ namespace model {
 
 class type::let: public type
 {
+	friend class type::var;
+	friend class type::ref;
 	type::info& info;
 public:
 	using instance = utility::instance<type::let>;
@@ -33,4 +33,3 @@ public:
 
 } /* namespace model */
 
-#endif /* MODEL_TYPES_LET_H_ */

@@ -5,8 +5,7 @@
 //       email: keldgaden@gmail.com
 //
 
-#ifndef INFO_H_
-#define INFO_H_
+#pragma once
 
 #include <map>
 #include <model/overload.h>
@@ -40,4 +39,3 @@ public:
 
 } /* namespace model */
 
-#endif /* INFO_H_ */

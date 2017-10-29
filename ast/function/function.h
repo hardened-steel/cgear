@@ -10,7 +10,6 @@
 
 #include <utility/instance.hpp>
 #include <ast/ast.h>
-#include "../../model/context.h"
 
 class ast::function: public ast::node
 {
@@ -20,7 +19,7 @@ public:
 	class prototype;
 	using instance = utility::instance<ast::function, utility::copyable>;
 public:
-	virtual void codegen(generator::context& context) const {}
+	//virtual void codegen(generator::context& context) const {}
 	virtual ~function() {}
 };
 

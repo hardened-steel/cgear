@@ -5,8 +5,7 @@
 //       email: keldgaden@gmail.com
 //
 
-#ifndef MODEL_TUPLE_H_
-#define MODEL_TUPLE_H_
+#pragma once
 
 #include <vector>
 #include <utility/instance.hpp>
@@ -45,5 +44,3 @@ public:
 };
 
 } /* namespace model */
-
-#endif /* MODEL_TUPLE_H_ */

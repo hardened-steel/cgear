@@ -12,22 +12,22 @@
 #include "operation.h"
 
 #define OPERATION(X)                  \
-	X(assign, "=")                    \
-	X(addition_and_assign, "+=")      \
-	X(subtraction_and_assign, "-=")   \
-	X(multiplication_and_assign, "*=")\
-	X(division_and_assign, "/=")      \
-	X(modulo_and_assign, "%=")        \
-	                                  \
-	X(equal, "==")                    \
-	X(not_equal, "!=")                \
-	                                  \
-	X(addition, "+")                  \
-	X(subtraction, "-")               \
-	                                  \
-	X(multiplication, "*")            \
-	X(division, "/")                  \
-	X(modulo, "%")                    \
+    X(assign, "=")                    \
+    X(addition_and_assign, "+=")      \
+    X(subtraction_and_assign, "-=")   \
+    X(multiplication_and_assign, "*=")\
+    X(division_and_assign, "/=")      \
+    X(modulo_and_assign, "%=")        \
+                                      \
+    X(equal, "==")                    \
+    X(not_equal, "!=")                \
+                                      \
+    X(addition, "+")                  \
+    X(subtraction, "-")               \
+                                      \
+    X(multiplication, "*")            \
+    X(division, "/")                  \
+    X(modulo, "%")                    \
 
 constexpr unsigned int OPERATION_COUNT() {
 #define ForOperation(operation, Str) operation,

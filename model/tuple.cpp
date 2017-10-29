@@ -5,6 +5,7 @@
 //       email: keldgaden@gmail.com
 //
 
+#include <list>
 #include "tuple.h"
 
 namespace model {

@@ -5,8 +5,7 @@
 //       email: keldgaden@gmail.com
 //
 
-#ifndef VALUE_H_
-#define VALUE_H_
+#pragma once
 
 #include <memory>
 #include <utility/instance.hpp>
@@ -36,6 +35,4 @@ public:
 };
 
 } /* namespace generator */
-
-#endif /* VALUE_H_ */
 
