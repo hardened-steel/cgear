@@ -1,9 +1,1 @@
-/Debug/
-/deployment.pri
-/.project
-/CGear.pro
-/CGear.pro.user
-/.cproject
-/main.cpp~
-/Release/
-/Debug/
+build

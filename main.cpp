@@ -3,53 +3,29 @@
 #include <exception>
 #include <sstream>
 
-#include <boost/spirit/include/qi.hpp>
-#include <boost/phoenix/phoenix.hpp>
-#include <lexer/lexer.h>
-#include <lexer/constant_table.h>
-#include <parser/module.h>
+#include <boost/array.hpp>
+#include <boost/fiber/fiber.hpp>
 
-void parse_file(std::istream& in, std::ostream& out) {
-	namespace lex = boost::spirit::lex;
-	namespace phx = boost::phoenix;
-	namespace qi = boost::spirit::qi;
+#include <boost/iostreams/filtering_streambuf.hpp>
+#include <boost/iostreams/copy.hpp>
+#include <boost/iostreams/filter/zlib.hpp>
 
-	boost::spirit::istream_iterator f_begin(in), f_end;
-	token::iterator lp_start(f_begin), lp_begin(f_begin), lp_end(f_end);
-	try {
-		ConstantTable table;
-		Lexer lexer(table);
-		GModule gmodule(lexer);
-
-		ast::module module;
-
-		bool res = lex::tokenize_and_phrase_parse(lp_begin, lp_end, lexer, gmodule, qi::in_state("WS")[lexer.self], module);
-		if(res && lp_begin == lp_end) {
-			module.codegen();
-		} else {
-			std::string rest(lp_begin, lp_end);
-			std::cout << "Parsed: \"" << std::string(lp_start, lp_begin) << "\"" << std::endl;
-			std::cout << "Pasring failed, returned value: " << std::boolalpha << res << "\n" << "stopped at: \"" << rest << "\"" << std::endl;
-		}
-	} catch(std::exception& e) {
-		std::string rest(lp_begin, lp_end);
-		std::cout << "Pasring failed: " << e.what() << "\n" << "stopped at: \"" << rest << "\"" << std::endl;
-	}
+int main(int argc, char* argv[])
+{
+    namespace ios = boost::iostreams;
+    /*{
+        std::ofstream file("hello.z", std::ios_base::out | std::ios_base::binary);
+        ios::filtering_streambuf<ios::output> out;
+        out.push(ios::zlib_compressor());
+        out.push(file);
+        boost::iostreams::copy(std::cin, out);
+    }*/
+    {
+        std::ifstream ifile("hello.z", std::ios_base::in | std::ios_base::binary);
+        std::ofstream ofile("hello.uz", std::ios_base::out | std::ios_base::binary);
+        ios::filtering_streambuf<ios::output> out;
+        out.push(ios::zlib_decompressor());
+        out.push(ofile);
+        boost::iostreams::copy(ifile, out);
+    }
 }
-
-int main(int argc, char* argv[]) {
-	namespace lex = boost::spirit::lex;
-	namespace phx = boost::phoenix;
-	namespace qi = boost::spirit::qi;
-
-	for(int i = 1; i < argc; ++i) {
-		std::ifstream in(argv[i]);
-		std::ofstream out(argv[i] + std::string(".out"));
-		if(in && out) {
-			in.unsetf(std::ios::skipws);
-			parse_file(in, out);
-		}
-	}
-}
-
-
